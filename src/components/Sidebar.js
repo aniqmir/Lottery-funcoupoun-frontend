@@ -5,13 +5,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 
 import Lottery from "../screens/Lotery";
 import { Router, Route } from "react-router-dom";
@@ -19,6 +15,10 @@ import { Router, Route } from "react-router-dom";
 import history from "../history";
 
 const drawerWidth = 240;
+const sidebarbg = "#21215e";
+const sidebartext = "#7d5c7f";
+const navcolorbg = "#26234a";
+// const navsign = "#c04e88";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
+    backgroundColor: navcolorbg,
   },
   drawer: {
     width: drawerWidth,
@@ -34,12 +35,14 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    color: sidebartext,
+    backgroundColor: sidebarbg,
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: "#060656",
     padding: theme.spacing(3),
   },
 }));
@@ -55,9 +58,9 @@ export default function PermanentDrawerLeft(props) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          {/* <Typography variant="h6" noWrap>
             Permanent drawer
-          </Typography>
+          </Typography> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -73,16 +76,19 @@ export default function PermanentDrawerLeft(props) {
         <List>
           {["Lottery", "Profile", "Token", "Road Map", "Exchange"].map(
             (text, index) => (
-              <ListItem onClick={() => changeRoute(text)} button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+              <ListItem
+                alignItems="center"
+                onClick={() => changeRoute(text)}
+                button
+                key={text}
+                divider={true}
+              >
                 <ListItemText primary={text} />
               </ListItem>
             )
           )}
         </List>
-        <Divider />
+
         {/* <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>

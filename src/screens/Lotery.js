@@ -6,6 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import TokenProgress from "../components/generic/tokenprogress";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,7 +56,8 @@ function LinkTab(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#060656",
+    color: "white",
   },
 }));
 
@@ -84,7 +86,9 @@ export default function NavTabs() {
         Page One
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Lotery
+        {[1, 2, 3, 4, 5].map((item, index) => (
+          <TokenProgress />
+        ))}
       </TabPanel>
     </div>
   );

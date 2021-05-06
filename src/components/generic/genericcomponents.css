@@ -1,0 +1,24 @@
+.tokenprogress {
+  padding: 25px;
+  background: #1d1c55;
+  border-radius: 15px;
+  margin: 15px;
+}
+
+/* progressgradient:   */
+/* background: rgb(123,50,249); */
+/* background: linear-gradient(90deg, rgba(123,50,249,1) 0%, rgba(123,120,240,1) 35%, rgba(158,246,227,1) 100%);  */
+
+/* navcolor:#26234a */
+/* navsign:#c04e88 */
+
+/* sidebarcolor:#21215e */
+/* sidebartext:#7d5c7f */
+/* sidebartextactive: #c04e88 */
+
+/* tabhighlight:#a2ffe2 */
+/* tabinactive:#8784e0 */
+
+/* indexcolor:#8825f4 */
+/* iconcolor:#a9e5b5 */
+/* ticketcolor: #08064f */
