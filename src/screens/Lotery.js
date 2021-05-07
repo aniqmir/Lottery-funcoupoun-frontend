@@ -8,6 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import TokenProgress from "../components/generic/tokenprogress";
 
+import downarrows from "../assets/downarrows.png";
+
+import "./screens.css";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -58,6 +62,23 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: "#060656",
     color: "white",
+    textTransform: "none",
+  },
+  rootbar: {
+    flexGrow: 1,
+    backgroundColor: "#060656",
+    color: "#a2ffe2",
+    boxShadow: "none",
+    textTransform: "none",
+  },
+  indicator: {
+    backgroundColor: "#211e47",
+    width: "10%",
+  },
+  tabsroot: {
+    textTransform: "none",
+    fontSize: "24px",
+    fontWeight: 700,
   },
 }));
 
@@ -71,24 +92,46 @@ export default function NavTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.rootbar}>
         <Tabs
           variant="fullWidth"
           value={value}
           onChange={handleChange}
           aria-label="nav tabs example"
+          classes={{
+            indicator: classes.indicator,
+          }}
         >
-          <LinkTab label="Saving Lotery" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Lotery" href="/trash" {...a11yProps(1)} />
+          <LinkTab
+            classes={{
+              root: classes.tabsroot,
+            }}
+            label="Saving Lotery"
+            href="/drafts"
+            {...a11yProps(0)}
+          />
+          <LinkTab
+            classes={{
+              root: classes.tabsroot,
+            }}
+            label="Lotery"
+            href="/trash"
+            {...a11yProps(1)}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         Page One
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {[1, 2, 3, 4, 5].map((item, index) => (
-          <TokenProgress />
+        {[1, 2, 3].map((item, index) => (
+          <div className="tokenProgressMain">
+            <TokenProgress key={index} />
+          </div>
         ))}
+        <div className="downarrows">
+          <img src={downarrows} alt="downarrows" />
+        </div>
       </TabPanel>
     </div>
   );

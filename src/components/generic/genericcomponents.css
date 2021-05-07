@@ -1,8 +1,21 @@
 .tokenprogress {
-  padding: 25px;
-  background: #1d1c55;
+  padding: 0px 25px 25px 10px;
+  background-color: #1d1c55;
   border-radius: 15px;
   margin: 15px;
+  width: 75%;
+}
+
+.ticketPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #a2ffe2;
+}
+
+.downarrows {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* progressgradient:   */

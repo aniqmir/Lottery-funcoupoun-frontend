@@ -1,8 +1,12 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import {
+  // makeStyles,
+  withStyles,
+} from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
 
 const BorderLinearProgress = withStyles({
@@ -19,64 +23,64 @@ const BorderLinearProgress = withStyles({
   },
 })(LinearProgress);
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+// }));
 
 const TokenProgress = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
-    <Grid container className="tokenprogress">
-      <Grid item md={2}>
-        <p>#1</p>
+    <Grid
+      container
+      className="tokenprogress"
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+      alignContent="center"
+      spacing={1}
+      style={{ margin: "15px", width: "75%" }}
+    >
+      <Grid item xs={4} md={12}>
+        <span style={{ color: "#9026ff", fontSize: "1.2rem", fontWeight: 700 }}>
+          #1
+        </span>
       </Grid>
-      <Grid
-        item
-        md={10}
-        container
-        direction="row"
-        justify="flex-end"
-        alignItems="flex-end"
-      >
-        <p>$ 100</p>
+      <Grid item xs={8} md={12} container direction="row" justify="flex-end">
+        <span className="ticketPrice">$ 100</span>
       </Grid>
-      <Grid item md={12}>
+      <Grid item xs={12} md={12}>
         <div>
           <BorderLinearProgress
-            className={classes.margin}
             variant="determinate"
             color="secondary"
             value={50}
           />
         </div>
       </Grid>
-      <Grid item container md={4}>
+      <Grid item container xs={8} md={4}>
         <Grid item xs={6}>
-          1
+          K : 100 $
         </Grid>
         <Grid item xs={6}>
-          2
+          4e : 200 $
         </Grid>
         <Grid item xs={6}>
-          3
+          L : 300 $
         </Grid>
         <Grid item xs={6}>
-          4
+          5e : 400 $
         </Grid>
         <Grid item xs={6}>
-          5
+          M : 500 $
         </Grid>
         <Grid item xs={6}>
-          6
+          6e : 600 $
         </Grid>
       </Grid>
-      <Grid item md={4}>
+      <Grid item xs={4} md={4}>
         <div
           style={{
             background: "#b4ffa4",
@@ -93,18 +97,19 @@ const TokenProgress = () => {
           i
         </div>
       </Grid>
-      <Grid item md={4}>
-        <div
-          style={{
-            background: "#b4ffa4",
-            color: "black",
-            borderRadius: "5px",
-            padding: "10px",
-            margin: "10px",
-          }}
-        >
-          Tickets Disponibles : 12
-        </div>
+      <Grid item xs={12} md={4}>
+        <img src={ticket} alt="ticket" />
+        {/* <div
+            style={{
+              background: "#b4ffa4",
+              color: "black",
+              borderRadius: "5px",
+              padding: "10px",
+              margin: "10px",
+            }}
+          >
+            Tickets Disponibles : 12
+          </div> */}
       </Grid>
     </Grid>
   );
