@@ -14,8 +14,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import Lottery from "../screens/Lotery";
-import Profile from "../screens/Profil";
-
 import { Router, Route } from "react-router-dom";
 
 import funcoupons from "../assets/funcoupons.png";
@@ -23,8 +21,6 @@ import mongain from "../assets/mongain.png";
 import sideticket from "../assets/sideticket.png";
 
 import history from "../history";
-
-import "./components.css";
 
 const drawerWidth = 240;
 // const sidebarbg = "#21215e";
@@ -39,10 +35,8 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor: navcolorbg,
-    boxShadow: "none",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
     [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - 0px)`,
+      width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
@@ -189,8 +183,7 @@ function ResponsiveDrawer(props) {
       <main className={classes.content}>
         <Toolbar />
         <Router history={history}>
-          <Route exact path="/Lottery" component={Lottery} />
-          <Route exact path="/Profile" component={Profile} />
+          <Route path="/Lottery" component={Lottery} />
         </Router>
       </main>
     </div>

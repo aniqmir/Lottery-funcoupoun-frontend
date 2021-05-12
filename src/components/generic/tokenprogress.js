@@ -6,7 +6,7 @@ import {
 import { Grid } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import ticket from "../../assets/ticket.png";
+// import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
 
 const BorderLinearProgress = withStyles({
@@ -60,7 +60,7 @@ const TokenProgress = () => {
           />
         </div>
       </Grid>
-      <Grid item container xs={8} md={4}>
+      <Grid item container xs={12} md={12} lg={4}>
         <Grid item xs={6}>
           K : 100 $
         </Grid>
@@ -80,7 +80,7 @@ const TokenProgress = () => {
           6e : 600 $
         </Grid>
       </Grid>
-      <Grid item xs={4} md={4}>
+      <Grid item xs={4} md={6} lg={4}>
         <div
           style={{
             background: "#b4ffa4",
@@ -97,19 +97,19 @@ const TokenProgress = () => {
           i
         </div>
       </Grid>
-      <Grid item xs={12} md={4}>
-        <img src={ticket} alt="ticket" />
-        {/* <div
-            style={{
-              background: "#b4ffa4",
-              color: "black",
-              borderRadius: "5px",
-              padding: "10px",
-              margin: "10px",
-            }}
-          >
-            Tickets Disponibles : 12
-          </div> */}
+      <Grid item xs={8} md={6} lg={4}>
+        {/* <img src={ticket} alt="ticket" /> */}
+        <div
+          style={{
+            background: "#b4ffa4",
+            color: "black",
+            borderRadius: "5px",
+            padding: "10px",
+            margin: "10px",
+          }}
+        >
+          Tickets Disponibles : 12
+        </div>
       </Grid>
     </Grid>
   );

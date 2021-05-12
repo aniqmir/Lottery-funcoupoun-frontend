@@ -3,9 +3,43 @@
   background-color: #1d1c55;
   border-radius: 15px;
   margin: 15px;
-  width: 75%;
+  width: 100%;
 }
 
+.lotteryticket {
+  padding: 0px 50px 25px;
+  background-color: #1d1c55;
+  border-radius: 15px;
+  margin: 15px;
+  width: 100%;
+}
+
+.yourtickets {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 1rem;
+}
+.lotteryticketbg {
+  /* background-image: url("../../assets/lotteryticket.png");
+  background-repeat: no-repeat;
+  height: 169px; */
+  width: 100%;
+  text-align: center;
+  color: white;
+  object-fit: cover;
+}
+
+.lotteryhead {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #7c2afa;
+}
+
+.lotteryprice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b4ffa4;
+}
 .ticketPrice {
   font-size: 2rem;
   font-weight: 700;
