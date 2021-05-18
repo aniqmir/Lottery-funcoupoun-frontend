@@ -106,24 +106,21 @@ export default function NavTabs() {
             classes={{
               root: classes.tabsroot,
             }}
-            label="Saving Lotery"
-            href="/drafts"
+            label="Lotery"
+            // href="/trash"
             {...a11yProps(0)}
           />
           <LinkTab
             classes={{
               root: classes.tabsroot,
             }}
-            label="Lotery"
-            href="/trash"
+            label="Saving Lotery"
+            // href="/drafts"
             {...a11yProps(1)}
           />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        Page One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
         {[1, 2, 3].map((item, index) => (
           <div className="tokenProgressMain">
             <TokenProgress key={index} />
@@ -132,6 +129,9 @@ export default function NavTabs() {
         <div className="downarrows">
           <img src={downarrows} alt="downarrows" />
         </div>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Page One
       </TabPanel>
     </div>
   );

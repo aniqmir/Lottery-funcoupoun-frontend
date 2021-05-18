@@ -15,8 +15,9 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
+import Exchange from "../screens/Exchange";
 
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Redirect } from "react-router-dom";
 
 import funcoupons from "../assets/funcoupons.png";
 import mongain from "../assets/mongain.png";
@@ -189,8 +190,12 @@ function ResponsiveDrawer(props) {
       <main className={classes.content}>
         <Toolbar />
         <Router history={history}>
+          <Route exact path="/">
+            <Redirect to="/Lottery" />
+          </Route>
           <Route exact path="/Lottery" component={Lottery} />
           <Route exact path="/Profile" component={Profile} />
+          <Route exact path="/Exchange" component={Exchange} />
         </Router>
       </main>
     </div>

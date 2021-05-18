@@ -52,6 +52,10 @@
   justify-content: center;
 }
 
+.fcPrice {
+  padding-top: 10px;
+  color: #c04e88;
+}
 /* progressgradient:   */
 /* background: rgb(123,50,249); */
 /* background: linear-gradient(90deg, rgba(123,50,249,1) 0%, rgba(123,120,240,1) 35%, rgba(158,246,227,1) 100%);  */

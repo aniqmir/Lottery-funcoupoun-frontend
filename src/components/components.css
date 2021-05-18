@@ -13,3 +13,17 @@
   text-transform: capitalize;
   color: #c04e88;
 }
+
+.selectitems {
+  position: absolute;
+  background: #323159 !important;
+  padding: 10px;
+  text-align: center;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.selectitems:hover {
+  background: #323159 !important;
+}

@@ -6,6 +6,12 @@ import {
 import { Grid } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+import sideticket from "../../assets/sideticket.png";
+import equal from "../../assets/equal.png";
+import goldcrown from "../../assets/goldcrown.svg";
+import silvercrown from "../../assets/silvercrown.svg";
+import bronzecrown from "../../assets/bronzecrown.svg";
+
 // import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
 
@@ -17,9 +23,9 @@ const BorderLinearProgress = withStyles({
   },
   bar: {
     borderRadius: 35,
-    // background: "rgb(123,50,249)",
+    // background: "rgb(144,38,255)",
     background:
-      "linear-gradient(90deg, rgba(123,50,249,1) 0%, rgba(123,120,240,1) 35%, rgba(158,246,227,1) 100%)",
+      "linear-gradient(90deg, rgba(144,38,255,1) 41%, rgba(95,255,226,1) 100%)",
   },
 })(LinearProgress);
 
@@ -43,13 +49,43 @@ const TokenProgress = () => {
       spacing={1}
       style={{ margin: "15px", width: "75%" }}
     >
-      <Grid item xs={4} md={12}>
+      <Grid item xs={2} md={12}>
         <span style={{ color: "#9026ff", fontSize: "1.2rem", fontWeight: 700 }}>
           #1
         </span>
       </Grid>
-      <Grid item xs={8} md={12} container direction="row" justify="flex-end">
-        <span className="ticketPrice">$ 100</span>
+      <Grid item xs={10} md={12} container direction="row">
+        <Grid item xs={1} md={6}></Grid>
+        <Grid item md={6} container justify="flex-end" alignContent="flex-end">
+          <Grid
+            item
+            xs={3}
+            md={2}
+            container
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+          >
+            <span className="fcPrice"> 1000 Fc</span>
+          </Grid>
+          <Grid item xs={3} md={1}>
+            <img src={sideticket} alt="sideticket" style={{ width: "40px" }} />
+          </Grid>
+          <Grid
+            item
+            xs={2}
+            md={2}
+            container
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+          >
+            <img alt="equal" src={equal} />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <span className="ticketPrice">$ 100</span>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
         <div>
@@ -62,19 +98,22 @@ const TokenProgress = () => {
       </Grid>
       <Grid item container xs={12} md={12} lg={4}>
         <Grid item xs={6}>
-          K : 100 $
+          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :
+          100 $
         </Grid>
         <Grid item xs={6}>
           4e : 200 $
         </Grid>
         <Grid item xs={6}>
-          L : 300 $
+          <img src={silvercrown} alt="silvercrown" style={{ width: "20px" }} />{" "}
+          : 300 $
         </Grid>
         <Grid item xs={6}>
           5e : 400 $
         </Grid>
         <Grid item xs={6}>
-          M : 500 $
+          <img src={bronzecrown} alt="bronzecrown" style={{ width: "20px" }} />{" "}
+          : 500 $
         </Grid>
         <Grid item xs={6}>
           6e : 600 $
