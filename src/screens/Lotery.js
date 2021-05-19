@@ -85,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const lotteryArray = [100,1000,10000,100000]
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -123,7 +124,7 @@ export default function NavTabs() {
       <TabPanel value={value} index={0}>
         {[1, 2, 3, 4].map((item, index) => (
           <div className="tokenProgressMain">
-            <TokenProgress key={index} />
+            <TokenProgress keys={index+1} lotteryAmount={lotteryArray[index]} />
           </div>
         ))}
         <div className="downarrows">

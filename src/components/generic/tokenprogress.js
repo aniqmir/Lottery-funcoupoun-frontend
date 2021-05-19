@@ -35,7 +35,7 @@ const BorderLinearProgress = withStyles({
 //   },
 // }));
 
-const TokenProgress = () => {
+const TokenProgress = (props) => {
   // const classes = useStyles();
 
   return (
@@ -51,7 +51,7 @@ const TokenProgress = () => {
     >
       <Grid item xs={2} md={12}>
         <span style={{ color: "#9026ff", fontSize: "1.2rem", fontWeight: 700 }}>
-          #1
+          #{props.keys}
         </span>
       </Grid>
       <Grid item xs={10} md={12} container direction="row">
@@ -66,7 +66,7 @@ const TokenProgress = () => {
             alignItems="center"
             alignContent="center"
           >
-            <span className="fcPrice"> 1000 Fc</span>
+            <span className="fcPrice"> {10*props.lotteryAmount} Fc</span>
           </Grid>
           <Grid item xs={3} md={1}>
             <img src={sideticket} alt="sideticket" style={{ width: "40px" }} />
@@ -83,7 +83,7 @@ const TokenProgress = () => {
             <img alt="equal" src={equal} />
           </Grid>
           <Grid item xs={6} md={3}>
-            <span className="ticketPrice">$ 100</span>
+            <span className="ticketPrice">$ {props.lotteryAmount}</span>
           </Grid>
         </Grid>
       </Grid>
