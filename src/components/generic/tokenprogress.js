@@ -138,7 +138,7 @@ const TokenProgress = (props) => {
             color: "black",
             fontSize: "20px",
             fontWeight: 600,
-            textAlign: "center",
+            textAlign:"center"
           }}
         >
           i

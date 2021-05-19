@@ -109,6 +109,7 @@ function ResponsiveDrawer(props) {
               <ListItem
                 onClick={() => changeRoute(text)}
                 button
+                style={{textAlign:"center"}}
                 key={text}
                 divider={true}
                 selected={`/${text}` === currentRoute}
@@ -165,7 +166,7 @@ function ResponsiveDrawer(props) {
           </div>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer} aria-label="mailbox folders" >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer

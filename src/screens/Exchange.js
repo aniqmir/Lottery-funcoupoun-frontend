@@ -64,12 +64,12 @@ export default function SimpleCard() {
 
             <Grid item xs={12}>
               <div className="fromCard">
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                   <Grid item xs={12}>
                     From
                   </Grid>
                   <Grid item xs={5}>
-                    0.0
+                  <span style={{fontSize:"24px"}}>  0.0</span>
                   </Grid>
                   <Grid item xs={7} container spacing={4}>
                     <Grid item xs={2}>
@@ -81,8 +81,10 @@ export default function SimpleCard() {
                         />
                       </span>
                     </Grid>
-                    <Grid item xs={10}>
-                      <Select />
+                    <Grid  item xs={10}>
+                      <div style={{marginLeft:"9px"}}>
+                        <Select />
+                      </div>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -97,15 +99,17 @@ export default function SimpleCard() {
             </Grid>
             <Grid item xs={12}>
               <div className="fromCard">
-                <Grid container>
+                <Grid spacing={2} container>
                   <Grid item xs={12}>
                     To
                   </Grid>
                   <Grid item xs={6}>
-                    0.0
+                  <span style={{fontSize:"24px"}}>  0.0</span>
                   </Grid>
                   <Grid item xs={6}>
+                  <div style={{marginLeft:"19px"}}>
                     <Select />
+                    </div>
                     {/* <select
                       className="fromSelect"
                       placeholder="Select a Currency"
@@ -126,7 +130,7 @@ export default function SimpleCard() {
           </Grid>
         </CardContent>
         <CardActions>
-          <button className="unlockButton">Unlock Button</button>
+          <button className="unlockButton">Unlock Button</button> 
         </CardActions>
       </Card>
     </div>
