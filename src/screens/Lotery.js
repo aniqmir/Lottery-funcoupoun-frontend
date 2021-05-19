@@ -85,12 +85,23 @@ const useStyles = makeStyles((theme) => ({
 export default function NavTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const lotteryArray = [100,1000,10000,100000]
+  const lotteryArray = [100, 1000, 10000, 100000];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const tempArr = [
+    {
+      position1: "100",
+      position2: "200",
+      position3: "300",
+      position4: { name: "4 - 100th", price: "180" },
+      position5: { name: "101 - 200th", price: "60" },
+      position6: { name: "201 - 300th", price: "70" },
+      position7: { name: "301 - 400th", price: "40" },
+    },
+  ];
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.rootbar}>
@@ -124,7 +135,10 @@ export default function NavTabs() {
       <TabPanel value={value} index={0}>
         {[1, 2, 3, 4].map((item, index) => (
           <div className="tokenProgressMain">
-            <TokenProgress keys={index+1} lotteryAmount={lotteryArray[index]} />
+            <TokenProgress
+              keys={index + 1}
+              lotteryAmount={lotteryArray[index]}
+            />
           </div>
         ))}
         <div className="downarrows">

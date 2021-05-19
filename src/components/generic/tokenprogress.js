@@ -60,15 +60,15 @@ const TokenProgress = (props) => {
           <Grid
             item
             xs={3}
-            md={2}
+            md={3}
             container
             justify="center"
             alignItems="center"
             alignContent="center"
           >
-            <span className="fcPrice"> {10*props.lotteryAmount} Fc</span>
+            <span className="fcPrice"> {10 * props.lotteryAmount} Fc</span>
           </Grid>
-          <Grid item xs={3} md={1}>
+          <Grid item xs={3} md={2}>
             <img src={sideticket} alt="sideticket" style={{ width: "40px" }} />
           </Grid>
           <Grid
@@ -82,7 +82,7 @@ const TokenProgress = (props) => {
           >
             <img alt="equal" src={equal} />
           </Grid>
-          <Grid item xs={6} md={3}>
+          <Grid item xs={6} md={4}>
             <span className="ticketPrice">$ {props.lotteryAmount}</span>
           </Grid>
         </Grid>

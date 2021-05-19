@@ -85,6 +85,8 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const [connection, setConnection] = React.useState(false);
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -136,6 +138,10 @@ function ResponsiveDrawer(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  const connectToMetaMask = () => {
+    //connect here
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -152,7 +158,9 @@ function ResponsiveDrawer(props) {
           </IconButton>
           <img src={funcoupons} alt="funcoupons" />
           <div>
-            <button className="connect">Connect</button>
+            <button className="connect" onClick={connectToMetaMask}>
+              {connection ? "Connected" : "Connect"}
+            </button>
             <span className="connectLang">FR</span>
           </div>
         </Toolbar>
