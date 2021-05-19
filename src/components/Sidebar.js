@@ -16,6 +16,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
+import Roadmap from "../screens/Roadmap";
 
 import { Router, Route, Redirect } from "react-router-dom";
 
@@ -101,7 +102,7 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <div className={classes.drawerContainer}>
         <List>
-          {["Lottery", "Profile", "Token", "Road Map", "Exchange"].map(
+          {["Lottery", "Profile", "Token", "RoadMap", "Exchange"].map(
             (text, index) => (
               <ListItem
                 onClick={() => changeRoute(text)}
@@ -196,6 +197,7 @@ function ResponsiveDrawer(props) {
           <Route exact path="/Lottery" component={Lottery} />
           <Route exact path="/Profile" component={Profile} />
           <Route exact path="/Exchange" component={Exchange} />
+          <Route exact path="/Roadmap" component={Roadmap} />
         </Router>
       </main>
     </div>
