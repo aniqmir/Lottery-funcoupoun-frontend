@@ -60,13 +60,15 @@ function LinkTab(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: "#060656",
+    // backgroundColor: "#060656",
+    background: "rgb(7,4,53)",
+    background: "linear-gradient(rgba(7,4,53,1) 41%, rgba(0,0,93,1) 100%)",
     color: "white",
     textTransform: "none",
   },
   rootbar: {
     flexGrow: 1,
-    backgroundColor: "#060656",
+    backgroundColor: "rgb(7,4,53)",
     color: "#a2ffe2",
     boxShadow: "none",
     textTransform: "none",
