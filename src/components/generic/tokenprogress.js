@@ -66,7 +66,7 @@ const TokenProgress = (props) => {
             alignItems="center"
             alignContent="center"
           >
-            <span className="fcPrice"> 1000 Fc</span>
+            <span className="fcPrice"> {10*props.lotteryAmount} Fc</span>
           </Grid>
           <Grid item xs={3} md={1}>
             <img src={sideticket} alt="sideticket" style={{ width: "40px" }} />
