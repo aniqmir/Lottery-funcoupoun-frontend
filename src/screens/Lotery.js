@@ -91,15 +91,42 @@ export default function NavTabs() {
     setValue(newValue);
   };
 
-  const tempArr = [
+  const lotteryValues = [
     {
-      position1: "100",
-      position2: "200",
-      position3: "300",
+      position1: "50",
+      position2: "10",
+      position3: "5",
       position4: { name: "4 - 100th", price: "180" },
       position5: { name: "101 - 200th", price: "60" },
       position6: { name: "201 - 300th", price: "70" },
       position7: { name: "301 - 400th", price: "40" },
+    },
+    {
+      position1: "500",
+      position2: "100",
+      position3: "50",
+      position4: { name: "4 - 10th", price: "18" },
+      position5: { name: "11 - 20th", price: "6" },
+      position6: { name: "21 - 30th", price: "7" },
+      position7: { name: "31 - 40th", price: "4" },
+    },
+    {
+      position1: "5000",
+      position2: "1000",
+      position3: "500",
+      position4: { name: "4 - 1000th", price: "1800" },
+      position5: { name: "1001 - 2000th", price: "600" },
+      position6: { name: "2001 - 3000th", price: "700" },
+      position7: { name: "3001 - 4000th", price: "400" },
+    },
+    {
+      position1: "50000",
+      position2: "10000",
+      position3: "5000",
+      position4: { name: "4 - 10000th", price: "18000" },
+      position5: { name: "10001 - 20000th", price: "6000" },
+      position6: { name: "20001 - 30000th", price: "7000" },
+      position7: { name: "30001 - 40000th", price: "4000" },
     },
   ];
   return (
@@ -133,11 +160,12 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {[1, 2, 3, 4].map((item, index) => (
+        {lotteryValues.map((value, index) => (
           <div className="tokenProgressMain">
             <TokenProgress
               keys={index + 1}
               lotteryAmount={lotteryArray[index]}
+              {...value}
             />
           </div>
         ))}

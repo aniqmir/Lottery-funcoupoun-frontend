@@ -38,6 +38,7 @@ const BorderLinearProgress = withStyles({
 const TokenProgress = (props) => {
   // const classes = useStyles();
 
+  console.log(props, "props");
   return (
     <Grid
       container
@@ -96,30 +97,37 @@ const TokenProgress = (props) => {
           />
         </div>
       </Grid>
-      <Grid item container xs={12} md={12} lg={4}>
-        <Grid item xs={6}>
-          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :
-          100 $
+      <Grid item container xs={12} md={12} lg={3}>
+        <Grid item xs={12}>
+          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :{" "}
+          {props.position1} $
         </Grid>
-        <Grid item xs={6}>
-          4e : 200 $
-        </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <img src={silvercrown} alt="silvercrown" style={{ width: "20px" }} />{" "}
-          : 300 $
-        </Grid>
-        <Grid item xs={6}>
-          5e : 400 $
+          : {props.position2} $
         </Grid>
         <Grid item xs={6}>
           <img src={bronzecrown} alt="bronzecrown" style={{ width: "20px" }} />{" "}
-          : 500 $
-        </Grid>
-        <Grid item xs={6}>
-          6e : 600 $
+          : {props.position3} $
         </Grid>
       </Grid>
-      <Grid item xs={4} md={6} lg={4}>
+
+      <Grid item container xs={12} md={12} lg={4}>
+        <Grid item xs={12}>
+          {props.position4.name} : {props.position4.price} $ to share
+        </Grid>
+        <Grid item xs={12}>
+          {props.position5.name} : {props.position5.price} $ to share
+        </Grid>
+        <Grid item xs={12}>
+          {props.position6.name} : {props.position6.price} $ to share
+        </Grid>
+        <Grid item xs={12}>
+          {props.position7.name} : {props.position7.price} $ to share
+        </Grid>
+      </Grid>
+
+      <Grid item xs={4} md={6} lg={1}>
         <div
           style={{
             background: "#b4ffa4",
