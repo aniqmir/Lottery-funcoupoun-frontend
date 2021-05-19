@@ -79,6 +79,12 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(rgba(7,4,53,1) 41%, rgba(0,0,93,1) 100%)",
     padding: theme.spacing(3),
   },
+  divider: {
+    height:"50px"
+  },
+  selected: {
+      color:"#dd4d8c"
+  },
 }));
 
 function ResponsiveDrawer(props) {
@@ -115,8 +121,13 @@ function ResponsiveDrawer(props) {
                 key={text}
                 divider={true}
                 selected={`/${text}` === currentRoute}
+                classes={{
+                  divider: classes.divider,
+                  selected: classes.selected,
+                }}
               >
-                <ListItemText primary={text} />
+                {/* <ListItemText primary={text} /> */}
+                <span style={{color:`/${text}` === currentRoute?"#dd4d8c":"#f5a0be",marginLeft:"1rem",fontWeight:700,fontSize:"20px"}}>{text}</span>
               </ListItem>
             )
           )}

@@ -138,7 +138,8 @@ const TokenProgress = (props) => {
             color: "black",
             fontSize: "20px",
             fontWeight: 600,
-            textAlign:"center"
+            textAlign:"center",
+            cursor:"pointer"
           }}
         >
           i
@@ -155,7 +156,7 @@ const TokenProgress = (props) => {
             margin: "10px",
           }}
         >
-          Tickets Disponibles : 12
+          Tickets Available : 12
         </div>
       </Grid>
     </Grid>
