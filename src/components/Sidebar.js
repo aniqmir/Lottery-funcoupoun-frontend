@@ -13,6 +13,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+import Web3 from 'web3';
+
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
@@ -27,6 +29,8 @@ import sideticket from "../assets/sideticket.png";
 import history from "../history";
 
 import "./components.css";
+
+
 
 const drawerWidth = 240;
 // const sidebarbg = "#21215e";
@@ -106,6 +110,12 @@ function ResponsiveDrawer(props) {
   const [currentRoute, setCurrentRoute] = React.useState(
     window !== undefined ? window.location.pathname : "/"
   );
+  const connectToMetaMask = (e) => {
+    //connect here
+    e.preventDefault();
+    props.onConnectWithMetamask();
+  
+  };
 
   const drawer = (
     <div>
@@ -152,9 +162,7 @@ function ResponsiveDrawer(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  const connectToMetaMask = () => {
-    //connect here
-  };
+  
 
   return (
     <div className={classes.root}>
