@@ -79,7 +79,6 @@
 .exchangeCard {
   display: flex;
   justify-content: center;
-  height: 100vh;
   align-items: center;
 }
 
@@ -127,8 +126,9 @@
   align-self: center;
   border-radius: 10px;
   box-shadow: none;
-  margin: 0px 30px 30px 15px;
-  height: 35px;
+  margin: 0px 30px 30px 30px;
+  height: 45px;
+  cursor: pointer;
 }
 
 .centerArrow {
@@ -141,4 +141,36 @@
 .exchangeIcon {
   width: 25px;
   margin-top: 10px;
+}
+
+.timer {
+  color: #a2ffe2;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 10px;
+}
+
+.timer div {
+  text-align: center;
+}
+
+.timer span {
+  font-size: 32px;
+  border: 1px solid #a2ffe2;
+  border-radius: 10px;
+  color: #a2ffe2;
+  padding: 10px;
+  margin: 10px;
+}
+
+.fromInput {
+  background: transparent;
+  border: none;
+  color: #a2ffe2;
+  font-size: 26px;
+  width: 100%;
+}
+input:focus {
+  outline: none;
 }

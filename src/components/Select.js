@@ -1,87 +1,127 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import InputBase from "@material-ui/core/InputBase";
-import "./components.css";
-const BootstrapInput = withStyles((theme) => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3),
-    },
-  },
-  input: {
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: "transparent",
-    fontSize: 16,
-    padding: "10px 26px 10px 12px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    width: "150px",
-    border: "none",
-    color: "#a2ffe2",
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-    "&:focus": {
-      borderRadius: 4,
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
-      backgroundColor: "transparent",
-    },
-  },
-}))(InputBase);
+import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
+import sideticket from "../assets/sideticket.png";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
+  quantityRoot: {
+    color: "#FFF",
+    // backgroundColor: "#303039",
+    minWidth: 100,
+    opacity: 0.6,
+    borderRadius: "5px",
+    "&:hover": {
+      backgroundColor: "#4c4b70",
+      borderRadius: "5px",
+      opacity: 1,
+    },
+    "&:focus-within": {
+      backgroundColor: "#4c4b70",
+      borderRadius: "5px",
+      opacity: 1,
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      border: "1px solid #4c4b70",
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+      border: "1px solid #4c4b70",
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      border: "1px solid #4c4b70",
+      borderRadius: "5px 5px 0 0",
+    },
+    "& .Mui-disabled": {
+      color: "#FFFFFF",
+      opacity: 0.6,
+    },
+    "& .Mui-disabled .MuiOutlinedInput-notchedOutline": {
+      border: "1px solid #4c4b70",
+    },
   },
-  margin: {
-    margin: theme.spacing(1),
+  button: {
+    display: "block",
+    marginTop: theme.spacing(2),
+  },
+  formControl: {
+    // margin: theme.spacing(1),
+    minWidth: 100,
+  },
+  selectRoot: {
+    color: "#FFFFFF",
+    border: "1px solid #4c4b70",
+    textAlign: "top",
+  },
+  icon: {
+    color: "#FFFFFF",
   },
 }));
 
-export default function CustomizedSelects() {
+export default function ControlledOpenSelect() {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
-    <form className={classes.root} autoComplete="off">
-      <NativeSelect
-        value={age}
-        onChange={handleChange}
-        input={
-          <BootstrapInput
-            name="age"
-            placeholder="Select a Currency"
-            id="age-customized-native-simple"
-          />
-        }
+    <div>
+      <FormControl
+        className={classes.formControl}
+        classes={{ root: classes.quantityRoot }}
       >
-        <option className="selectitems" value="" disabled>
+        {/* <InputLabel id="demo-controlled-open-select-label">
           Select a Currency
-        </option>
-        <option className="selectitems" value={10}>
-          Ten
-        </option>
-        <option className="selectitems" value={20}>
-          Twenty
-        </option>
-        <option className="selectitems" value={30}>
-          Thirty
-        </option>
-      </NativeSelect>
-    </form>
+        </InputLabel> */}
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={age}
+          onChange={handleChange}
+          variant="outlined"
+          classes={{
+            root: classes.selectRoot,
+            icon: classes.icon,
+          }}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>
+            <div style={{ display: "flex" }}>
+              <img alt="furc" src={sideticket} style={{ width: "20px" }} />
+              &nbsp;FURC
+            </div>
+          </MenuItem>
+          <MenuItem value={20}>
+            <div style={{ display: "flex" }}>
+              <img alt="furc" src={sideticket} style={{ width: "20px" }} />
+              &nbsp;FURC
+            </div>
+          </MenuItem>
+          <MenuItem value={30}>
+            <div style={{ display: "flex" }}>
+              <img alt="furc" src={sideticket} style={{ width: "20px" }} />
+              &nbsp;FURC
+            </div>
+          </MenuItem>
+        </Select>
+      </FormControl>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,7 +7,6 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 
@@ -17,6 +16,7 @@ import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
 import Roadmap from "../screens/Roadmap";
+import Token from "../screens/Token";
 
 import { Router, Route, Redirect } from "react-router-dom";
 
@@ -79,6 +79,10 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(rgba(7,4,53,1) 41%, rgba(0,0,93,1) 100%)",
     padding: theme.spacing(3),
   },
+  divider: {
+    height: "50px",
+    borderBottom: "2px solid #070435",
+  },
 }));
 
 function ResponsiveDrawer(props) {
@@ -101,6 +105,11 @@ function ResponsiveDrawer(props) {
     window !== undefined ? window.location.pathname : "/"
   );
 
+  useEffect(() => {
+    window !== undefined
+      ? setCurrentRoute(window.location.pathname)
+      : setCurrentRoute("/");
+  }, []);
   const drawer = (
     <div>
       <Toolbar />
@@ -114,8 +123,21 @@ function ResponsiveDrawer(props) {
                 key={text}
                 divider={true}
                 selected={`/${text}` === currentRoute}
+                classes={{
+                  divider: classes.divider,
+                }}
               >
-                <ListItemText primary={text} />
+                <span
+                  style={{
+                    color: `/${text}` === currentRoute ? "#dd4d8c" : "#f5a0be",
+                    marginLeft: "15px",
+                    fontSize: "18px",
+                    fontWeight: "550",
+                  }}
+                >
+                  {text}
+                </span>
+                {/* <ListItemText primary={text} /> */}
               </ListItem>
             )
           )}
@@ -148,7 +170,11 @@ function ResponsiveDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar style={{ justifyContent: "space-between" }}>
+        <Toolbar
+          style={{
+            justifyContent: "space-between",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -208,6 +234,7 @@ function ResponsiveDrawer(props) {
           <Route exact path="/Profile" component={Profile} />
           <Route exact path="/Exchange" component={Exchange} />
           <Route exact path="/Roadmap" component={Roadmap} />
+          <Route exact path="/Token" component={Token} />
         </Router>
       </main>
     </div>
