@@ -12,6 +12,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+import Web3 from "web3";
+
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
@@ -104,6 +106,11 @@ function ResponsiveDrawer(props) {
   const [currentRoute, setCurrentRoute] = React.useState(
     window !== undefined ? window.location.pathname : "/"
   );
+  const connectToMetaMask = (e) => {
+    //connect here
+    e.preventDefault();
+    props.onConnectWithMetamask();
+  };
 
   useEffect(() => {
     window !== undefined
@@ -120,6 +127,7 @@ function ResponsiveDrawer(props) {
               <ListItem
                 onClick={() => changeRoute(text)}
                 button
+                style={{ textAlign: "center" }}
                 key={text}
                 divider={true}
                 selected={`/${text}` === currentRoute}
@@ -130,9 +138,9 @@ function ResponsiveDrawer(props) {
                 <span
                   style={{
                     color: `/${text}` === currentRoute ? "#dd4d8c" : "#f5a0be",
-                    marginLeft: "15px",
-                    fontSize: "18px",
-                    fontWeight: "550",
+                    marginLeft: "1rem",
+                    fontSize: "20px",
+                    fontWeight: "700",
                   }}
                 >
                   {text}
@@ -161,10 +169,6 @@ function ResponsiveDrawer(props) {
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
-
-  const connectToMetaMask = () => {
-    //connect here
-  };
 
   return (
     <div className={classes.root}>

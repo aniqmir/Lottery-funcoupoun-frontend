@@ -97,6 +97,45 @@ export default function Profile() {
           <Grid item xs={12} md={4}>
             <LotteryTicket />
           </Grid>
+
+
+          <Grid item xs={12}>
+            <div style={{ display: "flex" }}>
+              <div>
+                <div className="infoicon">i</div>
+              </div>
+              <div className="rewardprice">
+                <span className="rewardpricetext">
+                  8540 &nbsp;
+                  <span>
+                    <img
+                      src={sideticket}
+                      alt="sideticket"
+                      style={{ width: "40px", height: "auto" }}
+                    />
+                  </span>
+                </span>
+              </div>
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <div className="rewardcenter">
+              <button className="claim">Claim</button>
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <p className="headtext">Tirages en Course</p>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <LotteryTicket />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <LotteryTicket />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <LotteryTicket />
+          </Grid>
+
           <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />
