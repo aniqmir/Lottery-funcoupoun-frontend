@@ -43,28 +43,12 @@ const BorderLinearProgress = withStyles({
 
 const TokenProgress = (props) => {
   // const classes = useStyles();
-  const [progressValue, setProgressValue] = React.useState(40);
-  const [address, setAddress] = React.useState("");
 
-  React.useEffect(() => {
-    const getLotteryNumbersfromEth = async () => {
-      console.log("getter");
-      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-      const accounts = await web3.eth.getAccounts();
-      setAddress(accounts[0]);
-      const todoList = new web3.eth.Contract(
-        FUN_LOTTERY_ABI,
-        FUN_LOTTERY_ADDRESS
-      );
+  const { address, progressValue, total } = props;
 
-      const lotteryCount = await todoList.methods.getTicketsPurchased().call();
-      console.log(lotteryCount);
-
-      setProgressValue(lotteryCount[0]);
-    };
-    getLotteryNumbersfromEth();
-  }, []);
-
+  const getPercentage = (val) => {
+    return ((parseInt(val) / parseInt(total)) * 100).toFixed(2);
+  };
   const buyTicket = async () => {
     //buy ticket
     console.log("buy ticket");
@@ -127,7 +111,7 @@ const TokenProgress = (props) => {
           <BorderLinearProgress
             variant="determinate"
             color="secondary"
-            value={progressValue}
+            value={getPercentage(progressValue)}
           />
           <Typography
             style={{
@@ -140,7 +124,7 @@ const TokenProgress = (props) => {
               // transform: "translateX(-50%)",
             }}
           >
-            {progressValue}%
+            {getPercentage(progressValue)}&nbsp;%
           </Typography>
           {/* <Typography
             style={{

@@ -11,6 +11,7 @@ import { FUN_COIN_ABI, FUN_COIN_ADDRESS } from "./smartcontract/funcoin";
 
 function App() {
   const [address, setAddress] = useState("");
+
   const connectToMetaMask = async () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
