@@ -51,6 +51,7 @@ const TokenProgress = (props) => {
       //alert connect first
     }
     //buy logic
+    
   };
   return (
     <Grid
