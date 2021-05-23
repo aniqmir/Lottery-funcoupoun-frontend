@@ -112,6 +112,11 @@ function ResponsiveDrawer(props) {
     props.onConnectWithMetamask();
   };
 
+  const approvefromWeb3 = (e) => {
+    e.preventDefault();
+    // props.approvefromWeb3();
+  };
+
   useEffect(() => {
     window !== undefined
       ? setCurrentRoute(window.location.pathname)
@@ -190,6 +195,13 @@ function ResponsiveDrawer(props) {
           </IconButton>
           <img src={funcoupons} alt="funcoupons" />
           <div>
+            <button
+              className="connect"
+              onClick={approvefromWeb3}
+              disabled={props.address === ""}
+            >
+              Approve
+            </button>
             <button className="connect" onClick={connectToMetaMask}>
               {connection ? "Connected" : "Connect"}
             </button>

@@ -38,7 +38,6 @@ const BorderLinearProgress = withStyles({
 const TokenProgress = (props) => {
   // const classes = useStyles();
 
-  console.log(props, "props");
   return (
     <Grid
       container
@@ -138,8 +137,8 @@ const TokenProgress = (props) => {
             color: "black",
             fontSize: "20px",
             fontWeight: 600,
-            textAlign:"center",
-            cursor:"pointer"
+            textAlign: "center",
+            cursor: "pointer",
           }}
         >
           i
