@@ -57,22 +57,19 @@ const TokenProgress = (props) => {
         FUN_LOTTERY_ABI,
         FUN_LOTTERY_ADDRESS
       );
+     
+      const lotteryCount = await todoList.methods.getTicketsPurchased().call();
+      console.log(lotteryCount)
 
-      // this.setState({ todoList });
-      // const taskCount = await todoList.methods.taskCount().call();
-      // this.setState({ taskCount });
-      // for (var i = 1; i <= taskCount; i++) {
-      //   const task = await todoList.methods.tasks(i).call();
-      //   this.setState({
-      //     tasks: [...this.state.tasks, task],
-      //   });
-      // }
+      setProgressValue(lotteryCount[0]);
+      
     };
     getLotteryNumbersfromEth();
   }, []);
 
   const buyTicket = async () => {
     //buy ticket
+    console.log("buy ticket")
     if (address === "") {
       //alert connect first
     }
