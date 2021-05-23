@@ -35,7 +35,7 @@ const LotteryTicket = () => {
           <div className="yourtickets">YOUR TICKETS</div>
           <Grid container spacing={1}>
             {[18, 25, 65, 91, 54, 23].map((item, index) => (
-              <Grid item xs={6}>
+              <Grid item xs={6} key={index}>
                 <span
                   style={{
                     background: "white",

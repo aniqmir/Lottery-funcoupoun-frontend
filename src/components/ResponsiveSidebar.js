@@ -31,7 +31,6 @@ const navcolorbg = "#26234a";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -40,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -64,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerContainer: {
     overflow: "auto",
-   
   },
 
   content: {
@@ -100,6 +97,7 @@ function ResponsiveDrawer(props) {
           {["Lottery", "Profile", "Token", "Road Map", "Exchange"].map(
             (text, index) => (
               <ListItem
+                key={index}
                 onClick={() => changeRoute(text)}
                 button
                 key={text}

@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Typography from "@material-ui/core/Typography";
 
 import sideticket from "../../assets/sideticket.png";
 import equal from "../../assets/equal.png";
@@ -42,14 +43,12 @@ const BorderLinearProgress = withStyles({
 
 const TokenProgress = (props) => {
   // const classes = useStyles();
-  const [progressValue, setProgressValue] = React.useState(0);
+  const [progressValue, setProgressValue] = React.useState(40);
   const [address, setAddress] = React.useState("");
 
-  const connectFunction = () => {
-    //connect
-  };
   React.useEffect(() => {
     const getLotteryNumbersfromEth = async () => {
+      console.log("getter");
       const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
       const accounts = await web3.eth.getAccounts();
       setAddress(accounts[0]);
@@ -57,19 +56,18 @@ const TokenProgress = (props) => {
         FUN_LOTTERY_ABI,
         FUN_LOTTERY_ADDRESS
       );
-     
+
       const lotteryCount = await todoList.methods.getTicketsPurchased().call();
-      console.log(lotteryCount)
+      console.log(lotteryCount);
 
       setProgressValue(lotteryCount[0]);
-      
     };
     getLotteryNumbersfromEth();
   }, []);
 
   const buyTicket = async () => {
     //buy ticket
-    console.log("buy ticket")
+    console.log("buy ticket");
     if (address === "") {
       //alert connect first
     }
@@ -125,12 +123,36 @@ const TokenProgress = (props) => {
         </Grid>
       </Grid>
       <Grid item xs={12} md={12}>
-        <div>
+        <div style={{ position: "relative" }}>
           <BorderLinearProgress
             variant="determinate"
             color="secondary"
             value={progressValue}
           />
+          <Typography
+            style={{
+              position: "absolute",
+              color: progressValue < 50 ? "#a2ffe2" : "white",
+              top: 0,
+              left: "47%",
+              top: "10%",
+              fontWeight: 600,
+              // transform: "translateX(-50%)",
+            }}
+          >
+            {progressValue}%
+          </Typography>
+          {/* <Typography
+            style={{
+              position: "absolute",
+              color: "white",
+              top: 0,
+              left: "95%",
+              transform: "translateX(-50%)",
+            }}
+          >
+            50
+          </Typography> */}
         </div>
       </Grid>
       <Grid item container xs={12} md={12} lg={3}>
