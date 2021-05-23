@@ -12,6 +12,11 @@ import goldcrown from "../../assets/goldcrown.svg";
 import silvercrown from "../../assets/silvercrown.svg";
 import bronzecrown from "../../assets/bronzecrown.svg";
 
+import Web3 from "web3";
+import {
+  FUN_LOTTERY_ADDRESS,
+  FUN_LOTTERY_ABI,
+} from "../../smartcontract/funlottery";
 // import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
 
@@ -37,7 +42,42 @@ const BorderLinearProgress = withStyles({
 
 const TokenProgress = (props) => {
   // const classes = useStyles();
+  const [progressValue, setProgressValue] = React.useState(0);
+  const [address, setAddress] = React.useState("");
 
+  const connectFunction = () => {
+    //connect
+  };
+  React.useEffect(() => {
+    const getLotteryNumbersfromEth = async () => {
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+      const accounts = await web3.eth.getAccounts();
+      setAddress(accounts[0]);
+      const todoList = new web3.eth.Contract(
+        FUN_LOTTERY_ABI,
+        FUN_LOTTERY_ADDRESS
+      );
+
+      // this.setState({ todoList });
+      // const taskCount = await todoList.methods.taskCount().call();
+      // this.setState({ taskCount });
+      // for (var i = 1; i <= taskCount; i++) {
+      //   const task = await todoList.methods.tasks(i).call();
+      //   this.setState({
+      //     tasks: [...this.state.tasks, task],
+      //   });
+      // }
+    };
+    getLotteryNumbersfromEth();
+  }, []);
+
+  const buyTicket = async () => {
+    //buy ticket
+    if (address === "") {
+      //alert connect first
+    }
+    //buy logic
+  };
   return (
     <Grid
       container
@@ -92,7 +132,7 @@ const TokenProgress = (props) => {
           <BorderLinearProgress
             variant="determinate"
             color="secondary"
-            value={50}
+            value={progressValue}
           />
         </div>
       </Grid>
@@ -153,7 +193,9 @@ const TokenProgress = (props) => {
             borderRadius: "5px",
             padding: "10px",
             margin: "10px",
+            cursor: "pointer",
           }}
+          onClick={buyTicket}
         >
           Tickets Available : 12
         </div>

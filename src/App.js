@@ -27,11 +27,23 @@ function App() {
     const accounts = await web3.eth.getAccounts();
     if (accounts != undefined) {
       setAddress(accounts);
+      console.log(accounts);
     }
   };
 
   const approvefromWeb3 = () => {
     //approve function
+
+    //check balance of user
+
+    const web3 = window.web3;
+
+    const contract = new web3.eth.Contract(
+      JSON.parse(FUN_LOTTERY_ABI),
+      FUN_LOTTERY_ADDRESS
+    );
+
+    //to do approve
   };
 
   return (

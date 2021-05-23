@@ -203,7 +203,7 @@ function ResponsiveDrawer(props) {
               Approve
             </button>
             <button className="connect" onClick={connectToMetaMask}>
-              {connection ? "Connected" : "Connect"}
+              {props.address === "" ? "Connect" : props.address.slice(0, 4)}
             </button>
             <span className="connectLang">FR</span>
           </div>
