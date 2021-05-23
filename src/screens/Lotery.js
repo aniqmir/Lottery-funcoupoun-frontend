@@ -165,6 +165,7 @@ export default function NavTabs() {
         {lotteryValues.map((value, index) => (
           <div className="tokenProgressMain">
             <TokenProgress
+              key={index}
               keys={index + 1}
               lotteryAmount={lotteryArray[index]}
               {...value}
