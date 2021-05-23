@@ -346,3 +346,5 @@ export const FUN_LOTTERY_ABI = [
 		"type": "function"
 	}
 ];
+
+

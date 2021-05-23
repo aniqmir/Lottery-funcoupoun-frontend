@@ -114,7 +114,7 @@ function ResponsiveDrawer(props) {
 
   const approvefromWeb3 = (e) => {
     e.preventDefault();
-    // props.approvefromWeb3();
+    props.approvefromWeb3();
   };
 
   useEffect(() => {
@@ -198,7 +198,7 @@ function ResponsiveDrawer(props) {
             <button
               className="connect"
               onClick={approvefromWeb3}
-              disabled={props.address === ""}
+              // disabled={props.address === ""}
             >
               Approve
             </button>

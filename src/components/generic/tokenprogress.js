@@ -53,8 +53,9 @@ const TokenProgress = (props) => {
       const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
       const accounts = await web3.eth.getAccounts();
       setAddress(accounts[0]);
+      console.log(FUN_LOTTERY_ABI,FUN_LOTTERY_ADDRESS);
       const todoList = new web3.eth.Contract(
-        FUN_LOTTERY_ABI,
+        JSON.parse(FUN_LOTTERY_ABI),
         FUN_LOTTERY_ADDRESS
       );
      
