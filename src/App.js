@@ -7,7 +7,9 @@ import {
   FUN_LOTTERY_ABI,
   FUN_LOTTERY_ADDRESS,
 } from "./smartcontract/funlottery";
-import { FUN_COIN_ABI, FUN_COIN_ADDRESS } from "./smartcontract/funcoin";
+//import { FUN_COIN_ADDRESS,FUN_COIN_ABI } from "./smartcontract/funcoin";
+
+import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "./smartcontract/funcoin";
 
 function App() {
   const [address, setAddress] = useState("");
@@ -32,19 +34,37 @@ function App() {
     }
   };
 
-  const approvefromWeb3 = () => {
+  const approvefromWeb3 = async () => {
     //approve function
-
-    //check balance of user
-
-    const web3 = window.web3;
-
-    const contract = new web3.eth.Contract(
-      JSON.parse(FUN_LOTTERY_ABI),
+    console.log(
+      "12312321321",
+      FUN_COIN_ABI,
+      FUN_COIN_ADDRESS,
       FUN_LOTTERY_ADDRESS
     );
+    //check balance of user
+    // const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    // const accounts = await web3.eth.getAccounts();
 
-    //to do approve
+    // console.log(FUN_LOTTERY_ABI,FUN_LOTTERY_ADDRESS);
+    // const todoList = new web3.eth.Contract(
+    //   (FUN_LOTTERY_ABI),
+    //   FUN_LOTTERY_ADDRESS
+    // );
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+
+    const contracts = new web3.eth.Contract(FUN_COIN_ABI, FUN_COIN_ADDRESS);
+
+    const accounts = await window.ethereum.enable();
+    const account = accounts[0];
+    const gas = await contracts.methods
+      .approve(account, 10000000)
+      .estimateGas();
+    const result = await contracts.methods.approve(account, 10000000).send({
+      from: account,
+      gas,
+    });
+    console.log(result);
   };
 
   return (

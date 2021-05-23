@@ -114,7 +114,7 @@ function ResponsiveDrawer(props) {
 
   const approvefromWeb3 = (e) => {
     e.preventDefault();
-    // props.approvefromWeb3();
+    props.approvefromWeb3();
   };
 
   useEffect(() => {
@@ -198,12 +198,12 @@ function ResponsiveDrawer(props) {
             <button
               className="connect"
               onClick={approvefromWeb3}
-              disabled={props.address === ""}
+              // disabled={props.address === ""}
             >
               Approve
             </button>
             <button className="connect" onClick={connectToMetaMask}>
-              {props.address === "" ? "Connect" : props.address.slice(0, 4)}
+              {props.address === "" ? "Connect" : props.address[0].slice(0, 5)}
             </button>
             <span className="connectLang">FR</span>
           </div>

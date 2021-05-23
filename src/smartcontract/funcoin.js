@@ -1,8 +1,14 @@
-export const FUN_COIN_ADDRESS = "0x54bccaA69b89Cd938a58a919Be39C48a43d1170D";
+export const FUN_COIN_ADDRESS = "0x64a543660F2C3D7b5D4DD0484AEEdEB1803CB6b9";
 
 export const FUN_COIN_ABI = [
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "address",
+        name: "_func",
+        type: "address",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -10,25 +16,25 @@ export const FUN_COIN_ABI = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "spender",
-        type: "address",
+        indexed: false,
+        internalType: "uint256",
+        name: "size",
+        type: "uint256",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "value",
+        name: "lotteryId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "maxtickets",
         type: "uint256",
       },
     ],
-    name: "Approval",
+    name: "NewLottery",
     type: "event",
   },
   {
@@ -54,176 +60,179 @@ export const FUN_COIN_ABI = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
+        indexed: false,
+        internalType: "uint256",
+        name: "lottid_",
+        type: "uint256",
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "value",
+        name: "totaltickets_",
         type: "uint256",
       },
     ],
-    name: "Transfer",
+    name: "TicketPurchase",
     type: "event",
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-    ],
-    name: "allowance",
-    outputs: [
-      {
         internalType: "uint256",
-        name: "",
+        name: "_amount",
         type: "uint256",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "approve",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "balanceOf",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "decimals",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "subtractedValue",
-        type: "uint256",
-      },
-    ],
-    name: "decreaseAllowance",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "addedValue",
-        type: "uint256",
-      },
-    ],
-    name: "increaseAllowance",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "mint",
+    name: "adminWithdraw",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
   {
-    inputs: [],
-    name: "name",
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "allLoteries",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint256",
+        name: "lotId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "ticketCounter",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "size",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "maxtickets",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "winNumber",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_size",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "totalTickets",
+        type: "uint256",
+      },
+    ],
+    name: "buyticket",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_size",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_lotteryid",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_ticketnum",
+        type: "uint256",
+      },
+    ],
+    name: "claimReward",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_size",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_maxtickets",
+        type: "uint256",
+      },
+    ],
+    name: "createLotto",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_size",
+        type: "uint256",
+      },
+    ],
+    name: "getLottoId",
+    outputs: [
+      {
+        internalType: "uint256",
         name: "",
-        type: "string",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getTicketsPurchased",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -243,21 +252,19 @@ export const FUN_COIN_ABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "symbol",
-    outputs: [
+    inputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string",
+        internalType: "uint256",
+        name: "_number",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_percentage",
+        type: "uint256",
       },
     ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalSupply",
+    name: "percentage",
     outputs: [
       {
         internalType: "uint256",
@@ -265,59 +272,24 @@ export const FUN_COIN_ABI = [
         type: "uint256",
       },
     ],
-    stateMutability: "view",
+    stateMutability: "pure",
     type: "function",
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "recipient",
-        type: "address",
+        internalType: "bytes32",
+        name: "requestId",
+        type: "bytes32",
       },
       {
         internalType: "uint256",
-        name: "amount",
+        name: "randomness",
         type: "uint256",
       },
     ],
-    name: "transfer",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "recipient",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "transferFrom",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
+    name: "rawFulfillRandomness",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -332,6 +304,45 @@ export const FUN_COIN_ABI = [
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "userTickets",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "ticketId",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "redeemed",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
 ];
