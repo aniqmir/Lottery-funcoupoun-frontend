@@ -13,11 +13,6 @@ import goldcrown from "../../assets/goldcrown.svg";
 import silvercrown from "../../assets/silvercrown.svg";
 import bronzecrown from "../../assets/bronzecrown.svg";
 
-import Web3 from "web3";
-import {
-  FUN_LOTTERY_ADDRESS,
-  FUN_LOTTERY_ABI,
-} from "../../smartcontract/funlottery";
 // import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
 
@@ -117,7 +112,6 @@ const TokenProgress = (props) => {
             style={{
               position: "absolute",
               color: progressValue < 50 ? "#a2ffe2" : "white",
-              top: 0,
               left: "47%",
               top: "10%",
               fontWeight: 600,

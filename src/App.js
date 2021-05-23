@@ -4,10 +4,9 @@ import Web3 from "web3";
 import { useState } from "react";
 
 import {
-  FUN_LOTTERY_ABI,
+  // FUN_LOTTERY_ABI,
   FUN_LOTTERY_ADDRESS,
 } from "./smartcontract/funlottery";
-//import { FUN_COIN_ADDRESS,FUN_COIN_ABI } from "./smartcontract/funcoin";
 
 import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "./smartcontract/funcoin";
 
@@ -28,7 +27,7 @@ function App() {
 
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
-    if (accounts != undefined) {
+    if (accounts !== undefined) {
       setAddress(accounts);
       console.log(accounts);
     }
