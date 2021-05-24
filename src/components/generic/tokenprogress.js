@@ -44,6 +44,7 @@ const TokenProgress = (props) => {
   const getPercentage = (val) => {
     return ((parseInt(val) / parseInt(total)) * 100).toFixed(2);
   };
+
   const buyTicket = async () => {
     //buy ticket
 
@@ -196,7 +197,7 @@ const TokenProgress = (props) => {
           }}
           onClick={buyTicket}
         >
-          Tickets Available : 12
+          Tickets Available : {total - progressValue}
         </div>
       </Grid>
     </Grid>

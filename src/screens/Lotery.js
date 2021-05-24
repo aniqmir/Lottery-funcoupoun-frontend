@@ -105,7 +105,7 @@ export default function NavTabs() {
     2: 0,
     3: 0,
   });
-  const [address, setAddress] = React.useState();
+  const [address, setAddress] = React.useState([]);
 
   React.useEffect(() => {
     const getLotteryNumbersfromEth = async () => {
