@@ -104,7 +104,7 @@ function App() {
       FUN_COIN_ABI,
       signer
     );
-    const transaction = await contract.approve(address[0], 100000000);
+    const transaction = await contract.approve(FUN_LOTTERY_ADDRESS, 100000000);
     if (!!transaction.hash) {
       setApproved(true);
     }
