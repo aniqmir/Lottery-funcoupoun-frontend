@@ -126,20 +126,15 @@ export default function NavTabs() {
   }, []);
 
   const buyLotteryfromWeb3 = async (param1, param2, param3) => {
-   
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    console.log({ provider });
+
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
-    FUN_LOTTERY_ADDRESS,
-    FUN_LOTTERY_ABI,
-    signer
+      FUN_LOTTERY_ADDRESS,
+      FUN_LOTTERY_ABI,
+      signer
     );
-    const transaction = await contract.buyticket(
-    100,
-    10
-    );
-    
+    const transaction = await contract.buyticket(100, 10);
   };
 
   const handleChange = (event, newValue) => {

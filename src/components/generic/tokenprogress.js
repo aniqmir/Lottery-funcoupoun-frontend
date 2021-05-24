@@ -51,7 +51,7 @@ const TokenProgress = (props) => {
     if (address === "") {
       //alert connect first
     }
-    props.buyLotteryfromWeb3(12, 12);
+    props.buyLotteryfromWeb3(100, 10);
 
     //buy logic
   };

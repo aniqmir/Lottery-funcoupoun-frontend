@@ -13,6 +13,7 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "./smartcontract/funcoin";
 
 function App() {
   const [address, setAddress] = useState([]);
+  const [approved, setApproved] = useState(false);
 
   const connectToMetaMask = () => {
     if (address.length === 0) {
@@ -90,17 +91,18 @@ function App() {
     // console.log(result);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-    console.log({ provider });
     const signer = provider.getSigner();
+
+    console.log(signer, address, "checkk");
     const contract = new ethers.Contract(
       FUN_COIN_ADDRESS,
       FUN_COIN_ABI,
       signer
     );
-    const transaction = await contract.approve(
-      "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-      10000000
-    );
+    const transaction = await contract.approve(address[0], 100000000);
+    if (!!transaction.hash) {
+      setApproved(true);
+    }
   };
 
   return (
@@ -109,6 +111,7 @@ function App() {
         onConnectWithMetamask={connectToMetaMask}
         approvefromWeb3={approvefromWeb3}
         address={address}
+        approved={approved}
       />
     </div>
   );

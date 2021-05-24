@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-  const { window } = props;
+  const { window, approved } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -199,9 +199,9 @@ function ResponsiveDrawer(props) {
             <button
               className="connect"
               onClick={approvefromWeb3}
-              // disabled={props.address === ""}
+              disabled={approved}
             >
-              Approve
+              {approved ? "Approved" : "Approve"}
             </button>
             <button className="connect" onClick={connectToMetaMask}>
               {props.address.length === 0
