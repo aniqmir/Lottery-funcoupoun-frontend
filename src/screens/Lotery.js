@@ -118,7 +118,6 @@ export default function NavTabs() {
       );
 
       const lotteryCount = await todoList.methods.getTicketsPurchased().call();
-      console.log(lotteryCount);
 
       setProgressValue(lotteryCount);
     };
@@ -215,7 +214,7 @@ export default function NavTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
         {lotteryValues.map((value, index) => (
-          <div className="tokenProgressMain">
+          <div className="tokenProgressMain" key={index}>
             <TokenProgress
               key={index}
               keys={index + 1}

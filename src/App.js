@@ -15,13 +15,19 @@ function App() {
   const [address, setAddress] = useState([]);
   const [approved, setApproved] = useState(false);
 
-  const connectToMetaMask = () => {
+  const connectToMetaMask = async () => {
     if (address.length === 0) {
       if (window.ethereum) {
+        console.log("herer 1");
         window.web3 = new Web3(window.ethereum);
-        window.ethereum.enable();
-        updateAddress();
+        try {
+          await window.ethereum.enable();
+          updateAddress();
+        } catch (err) {
+          console.log(err);
+        }
       } else if (window.web3) {
+        console.log("herer 2");
         window.web3 = new Web3(window.web3.currentProvider);
         updateAddress();
       } else {
@@ -93,7 +99,6 @@ function App() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
-    console.log(signer, address, "checkk");
     const contract = new ethers.Contract(
       FUN_COIN_ADDRESS,
       FUN_COIN_ABI,
