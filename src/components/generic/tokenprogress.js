@@ -46,12 +46,13 @@ const TokenProgress = (props) => {
   };
   const buyTicket = async () => {
     //buy ticket
-    console.log("buy ticket");
+
     if (address === "") {
       //alert connect first
     }
+    props.buyLotteryfromWeb3(12, 12);
+
     //buy logic
-    
   };
   return (
     <Grid

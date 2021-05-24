@@ -14,6 +14,10 @@ import {
   FUN_LOTTERY_ADDRESS,
 } from "../smartcontract/funlottery";
 
+import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
+
+import { ethers } from "ethers";
+
 import downarrows from "../assets/downarrows.png";
 
 import "./screens.css";
@@ -121,6 +125,27 @@ export default function NavTabs() {
     getLotteryNumbersfromEth();
   }, []);
 
+  const buyLotteryfromWeb3 = async (param1, param2, param3) => {
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+
+    const SimpleContract = new web3.eth.Contract(
+      FUN_COIN_ABI,
+      FUN_COIN_ADDRESS
+    );
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      FUN_COIN_ADDRESS,
+      FUN_COIN_ABI,
+      signer
+    );
+    const transaction = await contract.approve(
+      "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+      10000000
+    );
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -206,6 +231,7 @@ export default function NavTabs() {
               lotteryAmount={lotteryArray[index]}
               progressValue={progressValue[index]}
               address={address}
+              buyLotteryfromWeb3={buyLotteryfromWeb3}
               {...value}
             />
           </div>

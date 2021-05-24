@@ -175,6 +175,7 @@ function ResponsiveDrawer(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  console.log(props.address, "address");
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -203,7 +204,9 @@ function ResponsiveDrawer(props) {
               Approve
             </button>
             <button className="connect" onClick={connectToMetaMask}>
-              {props.address === "" ? "Connect" : props.address[0].slice(0, 5)}
+              {props.address.length === 0
+                ? "Connect"
+                : props.address[0].slice(0, 5)}
             </button>
             <span className="connectLang">FR</span>
           </div>

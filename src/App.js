@@ -2,7 +2,7 @@ import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Web3 from "web3";
 import { useState } from "react";
-import { ethers } from 'ethers'
+import { ethers } from "ethers";
 
 import {
   // FUN_LOTTERY_ABI,
@@ -12,7 +12,7 @@ import {
 import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "./smartcontract/funcoin";
 
 function App() {
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState([]);
 
   const connectToMetaMask = async () => {
     if (window.ethereum) {
@@ -35,7 +35,7 @@ function App() {
   };
 
   const approvefromWeb3 = async () => {
-   // const accounts = await window.ethereum.enable();
+    // const accounts = await window.ethereum.enable();
     //approve function
     // console.log(
     //   "12312321321",
@@ -54,10 +54,13 @@ function App() {
     //   (FUN_LOTTERY_ABI),
     //   FUN_LOTTERY_ADDRESS
     // );
-     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
-     const SimpleContract = new web3.eth.Contract(FUN_COIN_ABI, FUN_COIN_ADDRESS);
-    
+    const SimpleContract = new web3.eth.Contract(
+      FUN_COIN_ABI,
+      FUN_COIN_ADDRESS
+    );
+
     // const account = accounts[0];
 
     // const gas = await contracts.methods
@@ -66,20 +69,24 @@ function App() {
     // const result = await contracts.methods.approve("0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", 10000000).send();
     // console.log(result);
 
-
     // const accounts = await window.ethereum.enable();
     // const account = accounts[0];
     // const gas = await SimpleContract.methods.approve("0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", 10000000).estimateGas();
     // const result = await SimpleContract.methods.approve("0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", 10000000).send({ from: account, gas });
     // console.log(result);
 
-
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-      console.log({ provider })
-      const signer = provider.getSigner()
-      const contract = new ethers.Contract(FUN_COIN_ADDRESS, FUN_COIN_ABI, signer)
-      const transaction = await contract.approve("0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", 10000000)
-
+    console.log({ provider });
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      FUN_COIN_ADDRESS,
+      FUN_COIN_ABI,
+      signer
+    );
+    const transaction = await contract.approve(
+      "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+      10000000
+    );
   };
 
   return (
