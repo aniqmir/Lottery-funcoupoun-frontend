@@ -10,6 +10,11 @@ import sideticket from "../assets/sideticket.png";
 import "./screens.css";
 import { Container } from "@material-ui/core";
 
+import {
+  FUN_LOTTERY_ABI,
+  FUN_LOTTERY_ADDRESS,
+} from "../smartcontract/funlottery";
+
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     backgroundColor: "#060656",
@@ -20,6 +25,41 @@ import { Container } from "@material-ui/core";
 
 export default function Profile() {
   // const classes = useStyles();
+
+
+  const getAllLotteries = async (size) => {
+    const web3 = window.web3;
+    size = 100; 
+
+    const accounts = await web3.eth.getAccounts();
+
+    const todoList = new web3.eth.Contract(
+      FUN_LOTTERY_ABI,
+      FUN_LOTTERY_ADDRESS
+    );
+
+    var latestid = await todoList.methods.getLottoId(size);
+
+    for (let i=latestid;i>0;i--){
+
+      var lotteryCnt = await todoList.methods.getUserTickets(latestid,accounts,size).call();
+      console.log(lotteryCnt);
+    }
+        
+    size = 1000; 
+  
+    latestid = await todoList.methods.getLottoId(size);
+
+    for (let i=latestid;i>0;i--){
+
+      lotteryCnt = await todoList.methods.getUserTickets(latestid,accounts,size).call();
+      console.log(lotteryCnt);
+    }
+
+   // return 
+  };
+
+
 
   return (
     <Container>
