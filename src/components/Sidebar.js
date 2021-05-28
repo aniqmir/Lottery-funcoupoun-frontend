@@ -114,7 +114,7 @@ function ResponsiveDrawer(props) {
   const approvefromWeb3 = (e) => {
     e.preventDefault();
     if (props.address.length === 0) {
-      alert("Connect to Metamask");
+      alert("Please connect your metamask wallet");
     } else {
       props.approvefromWeb3();
     }

@@ -55,7 +55,7 @@ const TokenProgress = (props) => {
     //buy ticket
     if (tempAddress === undefined) {
       //alert connect first
-      alert("Connect to metamask");
+      alert("Please connect your metamask wallet");
     } else {
       props.buyLotteryfromWeb3(100, 10);
     }
