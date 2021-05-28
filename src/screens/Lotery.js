@@ -181,6 +181,7 @@ export default function NavTabs() {
       total: 120000,
     },
   ];
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.rootbar}>

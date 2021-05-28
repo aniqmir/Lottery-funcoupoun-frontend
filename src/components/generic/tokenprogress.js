@@ -13,6 +13,7 @@ import goldcrown from "../../assets/goldcrown.svg";
 import silvercrown from "../../assets/silvercrown.svg";
 import bronzecrown from "../../assets/bronzecrown.svg";
 
+import Web3 from "web3";
 // import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
 
@@ -46,14 +47,18 @@ const TokenProgress = (props) => {
   };
 
   const buyTicket = async () => {
+    let tempAddress;
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const accounts = await web3.eth.getAccounts();
+    tempAddress = accounts[0];
+
     //buy ticket
-
-    if (address === "") {
+    if (tempAddress === undefined) {
       //alert connect first
+      alert("Connect to metamask");
+    } else {
+      props.buyLotteryfromWeb3(100, 10);
     }
-    props.buyLotteryfromWeb3(100, 10);
-
-    //buy logic
   };
   return (
     <Grid

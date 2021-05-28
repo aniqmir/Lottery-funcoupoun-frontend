@@ -113,7 +113,11 @@ function ResponsiveDrawer(props) {
 
   const approvefromWeb3 = (e) => {
     e.preventDefault();
-    props.approvefromWeb3();
+    if (props.address.length === 0) {
+      alert("Connect to Metamask");
+    } else {
+      props.approvefromWeb3();
+    }
   };
 
   useEffect(() => {
