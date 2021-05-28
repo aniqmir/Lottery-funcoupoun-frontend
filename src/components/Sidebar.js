@@ -12,8 +12,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-import Web3 from "web3";
-
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
@@ -39,6 +37,7 @@ const navcolorbg = "#26234a";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    fontFamily: "ITCAvant, bold",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -82,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   divider: {
-    height: "50px",
+    height: "65px",
     borderBottom: "2px solid #070435",
   },
 }));
@@ -93,7 +92,7 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const [connection, setConnection] = React.useState(false);
+  // const [connection, setConnection] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -146,6 +145,7 @@ function ResponsiveDrawer(props) {
                     marginLeft: "1rem",
                     fontSize: "20px",
                     fontWeight: "700",
+                    fontFamily: "ITCAvant, bold",
                   }}
                 >
                   {text}
@@ -158,14 +158,37 @@ function ResponsiveDrawer(props) {
             <ListItem key={index} alignItems="center"></ListItem>
           ))}
           <ListItem alignItems="center" button divider={true}>
-            <img src={mongain} alt="mongain" />
+            <span
+              style={{
+                marginLeft: "1rem",
+              }}
+            >
+              <img src={mongain} alt="mongain" />
+            </span>
           </ListItem>
           <ListItem alignItems="center" button divider={true}>
-            <img
-              src={sideticket}
-              alt="sideticket"
-              style={{ width: "40px", height: "auto" }}
-            />
+            <span
+              style={{
+                marginLeft: "1rem",
+              }}
+            >
+              <img
+                src={sideticket}
+                alt="sideticket"
+                style={{ width: "40px", height: "auto" }}
+              />
+            </span>
+            <span
+              style={{
+                marginLeft: "0.5rem",
+                fontSize: "20px",
+                fontWeight: "700",
+                fontFamily: "ITCAvant, bold",
+                color: "#dd4d8c",
+              }}
+            >
+              100 $
+            </span>
           </ListItem>
         </List>
       </div>
@@ -175,7 +198,6 @@ function ResponsiveDrawer(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  console.log(props.address, "address");
   return (
     <div className={classes.root}>
       <CssBaseline />

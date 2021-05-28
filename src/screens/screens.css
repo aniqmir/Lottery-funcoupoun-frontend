@@ -84,12 +84,13 @@
 
 .exchangeTitle {
   font-size: 20px;
+  font-family: ITCAvant, bold;
 }
 
 .fromCard {
   border-radius: 10px;
   background: #4c4b70;
-  margin: 20px;
+  margin: 0px 20px 0px 20px;
   padding: 20px;
 }
 
@@ -124,11 +125,13 @@
   color: #0e0c37;
   width: 100%;
   align-self: center;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: none;
-  margin: 0px 30px 30px 25px;
+  margin: 0px 30px 20px 30px;
   height: 50px;
   cursor: pointer;
+  font-family: ITCAvant, bold;
+  border: none;
 }
 
 .centerArrow {
@@ -140,9 +143,15 @@
 
 .exchangeIcon {
   width: 25px;
-  margin-top: 10px;
+  margin-top: 15px;
+  color: #4c4b70;
 }
 
+.exchangeIconarrow {
+  width: 25px;
+  margin-top: 1px;
+  color: #4c4b70;
+}
 .timer {
   color: #a2ffe2;
   display: flex;

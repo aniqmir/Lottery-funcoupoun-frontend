@@ -77,10 +77,10 @@ function App() {
     // );
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
-    const SimpleContract = new web3.eth.Contract(
-      FUN_COIN_ABI,
-      FUN_COIN_ADDRESS
-    );
+    // const SimpleContract = new web3.eth.Contract(
+    //   FUN_COIN_ABI,
+    //   FUN_COIN_ADDRESS
+    // );
 
     // const account = accounts[0];
 

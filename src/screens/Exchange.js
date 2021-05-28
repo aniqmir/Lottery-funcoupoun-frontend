@@ -73,7 +73,7 @@ export default function SimpleCard() {
   }, []);
 
   return (
-    <>
+    <div style={{ minHeight: "84.5vh" }}>
       <div className="timer">
         <div>
           <span>{timer.days < 10 ? `0${timer.days}` : timer.days}</span>
@@ -101,12 +101,14 @@ export default function SimpleCard() {
         <Card className={classes.root}>
           <CardContent>
             <Grid container spacing={3}>
-              <Grid item xs={6} container>
+              <Grid item xs={6} spacing={1} container>
                 <Grid item xs={12}>
                   <span className="exchangeTitle">Exchange</span>
                 </Grid>
                 <Grid item xs={12}>
-                  <span>Trade Tokens in an Instant</span>
+                  <span style={{ fontFamily: "ITCAvant" }}>
+                    Trade Tokens in an Instant
+                  </span>
                 </Grid>
               </Grid>
               <Grid item xs={6} container>
@@ -155,9 +157,9 @@ export default function SimpleCard() {
               </Grid>
               <Grid item xs={12} container justify="center" spacing={0}>
                 <img
-                  alt="exchangeicon"
+                  alt="exchangeIconarrow"
                   src={exchangearrow}
-                  className="exchangeIcon"
+                  className="exchangeIconarrow"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -199,6 +201,6 @@ export default function SimpleCard() {
           </CardActions>
         </Card>
       </div>
-    </>
+    </div>
   );
 }

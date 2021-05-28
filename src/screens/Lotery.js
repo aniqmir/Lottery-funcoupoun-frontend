@@ -14,8 +14,6 @@ import {
   FUN_LOTTERY_ADDRESS,
 } from "../smartcontract/funlottery";
 
-import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
-
 import { ethers } from "ethers";
 
 import downarrows from "../assets/downarrows.png";
@@ -90,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   tabsroot: {
     textTransform: "none",
     fontSize: "24px",
-    fontWeight: 700,
+    fontFamily: "ITCAvant, bold",
   },
 }));
 
@@ -134,6 +132,7 @@ export default function NavTabs() {
       signer
     );
     const transaction = await contract.buyticket(100, 10);
+    console.log(transaction);
   };
 
   const handleChange = (event, newValue) => {
@@ -231,7 +230,7 @@ export default function NavTabs() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Page One
+        <div style={{ minHeight: "72.5vh" }}>In Progress...</div>
       </TabPanel>
     </div>
   );

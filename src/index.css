@@ -1,12 +1,17 @@
+@font-face {
+  font-family: "ITCAvant";
+  src: local("ITCAvant"),
+    url(./fonts/ITCAvantGardeGothicBold.otf) format("truetype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: ITCAvant, bold;
   background: rgb(7, 4, 53);
   background: linear-gradient(rgba(7, 4, 53, 1) 41%, rgba(0, 0, 93, 1) 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: ITCAvant, bold;
 }
 
 code {
