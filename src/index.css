@@ -4,6 +4,12 @@
     url(./fonts/ITCAvantGardeGothicBold.otf) format("truetype");
 }
 
+@font-face {
+  font-family: "HarlowItalic";
+  src: local("HarlowItalic"),
+    url(./fonts/HarlowSolidItalicItalic.ttf) format("truetype");
+}
+
 body {
   margin: 0;
   font-family: ITCAvant, bold;

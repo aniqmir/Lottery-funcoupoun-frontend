@@ -230,7 +230,19 @@ export default function NavTabs() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div style={{ minHeight: "72.5vh" }}>In Progress...</div>
+        <div
+          style={{
+            minHeight: "72.5vh",
+            fontFamily: "HarlowItalic",
+            fontSize: "64px",
+            letterSpacing: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          In Progress...
+        </div>
       </TabPanel>
     </div>
   );

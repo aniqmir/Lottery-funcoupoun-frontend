@@ -148,7 +148,9 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select />
+                          <Select
+                            options={[{ name: "USD" }, { name: "BNB" }]}
+                          />
                         </div>
                       </Grid>
                     </Grid>
@@ -187,7 +189,7 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select />
+                          <Select options={[{ name: "FUNC" }]} />
                         </div>
                       </Grid>
                     </Grid>

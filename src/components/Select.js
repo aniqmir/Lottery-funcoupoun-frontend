@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ControlledOpenSelect() {
+export default function ControlledOpenSelect(props) {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -76,6 +76,8 @@ export default function ControlledOpenSelect() {
     setOpen(true);
   };
 
+  const { options } = props;
+
   return (
     <div>
       <FormControl
@@ -91,7 +93,7 @@ export default function ControlledOpenSelect() {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
+          value={options[0].name}
           onChange={handleChange}
           variant="outlined"
           classes={{
@@ -99,27 +101,19 @@ export default function ControlledOpenSelect() {
             icon: classes.icon,
           }}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>
-            <div style={{ display: "flex" }}>
-              <img alt="furc" src={sideticket} style={{ width: "20px" }} />
-              &nbsp;FURC
-            </div>
-          </MenuItem>
-          <MenuItem value={20}>
-            <div style={{ display: "flex" }}>
-              <img alt="furc" src={sideticket} style={{ width: "20px" }} />
-              &nbsp;FURC
-            </div>
-          </MenuItem>
-          <MenuItem value={30}>
-            <div style={{ display: "flex" }}>
-              <img alt="furc" src={sideticket} style={{ width: "20px" }} />
-              &nbsp;FURC
-            </div>
-          </MenuItem>
+          {/* <MenuItem value={options[0].name}>
+            <em>{options[0].name}</em>
+          </MenuItem> */}
+          {options.map((option, index) => {
+            return (
+              <MenuItem value={option.name}>
+                <div style={{ display: "flex" }}>
+                  <img alt="furc" src={sideticket} style={{ width: "20px" }} />
+                  &nbsp;{option.name}
+                </div>
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
     </div>
