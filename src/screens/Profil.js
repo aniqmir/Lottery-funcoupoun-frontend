@@ -9,6 +9,7 @@ import sideticket from "../assets/sideticket.png";
 
 import "./screens.css";
 import { Container } from "@material-ui/core";
+import Web3 from "web3";
 
 import {
   FUN_LOTTERY_ABI,
@@ -29,41 +30,59 @@ export default function Profile() {
   var numberofRows = 4;
 
   const getAllLotteries = async (size) => {
-    const web3 = window.web3;
+    const web3 = new Web3(Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/");
+
+      const contractFunLottery = new web3.eth.Contract(
+        FUN_LOTTERY_ABI,
+        FUN_LOTTERY_ADDRESS
+      );
+
+     //const lotteryCount = await todoList.methods.getTicketsPurchased().call();
+
     size = 100;
 
-    const accounts = await web3.eth.getAccounts();
 
-    const todoList = new web3.eth.Contract(
-      FUN_LOTTERY_ABI,
-      FUN_LOTTERY_ADDRESS
-    );
+    var latestid = await contractFunLottery.methods.getLottoId(size).call();
+    
 
-    var latestid = await todoList.methods.getLottoId(size);
-
+   // const accounts = await web3.eth.getAccounts();
     for (let i = latestid; i > 0; i--) {
-      var lotteryCnt = await todoList.methods
-        .getUserTickets(latestid, accounts, size)
-        .call();
-      console.log(lotteryCnt);
+      var lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
+      console.log("latestId, size,result:",latestid,size,lotteryCnt);
     }
 
     size = 1000;
 
-    latestid = await todoList.methods.getLottoId(size);
+    latestid = await contractFunLottery.methods.getLottoId(size).call();
 
     for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await todoList.methods
-        .getUserTickets(latestid, accounts, size)
-        .call();
-      console.log(lotteryCnt);
+      lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
+      console.log("latestId, size,result:",latestid,size,lotteryCnt);
+    }
+
+    size = 10000;
+
+    latestid = await contractFunLottery.methods.getLottoId(size).call();
+
+    for (let i = latestid; i > 0; i--) {
+      lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
+      console.log("latestId, size,result:",latestid,size,lotteryCnt);
+    }
+
+    size = 100000;
+
+    latestid = await contractFunLottery.methods.getLottoId(size).call();
+
+    for (let i = latestid; i > 0; i--) {
+      lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
+      console.log("latestId, size,result:",latestid,size,lotteryCnt);
     }
 
     // return
   };
-
+  
   useEffect(() => {
-    // getAllLotteries();
+    getAllLotteries(100);
   }, []);
 
   var rows = [];

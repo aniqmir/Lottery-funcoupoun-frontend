@@ -64,10 +64,16 @@ function App() {
       FUN_COIN_ABI,
       signer
     );
-    const transaction = await contract.approve(FUN_LOTTERY_ADDRESS, 100000000);
-    console.log(transaction, "transaction");
-    if (!!transaction.hash) {
-      setApproved(true);
+
+    const accounts = await web3.eth.getAccounts();
+    if (accounts.length>0){
+      const balance = await contract.balanceOf(accounts[0]); 
+      console.log("balanceof", balance.toNumber());
+      const transaction = await contract.approve(FUN_LOTTERY_ADDRESS, balance.toNumber() );
+      console.log(transaction, "transaction");
+      if (!!transaction.hash) {
+        setApproved(true);
+      }
     }
   };
 

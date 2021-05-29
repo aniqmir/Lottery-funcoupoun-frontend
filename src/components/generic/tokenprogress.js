@@ -57,7 +57,7 @@ const TokenProgress = (props) => {
       //alert connect first
       alert("Please connect your metamask wallet");
     } else {
-      props.buyLotteryfromWeb3(100, 10);
+      props.buyLotteryfromWeb3(100, 1);
     }
   };
   return (
