@@ -27,6 +27,7 @@ import sideticket from "../assets/sideticket.png";
 import history from "../history";
 
 import "./components.css";
+import { Divider } from "@material-ui/core";
 
 const drawerWidth = 240;
 // const sidebarbg = "#21215e";
@@ -84,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     height: "65px",
     borderBottom: "2px solid #070435",
   },
+  icondivider: {
+    borderBottom: "2.5px solid #070435",
+  },
 }));
 
 function ResponsiveDrawer(props) {
@@ -128,7 +132,13 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar />
+
       <div className={classes.drawerContainer}>
+        <Divider
+          classes={{
+            root: classes.icondivider,
+          }}
+        />
         <List>
           {["Lottery", "Profile", "Token", "RoadMap", "Exchange"].map(
             (text, index) => (

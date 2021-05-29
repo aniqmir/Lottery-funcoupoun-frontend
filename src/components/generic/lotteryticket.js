@@ -10,8 +10,17 @@ import "./genericcomponents.css";
 //   },
 // }));
 
-const LotteryTicket = () => {
+const LotteryTicket = (props) => {
   // const classes = useStyles();
+  const { price } = props;
+
+  const getLotterId = () => {
+    //get Lottery ID here
+  };
+
+  const getNumberofTickets = () => {
+    //get number of tickets here
+  };
 
   return (
     <Grid
@@ -28,7 +37,7 @@ const LotteryTicket = () => {
         <span className="lotteryhead"> Lottery # 2</span>
       </Grid>
       <Grid item xs={12}>
-        <span className="lotteryprice"> 1000 $</span>
+        <span className="lotteryprice"> {price} $</span>
       </Grid>
       <Grid item xs={12}>
         <div className="lotteryticketbg">

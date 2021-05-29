@@ -30,13 +30,13 @@
 }
 
 .lotteryhead {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 1.4rem;
+  font-weight: 500;
   color: #7c2afa;
 }
 
 .lotteryprice {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #b4ffa4;
 }

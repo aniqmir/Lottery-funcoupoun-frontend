@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
@@ -26,10 +26,11 @@ import {
 export default function Profile() {
   // const classes = useStyles();
 
+  var numberofRows = 4;
 
   const getAllLotteries = async (size) => {
     const web3 = window.web3;
-    size = 100; 
+    size = 100;
 
     const accounts = await web3.eth.getAccounts();
 
@@ -40,31 +41,87 @@ export default function Profile() {
 
     var latestid = await todoList.methods.getLottoId(size);
 
-    for (let i=latestid;i>0;i--){
-
-      var lotteryCnt = await todoList.methods.getUserTickets(latestid,accounts,size).call();
+    for (let i = latestid; i > 0; i--) {
+      var lotteryCnt = await todoList.methods
+        .getUserTickets(latestid, accounts, size)
+        .call();
       console.log(lotteryCnt);
     }
-        
-    size = 1000; 
-  
+
+    size = 1000;
+
     latestid = await todoList.methods.getLottoId(size);
 
-    for (let i=latestid;i>0;i--){
-
-      lotteryCnt = await todoList.methods.getUserTickets(latestid,accounts,size).call();
+    for (let i = latestid; i > 0; i--) {
+      lotteryCnt = await todoList.methods
+        .getUserTickets(latestid, accounts, size)
+        .call();
       console.log(lotteryCnt);
     }
 
-   // return 
+    // return
   };
 
+  useEffect(() => {
+    // getAllLotteries();
+  }, []);
 
+  var rows = [];
 
+  const claim = () => {
+    //claim logic here
+  };
+
+  const makeRows = () => {
+    for (let i = 0; i < numberofRows; i++) {
+      rows.push(
+        <>
+          <Grid item xs={12}>
+            <div style={{ display: "flex" }}>
+              <div>
+                <div className="infoicon">i</div>
+              </div>
+              <div className="rewardprice">
+                <span className="rewardpricetext">
+                  8540 &nbsp;
+                  <span>
+                    <img
+                      src={sideticket}
+                      alt="sideticket"
+                      style={{ width: "40px", height: "auto" }}
+                    />
+                  </span>
+                </span>
+              </div>
+            </div>
+          </Grid>
+
+          <Grid item xs={12}>
+            <div className="rewardcenter">
+              <button className="claim" onClick={claim}>
+                Claim
+              </button>
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <p className="headtext">Tirages en Course</p>
+          </Grid>
+          {[100, 1000, 10000, 100000].map((price, index) => {
+            return (
+              <Grid item xs={12} md={3} key={index}>
+                <LotteryTicket price={price} />
+              </Grid>
+            );
+          })}
+        </>
+      );
+    }
+    return rows;
+  };
   return (
     <Container>
       <Grid container spacing={6}>
-        <Grid container item spacing={3}>
+        {/* <Grid container item spacing={3}>
           <Grid item xs={12}>
             <div style={{ display: "flex" }}>
               <div>
@@ -84,13 +141,16 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
             <LotteryTicket />
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
             <LotteryTicket />
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
+            <LotteryTicket />
+          </Grid>
+          <Grid item xs={12} md={3}>
             <LotteryTicket />
           </Grid>
           <Grid item xs={12}>
@@ -98,89 +158,9 @@ export default function Profile() {
               <img src={downarrows} alt="downarrows" />
             </div>
           </Grid>
-        </Grid>
+        </Grid> */}
         <Grid container spacing={3} item>
-          <Grid item xs={12}>
-            <div style={{ display: "flex" }}>
-              <div>
-                <div className="infoicon">i</div>
-              </div>
-              <div className="rewardprice">
-                <span className="rewardpricetext">
-                  8540 &nbsp;
-                  <span>
-                    <img
-                      src={sideticket}
-                      alt="sideticket"
-                      style={{ width: "40px", height: "auto" }}
-                    />
-                  </span>
-                </span>
-              </div>
-            </div>
-          </Grid>
-
-          <Grid item xs={12}>
-            <div className="rewardcenter">
-              <button className="claim">Claim</button>
-            </div>
-          </Grid>
-          <Grid item xs={12}>
-            <p className="headtext">Tirages en Course</p>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LotteryTicket />
-          </Grid>
-
-
-          <Grid item xs={12}>
-            <div style={{ display: "flex" }}>
-              <div>
-                <div className="infoicon">i</div>
-              </div>
-              <div className="rewardprice">
-                <span className="rewardpricetext">
-                  8540 &nbsp;
-                  <span>
-                    <img
-                      src={sideticket}
-                      alt="sideticket"
-                      style={{ width: "40px", height: "auto" }}
-                    />
-                  </span>
-                </span>
-              </div>
-            </div>
-          </Grid>
-          <Grid item xs={12}>
-            <div className="rewardcenter">
-              <button className="claim">Claim</button>
-            </div>
-          </Grid>
-          <Grid item xs={12}>
-            <p className="headtext">Tirages en Course</p>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LotteryTicket />
-          </Grid>
-
-          <Grid item xs={12}>
-            <div className="downarrows">
-              <img src={downarrows} alt="downarrows" />
-            </div>
-          </Grid>
+          {makeRows()}
         </Grid>
       </Grid>
     </Container>

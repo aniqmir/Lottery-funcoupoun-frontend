@@ -18,7 +18,6 @@ function App() {
   const connectToMetaMask = async () => {
     if (address.length === 0) {
       if (window.ethereum) {
-        console.log("herer 1");
         window.web3 = new Web3(window.ethereum);
         try {
           await window.ethereum.enable();
@@ -27,7 +26,6 @@ function App() {
           console.log(err);
         }
       } else if (window.web3) {
-        console.log("herer 2");
         window.web3 = new Web3(window.web3.currentProvider);
         updateAddress();
       } else {
@@ -56,7 +54,6 @@ function App() {
   }, []);
 
   const approvefromWeb3 = async () => {
-
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -68,13 +65,13 @@ function App() {
       signer
     );
     const transaction = await contract.approve(FUN_LOTTERY_ADDRESS, 100000000);
+    console.log(transaction, "transaction");
     if (!!transaction.hash) {
       setApproved(true);
     }
   };
 
-  const claimMultiple = async() => {
-
+  const claimMultiple = async () => {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -85,23 +82,26 @@ function App() {
       FUN_COIN_ABI,
       signer
     );
-    
-    var sizes = [100, 100, 1000]; //size 
+
+    var sizes = [100, 100, 1000]; //size
 
     var lotteryIDs = [1, 1, 1]; // latestID
 
     var ticketNum = [2, 3, 1]; // All number of Lottery array
 
-    const transaction = await contract.claimMultiple(sizes,lotteryIDs,ticketNum);
-  //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
+    const transaction = await contract.claimMultiple(
+      sizes,
+      lotteryIDs,
+      ticketNum
+    );
+    //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
     if (!!transaction.hash) {
-      console.log("transaction:",transaction)
+      console.log("transaction:", transaction);
     }
     // wait for 5 seconds
-    await web3.eth.getTransactionReceipt(transaction.hash, 
-           (err, txReceipt) => console.log("Err:",err,"txReciept:" ,txReceipt)
-           );
-
+    await web3.eth.getTransactionReceipt(transaction.hash, (err, txReceipt) =>
+      console.log("Err:", err, "txReciept:", txReceipt)
+    );
   };
 
   return (
