@@ -30,25 +30,31 @@ export default function Profile() {
   var numberofRows = 4;
 
   const getAllLotteries = async (size) => {
-    const web3 = new Web3(Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/");
+    const web3 = new Web3(
+      Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+    );
 
-      const contractFunLottery = new web3.eth.Contract(
-        FUN_LOTTERY_ABI,
-        FUN_LOTTERY_ADDRESS
-      );
+    const contractFunLottery = new web3.eth.Contract(
+      FUN_LOTTERY_ABI,
+      FUN_LOTTERY_ADDRESS
+    );
 
-     //const lotteryCount = await todoList.methods.getTicketsPurchased().call();
+    //const lotteryCount = await todoList.methods.getTicketsPurchased().call();
 
     size = 100;
 
-
     var latestid = await contractFunLottery.methods.getLottoId(size).call();
-    
 
-   // const accounts = await web3.eth.getAccounts();
+    // const accounts = await web3.eth.getAccounts();
     for (let i = latestid; i > 0; i--) {
-      var lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
-      console.log("latestId, size,result:",latestid,size,lotteryCnt);
+      var lotteryCnt = await contractFunLottery.methods
+        .getUserTickets(
+          latestid,
+          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+          size
+        )
+        .call();
+      console.log("latestId, size,result:", latestid, size, lotteryCnt);
     }
 
     size = 1000;
@@ -56,8 +62,14 @@ export default function Profile() {
     latestid = await contractFunLottery.methods.getLottoId(size).call();
 
     for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
-      console.log("latestId, size,result:",latestid,size,lotteryCnt);
+      lotteryCnt = await contractFunLottery.methods
+        .getUserTickets(
+          latestid,
+          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+          size
+        )
+        .call();
+      console.log("latestId, size,result:", latestid, size, lotteryCnt);
     }
 
     size = 10000;
@@ -65,8 +77,14 @@ export default function Profile() {
     latestid = await contractFunLottery.methods.getLottoId(size).call();
 
     for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
-      console.log("latestId, size,result:",latestid,size,lotteryCnt);
+      lotteryCnt = await contractFunLottery.methods
+        .getUserTickets(
+          latestid,
+          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+          size
+        )
+        .call();
+      console.log("latestId, size,result:", latestid, size, lotteryCnt);
     }
 
     size = 100000;
@@ -74,13 +92,33 @@ export default function Profile() {
     latestid = await contractFunLottery.methods.getLottoId(size).call();
 
     for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await contractFunLottery.methods.getUserTickets(latestid, "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", size).call();
-      console.log("latestId, size,result:",latestid,size,lotteryCnt);
+      lotteryCnt = await contractFunLottery.methods
+        .getUserTickets(
+          latestid,
+          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+          size
+        )
+        .call();
+      console.log("latestId, size,result:", latestid, size, lotteryCnt);
     }
 
     // return
   };
-  
+
+  const getLatestId = async (size) => {
+    const web3 = new Web3(
+      Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+    );
+
+    const contractFunLottery = new web3.eth.Contract(
+      FUN_LOTTERY_ABI,
+      FUN_LOTTERY_ADDRESS
+    );
+
+    var latestid = await contractFunLottery.methods.getLottoId(size).call();
+    return latestid;
+  };
+
   useEffect(() => {
     getAllLotteries(100);
   }, []);
@@ -128,7 +166,7 @@ export default function Profile() {
           {[100, 1000, 10000, 100000].map((price, index) => {
             return (
               <Grid item xs={12} md={3} key={index}>
-                <LotteryTicket price={price} />
+                <LotteryTicket price={price} latestId={getLatestId(price)} />
               </Grid>
             );
           })}

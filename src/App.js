@@ -66,10 +66,12 @@ function App() {
     );
 
     const accounts = await web3.eth.getAccounts();
-    if (accounts.length>0){
-      const balance = await contract.balanceOf(accounts[0]); 
-      console.log("balanceof", balance.toNumber());
-      const transaction = await contract.approve(FUN_LOTTERY_ADDRESS, balance.toNumber() );
+    if (accounts.length > 0) {
+      const balance = await contract.balanceOf(accounts[0]);
+      const transaction = await contract.approve(
+        FUN_LOTTERY_ADDRESS,
+        balance.toNumber()
+      );
       console.log(transaction, "transaction");
       if (!!transaction.hash) {
         setApproved(true);
