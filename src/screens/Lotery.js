@@ -107,7 +107,9 @@ export default function NavTabs() {
 
   React.useEffect(() => {
     const getLotteryNumbersfromEth = async () => {
-      const web3 = new Web3(Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/");
+      const web3 = new Web3(
+        Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+      );
 
       const todoList = new web3.eth.Contract(
         FUN_LOTTERY_ABI,
@@ -117,10 +119,10 @@ export default function NavTabs() {
       const lotteryCount = await todoList.methods.getTicketsPurchased().call();
 
       setProgressValue(lotteryCount);
-        
+
       const accounts = await web3.eth.getAccounts();
-      if (accounts.length>0){
-         setAddress(accounts[0]);
+      if (accounts.length > 0) {
+        setAddress(accounts[0]);
       }
     };
     getLotteryNumbersfromEth();
@@ -137,8 +139,8 @@ export default function NavTabs() {
       FUN_LOTTERY_ABI,
       signer
     );
-    const transaction = await contract.buyticket(100, 1);
-      console.log("transaction");
+    const transaction = await contract.buyticket(param1, 1);
+    console.log("transaction");
   };
 
   const handleChange = (event, newValue) => {
