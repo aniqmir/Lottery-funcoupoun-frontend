@@ -270,7 +270,7 @@ export default function Profile() {
   return (
     <Container>
       <Grid container spacing={6}>
-        {/* <Grid container item spacing={3}>
+        <Grid container item spacing={3}>
           <Grid item xs={12}>
             <div style={{ display: "flex" }}>
               <div>
@@ -282,15 +282,29 @@ export default function Profile() {
             </div>
           </Grid>
 
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <div className="rewardcenter">
               <button className="claim">Claim</button>
             </div>
           </Grid>
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
-          </Grid>
-          <Grid item xs={12} md={3}>
+          </Grid> */}
+          {[100, 1000, 10000, 1000000].map((price, index) => {
+            return (
+              <Grid item xs={12} md={3}>
+                <LotteryTicket
+                  price={price}
+                  latestId={getLatestId(price)}
+                  updateSizes={updateSizes}
+                  updateLotteryIDs={updateLotteryIDs}
+                  updateTicketNum={updateTicketNum}
+                  rowNum={-1}
+                />
+              </Grid>
+            );
+          })}
+          {/* <Grid item xs={12} md={3}>
             <LotteryTicket />
           </Grid>
           <Grid item xs={12} md={3}>
@@ -301,13 +315,13 @@ export default function Profile() {
           </Grid>
           <Grid item xs={12} md={3}>
             <LotteryTicket />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />
             </div>
           </Grid>
-        </Grid> */}
+        </Grid>
         <Grid container spacing={3} item>
           {makeRows()}
         </Grid>

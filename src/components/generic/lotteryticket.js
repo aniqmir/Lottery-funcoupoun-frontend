@@ -82,11 +82,11 @@ const LotteryTicket = (props) => {
       container
       className="lotteryticket"
       direction="row"
-      justify="center"
-      alignItems="center"
-      alignContent="center"
+      // justify="center"
+      // alignItems="center"
+      // alignContent="center"
       spacing={1}
-      style={{ textAlign: "center", width: "80%" }}
+      style={{ textAlign: "center", width: "80%", minHeight: "290px" }}
     >
       <Grid item xs={12}>
         <span className="lotteryhead"> Lottery # {latestId}</span>
