@@ -19,7 +19,8 @@ import "./genericcomponents.css";
 
 const LotteryTicket = (props) => {
   // const classes = useStyles();
-  const { price } = props;
+  const { price, updateSizes, updateLotteryIDs, updateTicketNum, rowNum } =
+    props;
 
   const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
@@ -37,6 +38,7 @@ const LotteryTicket = (props) => {
     );
 
     var latestid = await contractFunLottery.methods.getLottoId(price).call();
+
     setLatestId(latestid);
 
     const accounts = await web3.eth.getAccounts();
@@ -44,14 +46,30 @@ const LotteryTicket = (props) => {
     // for (let i = latestId; i > 0; i--) {
     var lotteryCnt = await contractFunLottery.methods
       .getUserTickets(
-        latestId,
+        latestid,
         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
         price
       )
       .call();
 
     setLotteryCount(lotteryCnt);
-    console.log(lotteryCnt, "lotteryCntlotteryCntlotteryCnt");
+
+    for (let i = 0; i < lotteryCnt.length; i++) {
+      updateSizes(price, rowNum);
+      updateLotteryIDs(latestid, rowNum);
+
+      const checkMapNavigator = await contractFunLottery.methods
+        .userTickets(
+          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+          price,
+          1,
+          latestid
+        )
+        .call();
+      if (!checkMapNavigator.redeemed) {
+        updateTicketNum(lotteryCnt[i], rowNum);
+      }
+    }
     // }
   };
 

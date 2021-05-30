@@ -16,6 +16,10 @@ import {
   FUN_LOTTERY_ADDRESS,
 } from "../smartcontract/funlottery";
 
+import { ethers } from "ethers";
+
+import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
+
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     backgroundColor: "#060656",
@@ -123,10 +127,91 @@ export default function Profile() {
     // getAllLotteries(100);
   }, []);
 
+  const [sizes1, setSizes1] = React.useState([]);
+  const [sizes2, setSizes2] = React.useState([]);
+  const [sizes3, setSizes3] = React.useState([]);
+  const [sizes4, setSizes4] = React.useState([]);
+
+  const [lotteryIDs1, setlotteryIDs1] = React.useState([]);
+  const [lotteryIDs2, setlotteryIDs2] = React.useState([]);
+  const [lotteryIDs3, setlotteryIDs3] = React.useState([]);
+  const [lotteryIDs4, setlotteryIDs4] = React.useState([]);
+
+  const [ticketNum1, setticketNum1] = React.useState([]);
+  const [ticketNum2, setticketNum2] = React.useState([]);
+  const [ticketNum3, setticketNum3] = React.useState([]);
+  const [ticketNum4, setticketNum4] = React.useState([]);
+
   var rows = [];
 
-  const claim = () => {
-    //claim logic here
+  const updateSizes = (val, rowNum) => {
+    if (rowNum === 1) {
+      setSizes1((oldArray) => [...oldArray, val]);
+    } else if (rowNum === 2) {
+      setSizes2((oldArray) => [...oldArray, val]);
+    } else if (rowNum === 3) {
+      setSizes3((oldArray) => [...oldArray, val]);
+    } else {
+      setSizes4((oldArray) => [...oldArray, val]);
+    }
+  };
+  const updateLotteryIDs = (val, rowNum) => {
+    if (rowNum === 1) {
+      setlotteryIDs1((oldArray) => [...oldArray, val]);
+    } else if (rowNum === 2) {
+      setlotteryIDs2((oldArray) => [...oldArray, val]);
+    } else if (rowNum === 3) {
+      setlotteryIDs3((oldArray) => [...oldArray, val]);
+    } else {
+      setlotteryIDs4((oldArray) => [...oldArray, val]);
+    }
+  };
+  const updateTicketNum = (val, rowNum) => {
+    if (rowNum === 1) {
+      setticketNum1((oldArray) => [...oldArray, val]);
+    } else if (rowNum === 2) {
+      setticketNum2((oldArray) => [...oldArray, val]);
+    } else if (rowNum === 3) {
+      setticketNum3((oldArray) => [...oldArray, val]);
+    } else {
+      setticketNum4((oldArray) => [...oldArray, val]);
+    }
+  };
+  const claim = async (rowNum) => {
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      FUN_COIN_ADDRESS,
+      FUN_COIN_ABI,
+      signer
+    );
+
+    if (rowNum === 1) {
+      const transaction = await contract.claimMultiple(
+        sizes1,
+        lotteryIDs1,
+        ticketNum1
+      );
+    } else if (rowNum === 2) {
+      const transaction = await contract.claimMultiple(
+        sizes2,
+        lotteryIDs2,
+        ticketNum2
+      );
+    } else if (rowNum === 3) {
+      const transaction = await contract.claimMultiple(
+        sizes3,
+        lotteryIDs3,
+        ticketNum3
+      );
+    } else {
+      const transaction = await contract.claimMultiple(
+        sizes4,
+        lotteryIDs4,
+        ticketNum4
+      );
+    }
   };
 
   const makeRows = () => {
@@ -155,7 +240,7 @@ export default function Profile() {
 
           <Grid item xs={12}>
             <div className="rewardcenter">
-              <button className="claim" onClick={claim}>
+              <button className="claim" onClick={() => claim(i + 1)}>
                 Claim
               </button>
             </div>
@@ -166,7 +251,14 @@ export default function Profile() {
           {[100, 1000, 10000, 100000].map((price, index) => {
             return (
               <Grid item xs={12} md={3} key={index}>
-                <LotteryTicket price={price} latestId={getLatestId(price)} />
+                <LotteryTicket
+                  price={price}
+                  latestId={getLatestId(price)}
+                  updateSizes={updateSizes}
+                  updateLotteryIDs={updateLotteryIDs}
+                  updateTicketNum={updateTicketNum}
+                  rowNum={i + 1}
+                />
               </Grid>
             );
           })}
