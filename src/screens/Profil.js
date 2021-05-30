@@ -29,81 +29,81 @@ export default function Profile() {
 
   var numberofRows = 4;
 
-  const getAllLotteries = async (size) => {
-    const web3 = new Web3(
-      Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
-    );
+  // const getAllLotteries = async (size) => {
+  //   const web3 = new Web3(
+  //     Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+  //   );
 
-    const contractFunLottery = new web3.eth.Contract(
-      FUN_LOTTERY_ABI,
-      FUN_LOTTERY_ADDRESS
-    );
+  //   const contractFunLottery = new web3.eth.Contract(
+  //     FUN_LOTTERY_ABI,
+  //     FUN_LOTTERY_ADDRESS
+  //   );
 
-    //const lotteryCount = await todoList.methods.getTicketsPurchased().call();
+  //   //const lotteryCount = await todoList.methods.getTicketsPurchased().call();
 
-    size = 100;
+  //   size = 100;
 
-    var latestid = await contractFunLottery.methods.getLottoId(size).call();
+  //   var latestid = await contractFunLottery.methods.getLottoId(size).call();
 
-    // const accounts = await web3.eth.getAccounts();
-    for (let i = latestid; i > 0; i--) {
-      var lotteryCnt = await contractFunLottery.methods
-        .getUserTickets(
-          latestid,
-          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-          size
-        )
-        .call();
-      console.log("latestId, size,result:", latestid, size, lotteryCnt);
-    }
+  //   // const accounts = await web3.eth.getAccounts();
+  //   for (let i = latestid; i > 0; i--) {
+  //     var lotteryCnt = await contractFunLottery.methods
+  //       .getUserTickets(
+  //         latestid,
+  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+  //         size
+  //       )
+  //       .call();
+  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
+  //   }
 
-    size = 1000;
+  //   size = 1000;
 
-    latestid = await contractFunLottery.methods.getLottoId(size).call();
+  //   latestid = await contractFunLottery.methods.getLottoId(size).call();
 
-    for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await contractFunLottery.methods
-        .getUserTickets(
-          latestid,
-          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-          size
-        )
-        .call();
-      console.log("latestId, size,result:", latestid, size, lotteryCnt);
-    }
+  //   for (let i = latestid; i > 0; i--) {
+  //     lotteryCnt = await contractFunLottery.methods
+  //       .getUserTickets(
+  //         latestid,
+  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+  //         size
+  //       )
+  //       .call();
+  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
+  //   }
 
-    size = 10000;
+  //   size = 10000;
 
-    latestid = await contractFunLottery.methods.getLottoId(size).call();
+  //   latestid = await contractFunLottery.methods.getLottoId(size).call();
 
-    for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await contractFunLottery.methods
-        .getUserTickets(
-          latestid,
-          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-          size
-        )
-        .call();
-      console.log("latestId, size,result:", latestid, size, lotteryCnt);
-    }
+  //   for (let i = latestid; i > 0; i--) {
+  //     lotteryCnt = await contractFunLottery.methods
+  //       .getUserTickets(
+  //         latestid,
+  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+  //         size
+  //       )
+  //       .call();
+  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
+  //   }
 
-    size = 100000;
+  //   size = 100000;
 
-    latestid = await contractFunLottery.methods.getLottoId(size).call();
+  //   latestid = await contractFunLottery.methods.getLottoId(size).call();
 
-    for (let i = latestid; i > 0; i--) {
-      lotteryCnt = await contractFunLottery.methods
-        .getUserTickets(
-          latestid,
-          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-          size
-        )
-        .call();
-      console.log("latestId, size,result:", latestid, size, lotteryCnt);
-    }
+  //   for (let i = latestid; i > 0; i--) {
+  //     lotteryCnt = await contractFunLottery.methods
+  //       .getUserTickets(
+  //         latestid,
+  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+  //         size
+  //       )
+  //       .call();
+  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
+  //   }
 
-    // return
-  };
+  //   // return
+  // };
 
   const getLatestId = async (size) => {
     const web3 = new Web3(
@@ -120,7 +120,7 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    getAllLotteries(100);
+    // getAllLotteries(100);
   }, []);
 
   var rows = [];
