@@ -28,16 +28,16 @@ const LotteryTicket = (props) => {
   const getLotteryId = async () => {
     //get Lottery ID here
 
-    const web3 = new Web3(
-      "https://data-seed-prebsc-1-s1.binance.org:8545/"
-    );
+    const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
     const contractFunLottery = new web3.eth.Contract(
       FUN_LOTTERY_ABI,
       FUN_LOTTERY_ADDRESS
     );
 
-    var latestid = await contractFunLottery.methods.getLottoId(price*10).call();
+    var latestid = await contractFunLottery.methods
+      .getLottoId(price * 10)
+      .call();
 
     setLatestId(latestid);
 

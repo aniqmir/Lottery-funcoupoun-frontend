@@ -33,12 +33,8 @@ export default function Profile() {
 
   var numberofRows = 3;
 
- 
-
   const getLatestId = async (size) => {
-    const web3 = new Web3(
-      "https://data-seed-prebsc-1-s1.binance.org:8545/"
-    );
+    const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
     const contractFunLottery = new web3.eth.Contract(
       FUN_LOTTERY_ABI,
@@ -103,6 +99,13 @@ export default function Profile() {
       setticketNum4((oldArray) => [...oldArray, val]);
     }
   };
+
+  const getRewardValue = (price) => {
+    const latestidd = getLatestId(price);
+    //reward value function
+    return 8550;
+  };
+
   const claim = async (rowNum) => {
     const web3 = new Web3(Web3.givenProvider);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -140,9 +143,28 @@ export default function Profile() {
     }
   };
 
+  const makeLotteries = (loopTill, price, rowNum) => {
+    const lotteries = [];
+    for (let i = 3; i >= 0; i--) {
+      lotteries.push(
+        <Grid item xs={12} md={3}>
+          <LotteryTicket
+            price={price}
+            latestId={getLatestId(price)}
+            updateSizes={updateSizes}
+            updateLotteryIDs={updateLotteryIDs}
+            updateTicketNum={updateTicketNum}
+            rowNum={rowNum}
+          />
+        </Grid>
+      );
+    }
+    return lotteries;
+  };
   const makeRows = () => {
     for (let i = 0; i < numberofRows; i++) {
-      loop =loop * 10;
+      // loop = loop * 10;
+      const prices = [100, 1000, 10000, 100000];
       rows.push(
         <>
           <Grid item xs={12}>
@@ -152,7 +174,7 @@ export default function Profile() {
               </div>
               <div className="rewardprice">
                 <span className="rewardpricetext">
-                  8540 &nbsp;
+                  {getRewardValue(prices[i])} &nbsp;
                   <span>
                     <img
                       src={sideticket}
@@ -167,7 +189,10 @@ export default function Profile() {
 
           <Grid item xs={12}>
             <div className="rewardcenter">
-              <button className="claim" onClick={(claimMultiple) => claim(i + 1)}>
+              <button
+                className="claim"
+                onClick={(claimMultiple) => claim(i + 1)}
+              >
                 Claim
               </button>
             </div>
@@ -175,7 +200,10 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid>
-          {[loop].map((price, index) => {
+
+          {makeLotteries(getLatestId(prices[i]), prices[i], i + 1)}
+
+          {/* {[loop].map((price, index) => {
             return (
               <Grid item xs={12} md={3} key={index}>
                 <LotteryTicket
@@ -188,7 +216,7 @@ export default function Profile() {
                 />
               </Grid>
             );
-          })}
+          })} */}
         </>
       );
     }
@@ -217,7 +245,7 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid> */}
-          {[loop].map((price, index) => {
+          {[100, 1000, 10000, 100000].map((price, index) => {
             return (
               <Grid item xs={12} md={3}>
                 <LotteryTicket
