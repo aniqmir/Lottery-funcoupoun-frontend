@@ -145,7 +145,7 @@ export default function Profile() {
 
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
-    for (let i = 3; i >= 0; i--) {
+    for (let i = loopTill; i >= 0; i--) {
       lotteries.push(
         <Grid item xs={12} md={3}>
           <LotteryTicket
