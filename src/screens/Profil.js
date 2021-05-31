@@ -30,23 +30,24 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 
 export default function Profile() {
   // const classes = useStyles();
-
+ 
   var numberofRows = 3;
+  const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+
+  const contractFunLottery = new web3.eth.Contract(
+    FUN_LOTTERY_ABI,
+    FUN_LOTTERY_ADDRESS
+  );
 
   const getLatestId = async (size) => {
-    const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
-
-    const contractFunLottery = new web3.eth.Contract(
-      FUN_LOTTERY_ABI,
-      FUN_LOTTERY_ADDRESS
-    );
-
     var latestid = await contractFunLottery.methods.getLottoId(size).call();
+   
     return latestid;
   };
-
+  
   useEffect(() => {
     // getAllLotteries(100);
+    
   }, []);
   var loop = 100;
   const [sizes1, setSizes1] = React.useState([]);
@@ -77,6 +78,7 @@ export default function Profile() {
       setSizes4((oldArray) => [...oldArray, val]);
     }
   };
+
   const updateLotteryIDs = (val, rowNum) => {
     if (rowNum === 1) {
       setlotteryIDs1((oldArray) => [...oldArray, val]);
@@ -88,6 +90,7 @@ export default function Profile() {
       setlotteryIDs4((oldArray) => [...oldArray, val]);
     }
   };
+  
   const updateTicketNum = (val, rowNum) => {
     if (rowNum === 1) {
       setticketNum1((oldArray) => [...oldArray, val]);
@@ -100,12 +103,15 @@ export default function Profile() {
     }
   };
 
+  // Rewards
   const getRewardValue = (price) => {
     const latestidd = getLatestId(price);
+   
     //reward value function
     return 8550;
   };
 
+  // row to claim
   const claim = async (rowNum) => {
     const web3 = new Web3(Web3.givenProvider);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -115,6 +121,7 @@ export default function Profile() {
       FUN_COIN_ABI,
       signer
     );
+
 
     if (rowNum === 1) {
       const transaction = await contract.claimMultiple(
@@ -143,9 +150,17 @@ export default function Profile() {
     }
   };
 
+  
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
-    for (let i = 3; i >= 0; i--) {
+
+   const loop = async(price) => {
+    loopTill = await contractFunLottery.methods.getLottoId(price).call();
+   } 
+   loop(price);
+   console.log("loopTill:",loopTill,price)
+   
+    for (let i = loopTill; i >= 0; i--) {
       lotteries.push(
         <Grid item xs={12} md={3}>
           <LotteryTicket
@@ -162,6 +177,7 @@ export default function Profile() {
     return lotteries;
   };
   const makeRows = () => {
+   
     for (let i = 0; i < numberofRows; i++) {
       // loop = loop * 10;
       const prices = [100, 1000, 10000, 100000];
@@ -200,8 +216,8 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid>
-
-          {makeLotteries(getLatestId(prices[i]), prices[i], i + 1)}
+          
+          {makeLotteries(i, prices[i], i + 1)}
 
           {/* {[loop].map((price, index) => {
             return (

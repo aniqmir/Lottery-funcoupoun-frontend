@@ -47,7 +47,7 @@ const LotteryTicket = (props) => {
     var lotteryCnt = await contractFunLottery.methods
       .getUserTickets(
         latestid,
-        "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+        "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", //todo
         price
       )
       .call();
@@ -60,7 +60,7 @@ const LotteryTicket = (props) => {
 
       const checkMapNavigator = await contractFunLottery.methods
         .userTickets(
-          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
+          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", // todo
           price,
           1,
           latestid
