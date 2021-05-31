@@ -31,87 +31,13 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 export default function Profile() {
   // const classes = useStyles();
 
-  var numberofRows = 4;
+  var numberofRows = 3;
 
-  // const getAllLotteries = async (size) => {
-  //   const web3 = new Web3(
-  //     Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
-  //   );
-
-  //   const contractFunLottery = new web3.eth.Contract(
-  //     FUN_LOTTERY_ABI,
-  //     FUN_LOTTERY_ADDRESS
-  //   );
-
-  //   //const lotteryCount = await todoList.methods.getTicketsPurchased().call();
-
-  //   size = 100;
-
-  //   var latestid = await contractFunLottery.methods.getLottoId(size).call();
-
-  //   // const accounts = await web3.eth.getAccounts();
-  //   for (let i = latestid; i > 0; i--) {
-  //     var lotteryCnt = await contractFunLottery.methods
-  //       .getUserTickets(
-  //         latestid,
-  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-  //         size
-  //       )
-  //       .call();
-  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
-  //   }
-
-  //   size = 1000;
-
-  //   latestid = await contractFunLottery.methods.getLottoId(size).call();
-
-  //   for (let i = latestid; i > 0; i--) {
-  //     lotteryCnt = await contractFunLottery.methods
-  //       .getUserTickets(
-  //         latestid,
-  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-  //         size
-  //       )
-  //       .call();
-  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
-  //   }
-
-  //   size = 10000;
-
-  //   latestid = await contractFunLottery.methods.getLottoId(size).call();
-
-  //   for (let i = latestid; i > 0; i--) {
-  //     lotteryCnt = await contractFunLottery.methods
-  //       .getUserTickets(
-  //         latestid,
-  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-  //         size
-  //       )
-  //       .call();
-  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
-  //   }
-
-  //   size = 100000;
-
-  //   latestid = await contractFunLottery.methods.getLottoId(size).call();
-
-  //   for (let i = latestid; i > 0; i--) {
-  //     lotteryCnt = await contractFunLottery.methods
-  //       .getUserTickets(
-  //         latestid,
-  //         "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9",
-  //         size
-  //       )
-  //       .call();
-  //     console.log("latestId, size,result:", latestid, size, lotteryCnt);
-  //   }
-
-  //   // return
-  // };
+ 
 
   const getLatestId = async (size) => {
     const web3 = new Web3(
-      Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+      "https://data-seed-prebsc-1-s1.binance.org:8545/"
     );
 
     const contractFunLottery = new web3.eth.Contract(
@@ -126,7 +52,7 @@ export default function Profile() {
   useEffect(() => {
     // getAllLotteries(100);
   }, []);
-
+  var loop = 100;
   const [sizes1, setSizes1] = React.useState([]);
   const [sizes2, setSizes2] = React.useState([]);
   const [sizes3, setSizes3] = React.useState([]);
@@ -178,7 +104,7 @@ export default function Profile() {
     }
   };
   const claim = async (rowNum) => {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    const web3 = new Web3(Web3.givenProvider);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(
@@ -216,6 +142,7 @@ export default function Profile() {
 
   const makeRows = () => {
     for (let i = 0; i < numberofRows; i++) {
+      loop =loop * 10;
       rows.push(
         <>
           <Grid item xs={12}>
@@ -240,7 +167,7 @@ export default function Profile() {
 
           <Grid item xs={12}>
             <div className="rewardcenter">
-              <button className="claim" onClick={() => claim(i + 1)}>
+              <button className="claim" onClick={(claimMultiple) => claim(i + 1)}>
                 Claim
               </button>
             </div>
@@ -248,7 +175,7 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid>
-          {[100, 1000, 10000, 100000].map((price, index) => {
+          {[loop].map((price, index) => {
             return (
               <Grid item xs={12} md={3} key={index}>
                 <LotteryTicket
@@ -290,7 +217,7 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid> */}
-          {[100, 1000, 10000, 1000000].map((price, index) => {
+          {[loop].map((price, index) => {
             return (
               <Grid item xs={12} md={3}>
                 <LotteryTicket

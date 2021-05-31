@@ -29,7 +29,7 @@ const LotteryTicket = (props) => {
     //get Lottery ID here
 
     const web3 = new Web3(
-      Web3.givenProvider || "https://data-seed-prebsc-1-s1.binance.org:8545/"
+      "https://data-seed-prebsc-1-s1.binance.org:8545/"
     );
 
     const contractFunLottery = new web3.eth.Contract(
@@ -37,7 +37,7 @@ const LotteryTicket = (props) => {
       FUN_LOTTERY_ADDRESS
     );
 
-    var latestid = await contractFunLottery.methods.getLottoId(price).call();
+    var latestid = await contractFunLottery.methods.getLottoId(price*10).call();
 
     setLatestId(latestid);
 
