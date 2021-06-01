@@ -28,10 +28,10 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 //   },
 // }));
 
-export default function Profile() {
+export default  function Profile() {
   // const classes = useStyles();
 
-  var numberofRows = 3;
+  var numberofRows = 4;
   const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
   const contractFunLottery = new web3.eth.Contract(
@@ -116,6 +116,7 @@ export default function Profile() {
     const latestidd = getLatestId(price);
 
     //reward value function
+    
     return 8550;
   };
 
@@ -130,6 +131,10 @@ export default function Profile() {
       FUN_LOTTERY_ABI,
       signer
     );
+
+    console.log("sizes1,lotteryIDs1,ticketNum1",sizes1,
+        lotteryIDs1,
+        ticketNum1);
 
     if (rowNum === 1) {
       const transaction = await contract.claimMultiple(
@@ -159,15 +164,15 @@ export default function Profile() {
     }
   };
 
-  const makeLotteries = (loopTill, price, rowNum) => {
+  const makeLotteries = async (loopTill, price, rowNum) => {
+    console.log("makeLotteries:",loopTill,price,rowNum)
+
+   
     const lotteries = [];
-    const loop = async (price) => {
-      loopTill = await contractFunLottery.methods.getLottoId(price).call();
-    };
+  
+    console.log("makeLotteries",loopTill);
+    for (let i = loopTill; i > 0; i--) {
 
-    loop(price);
-
-    for (let i = 1; i > 0; i--) {
       lotteries.push(
         <Grid item xs={12} md={3}>
           <LotteryTicket
@@ -182,11 +187,21 @@ export default function Profile() {
       );
     }
     return lotteries;
+
+   
   };
   const makeRows = () => {
     for (let i = 0; i < numberofRows; i++) {
       // loop = loop * 10;
-      const prices = [100, 1000, 10000, 100000];
+      
+      const prices = [100, 1000, 10000, 100000];  
+    //   var res;   
+      
+    //   getLatestId(prices[i]).then( function(result){
+    //     res = result;
+    //     console.log("loopTillin",res);
+    // });
+
       rows.push(
         <>
           <Grid item xs={12}>
@@ -223,7 +238,7 @@ export default function Profile() {
             <p className="headtext">Tirages en Course</p>
           </Grid>
 
-          {makeLotteries(i, prices[i], i + 1)}
+          {makeLotteries(i, prices[i], i + 1)} 
 
           {/* {[loop].map((price, index) => {
             return (
@@ -241,6 +256,7 @@ export default function Profile() {
           })} */}
         </>
       );
+      
     }
     return rows;
   };

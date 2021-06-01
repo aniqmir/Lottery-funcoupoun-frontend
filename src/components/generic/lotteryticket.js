@@ -42,6 +42,7 @@ const LotteryTicket = (props) => {
 
     setLatestId(latestid);
 
+
     const accounts = await web3.eth.getAccounts();
 
     // for (let i = latestId; i > 0; i--) {
@@ -52,24 +53,26 @@ const LotteryTicket = (props) => {
         price
       )
       .call();
-
-    setLotteryCount(lotteryCnt);
+      
+      setLotteryCount(lotteryCnt);
 
     for (let i = 0; i < lotteryCnt.length; i++) {
-      updateSizes(price, rowNum);
-      updateLotteryIDs(latestid, rowNum);
-
+     
       const checkMapNavigator = await contractFunLottery.methods
         .userTickets(
           "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", // todo
           price,
           1,
-          latestid
+          lotteryCnt[i]
         )
         .call();
-      // if (!checkMapNavigator.redeemed) {
+
+    if (!checkMapNavigator.redeemed) {
       updateTicketNum(lotteryCnt[i], rowNum);
-      // }
+      updateSizes(price, rowNum);
+      updateLotteryIDs(latestid, rowNum);
+       }
+
     }
     // }
   };
