@@ -30,7 +30,7 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 
 export default function Profile() {
   // const classes = useStyles();
- 
+
   var numberofRows = 3;
   const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
@@ -41,13 +41,12 @@ export default function Profile() {
 
   const getLatestId = async (size) => {
     var latestid = await contractFunLottery.methods.getLottoId(size).call();
-   
+
     return latestid;
   };
-  
+
   useEffect(() => {
     // getAllLotteries(100);
-    
   }, []);
   var loop = 100;
   const [sizes1, setSizes1] = React.useState([]);
@@ -68,6 +67,9 @@ export default function Profile() {
   var rows = [];
 
   const updateSizes = (val, rowNum) => {
+    if (rowNum === -1) {
+      return;
+    }
     if (rowNum === 1) {
       setSizes1((oldArray) => [...oldArray, val]);
     } else if (rowNum === 2) {
@@ -80,6 +82,9 @@ export default function Profile() {
   };
 
   const updateLotteryIDs = (val, rowNum) => {
+    if (rowNum === -1) {
+      return;
+    }
     if (rowNum === 1) {
       setlotteryIDs1((oldArray) => [...oldArray, val]);
     } else if (rowNum === 2) {
@@ -90,8 +95,11 @@ export default function Profile() {
       setlotteryIDs4((oldArray) => [...oldArray, val]);
     }
   };
-  
+
   const updateTicketNum = (val, rowNum) => {
+    if (rowNum === -1) {
+      return;
+    }
     if (rowNum === 1) {
       setticketNum1((oldArray) => [...oldArray, val]);
     } else if (rowNum === 2) {
@@ -106,16 +114,14 @@ export default function Profile() {
   // Rewards
   const getRewardValue = (price) => {
     const latestidd = getLatestId(price);
-   
+
     //reward value function
     return 8550;
   };
 
   // row to claim
   const claim = async (rowNum) => {
-  
-
-    web3.eth.handleRevert = true
+    web3.eth.handleRevert = true;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
@@ -125,19 +131,13 @@ export default function Profile() {
       signer
     );
 
-    console.log("rowNum",rowNum,"signer",signer,"sizes",sizes1,"lotteryId:",lotteryIDs1,"ticketnum",ticketNum1);
-
-    const transaction = await contract.claimMultiple(sizes1,lotteryIDs1,ticketNum1);
-
-    console.log("transaction",transaction);
-
-
     if (rowNum === 1) {
       const transaction = await contract.claimMultiple(
         sizes1,
         lotteryIDs1,
         ticketNum1
       );
+      console.log(transaction);
     } else if (rowNum === 2) {
       const transaction = await contract.claimMultiple(
         sizes2,
@@ -159,17 +159,15 @@ export default function Profile() {
     }
   };
 
-  
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
+    const loop = async (price) => {
+      loopTill = await contractFunLottery.methods.getLottoId(price).call();
+    };
 
-   const loop = async(price) => {
-    loopTill = await contractFunLottery.methods.getLottoId(price).call();
-   } 
-   loop(price);
-   console.log("loopTill:",loopTill,price)
-   
-    for (let i = loopTill; i >= 0; i--) {
+    loop(price);
+
+    for (let i = 1; i > 0; i--) {
       lotteries.push(
         <Grid item xs={12} md={3}>
           <LotteryTicket
@@ -186,7 +184,6 @@ export default function Profile() {
     return lotteries;
   };
   const makeRows = () => {
-   
     for (let i = 0; i < numberofRows; i++) {
       // loop = loop * 10;
       const prices = [100, 1000, 10000, 100000];
@@ -225,7 +222,7 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid>
-          
+
           {makeLotteries(i, prices[i], i + 1)}
 
           {/* {[loop].map((price, index) => {
@@ -284,18 +281,6 @@ export default function Profile() {
               </Grid>
             );
           })}
-          {/* <Grid item xs={12} md={3}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <LotteryTicket />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <LotteryTicket />
-          </Grid> */}
           <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />

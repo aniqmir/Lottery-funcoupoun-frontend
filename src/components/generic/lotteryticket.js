@@ -21,7 +21,6 @@ const LotteryTicket = (props) => {
   // const classes = useStyles();
   const { price, updateSizes, updateLotteryIDs, updateTicketNum, rowNum } =
     props;
-
   const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
@@ -68,18 +67,12 @@ const LotteryTicket = (props) => {
           latestid
         )
         .call();
-      if (!checkMapNavigator.redeemed) {
-        updateTicketNum(lotteryCnt[i], rowNum);
-      }
+      // if (!checkMapNavigator.redeemed) {
+      updateTicketNum(lotteryCnt[i], rowNum);
+      // }
     }
     // }
   };
-
-  const longText = `
-Aliquam eget finibus ante, non facilisis lectus. Sed vitae dignissim est, vel aliquam tellus.
-Praesent non nunc mollis, fermentum neque at, semper arcu.
-Nullam eget est sed sem iaculis gravida eget vitae justo.
-`;
 
   useEffect(() => {
     getLotteryId();
