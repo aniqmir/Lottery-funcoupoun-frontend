@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Tooltip } from "@material-ui/core";
 import extendedinfo from "../../assets/extendedinfo.png";
 
 import Web3 from "web3";
@@ -24,6 +24,8 @@ const LotteryTicket = (props) => {
 
   const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
+
+  const [lotteryCountMapper, setLotteryCountMapper] = React.useState([]);
 
   const getLotteryId = async () => {
     //get Lottery ID here
@@ -73,6 +75,12 @@ const LotteryTicket = (props) => {
     // }
   };
 
+  const longText = `
+Aliquam eget finibus ante, non facilisis lectus. Sed vitae dignissim est, vel aliquam tellus.
+Praesent non nunc mollis, fermentum neque at, semper arcu.
+Nullam eget est sed sem iaculis gravida eget vitae justo.
+`;
+
   useEffect(() => {
     getLotteryId();
   }, []);
@@ -98,29 +106,44 @@ const LotteryTicket = (props) => {
         <div className="lotteryticketbg">
           <div className="yourtickets">YOUR TICKETS</div>
           <Grid container spacing={1}>
-            {lotteryCount.map((item, index) => (
-              <Grid item xs={6} key={index}>
-                <span
-                  style={{
-                    background: "white",
-                    borderRadius: "10px",
-                    display: "inline-block",
-                    margin: "2px",
-                    padding: "3px",
-                  }}
-                ></span>
-                &nbsp;&nbsp;
-                <span>{item}</span>
-              </Grid>
-            ))}
+            {lotteryCount.map(
+              (item, index) =>
+                index <= 5 && (
+                  <Grid item xs={6} key={index}>
+                    <span
+                      style={{
+                        background: "white",
+                        borderRadius: "10px",
+                        display: "inline-block",
+                        margin: "2px",
+                        padding: "3px",
+                      }}
+                    ></span>
+                    &nbsp;&nbsp;
+                    <span>{item}</span>
+                  </Grid>
+                )
+            )}
           </Grid>
         </div>
 
         {/* <img src={lotteryticket} alt="lotteryticket" /> */}
       </Grid>
-      <Grid item xs={12}>
-        <img src={extendedinfo} alt="extendedinfo" />
-      </Grid>
+      <Tooltip
+        title={
+          <Grid container spacing={1}>
+            {lotteryCount.map((item, index) => (
+              <Grid item xs={3} key={index}>
+                <span>{item}</span>
+              </Grid>
+            ))}
+          </Grid>
+        }
+      >
+        <Grid item xs={12}>
+          <img src={extendedinfo} alt="extendedinfo" />
+        </Grid>
+      </Tooltip>
     </Grid>
   );
 };

@@ -113,14 +113,23 @@ export default function Profile() {
 
   // row to claim
   const claim = async (rowNum) => {
-    const web3 = new Web3(Web3.givenProvider);
+  
+
+    web3.eth.handleRevert = true
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
+
     const contract = new ethers.Contract(
-      FUN_COIN_ADDRESS,
-      FUN_COIN_ABI,
+      FUN_LOTTERY_ADDRESS,
+      FUN_LOTTERY_ABI,
       signer
     );
+
+    console.log("rowNum",rowNum,"signer",signer,"sizes",sizes1,"lotteryId:",lotteryIDs1,"ticketnum",ticketNum1);
+
+    const transaction = await contract.claimMultiple(sizes1,lotteryIDs1,ticketNum1);
+
+    console.log("transaction",transaction);
 
 
     if (rowNum === 1) {
