@@ -111,13 +111,15 @@ export default  function Profile() {
     }
   };
 
-  // Rewards
+  // Rewards  // todo
   const getRewardValue = (price) => {
     const latestidd = getLatestId(price);
 
     //reward value function
     
-    return 8550;
+  //    var test = contractFunLottery.methods.calculateReward(100,1,1).call(); // size,lotteryId,ticketnum
+    
+    return 100;
   };
 
   // row to claim
