@@ -164,14 +164,14 @@ export default  function Profile() {
     }
   };
 
-  const makeLotteries = async (loopTill, price, rowNum) => {
-    console.log("makeLotteries:",loopTill,price,rowNum)
+  const makeLotteries =  (loopTill, price, rowNum) => {
+   
 
    
     const lotteries = [];
   
-    console.log("makeLotteries",loopTill);
-    for (let i = loopTill; i > 0; i--) {
+    
+    for (let i = 1; i > 0; i--) {
 
       lotteries.push(
         <Grid item xs={12} md={3}>
@@ -195,12 +195,7 @@ export default  function Profile() {
       // loop = loop * 10;
       
       const prices = [100, 1000, 10000, 100000];  
-    //   var res;   
-      
-    //   getLatestId(prices[i]).then( function(result){
-    //     res = result;
-    //     console.log("loopTillin",res);
-    // });
+
 
       rows.push(
         <>

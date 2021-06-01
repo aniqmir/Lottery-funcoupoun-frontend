@@ -1,4 +1,4 @@
-export const FUN_LOTTERY_ADDRESS = "0x85f73aA6769E1B54Dc62e93bb43CAad46C709E97";
+export const FUN_LOTTERY_ADDRESS = "0x0a40577732Db22D65C17589F1E86b3c971c8381d";
 
 export const FUN_LOTTERY_ABI = [
 	{
@@ -216,6 +216,35 @@ export const FUN_LOTTERY_ABI = [
 			{
 				"internalType": "uint256",
 				"name": "winNumber",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_size",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_lotteryid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_ticketnum",
+				"type": "uint256"
+			}
+		],
+		"name": "calculateReward",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
 				"type": "uint256"
 			}
 		],
