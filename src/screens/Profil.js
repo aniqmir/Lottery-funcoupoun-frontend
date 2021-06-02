@@ -208,6 +208,8 @@ export default function Profile() {
     // const loopTilll = getLatestId(price);
     // loopTilll
     //   .then((res) => {
+
+   
     var loopchk = latestIDforrows.length !== 0 && latestIDforrows[rowNum - 1];
     if (loopchk != 0) {
       console.log(loopchk, "loopchk");
@@ -217,7 +219,7 @@ export default function Profile() {
           <Grid item xs={12} md={3}>
             <LotteryTicket
               price={price}
-              latestId={latestIDforrows[i]}
+              latestId={latestIDforrows[loopTill]-1}
               updateSizes={updateSizes}
               updateLotteryIDs={updateLotteryIDs}
               updateTicketNum={updateTicketNum}
