@@ -19,12 +19,16 @@ import "./genericcomponents.css";
 
 const LotteryTicket = (props) => {
   // const classes = useStyles();
-  const { price, updateSizes, updateLotteryIDs, updateTicketNum, rowNum } =
-    props;
+  const {
+    price,
+    updateSizes,
+    updateLotteryIDs,
+    updateTicketNum,
+    rowNum,
+    getRewardValue,
+  } = props;
   const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
-
-  const [lotteryCountMapper, setLotteryCountMapper] = React.useState([]);
 
   const getLotteryId = async () => {
     //get Lottery ID here
@@ -45,33 +49,35 @@ const LotteryTicket = (props) => {
     const accounts = await web3.eth.getAccounts();
 
     // for (let i = latestId; i > 0; i--) {
-    var lotteryCnt = await contractFunLottery.methods
-      .getUserTickets(
-        latestid,
-        "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", //todo
-        price
-      )
-      .call();
-
-    setLotteryCount(lotteryCnt);
-
-    for (let i = 0; i < lotteryCnt.length; i++) {
-      updateSizes(price, rowNum);
-      updateLotteryIDs(latestid, rowNum);
-
-      const checkMapNavigator = await contractFunLottery.methods
-        .userTickets(
-          "0x4d23c8E0e601C5e37b062832427b2D62777fAEF9", // todo
-          price,
-          1,
-          latestid
+    if (accounts.length > 0) {
+      var lotteryCnt = await contractFunLottery.methods
+        .getUserTickets(
+          latestid,
+          accounts[0], //todo
+          price
         )
         .call();
-      // if (!checkMapNavigator.redeemed) {
-      updateTicketNum(lotteryCnt[i], rowNum);
-      // }
+
+      setLotteryCount(lotteryCnt);
+
+      for (let i = 0; i < lotteryCnt.length; i++) {
+        const checkMapNavigator = await contractFunLottery.methods
+          .userTickets(
+            accounts[0], // todo
+            price,
+            1,
+            lotteryCnt[i]
+          )
+          .call();
+        getRewardValue(price, latestid, lotteryCnt[i], rowNum);
+
+        if (!checkMapNavigator.redeemed) {
+          updateTicketNum(lotteryCnt[i], rowNum);
+          updateSizes(price, rowNum);
+          updateLotteryIDs(latestid, rowNum);
+        }
+      }
     }
-    // }
   };
 
   useEffect(() => {

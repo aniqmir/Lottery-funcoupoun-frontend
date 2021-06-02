@@ -31,7 +31,7 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 export default function Profile() {
   // const classes = useStyles();
 
-  var numberofRows = 3;
+  var numberofRows = 4;
   const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
   const [mostLatestId, setMostLatestId] = React.useState({
@@ -115,12 +115,18 @@ export default function Profile() {
     }
   };
 
-  // Rewards
-  const getRewardValue = (price) => {
-    const latestidd = getLatestId(price);
-
+  const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
+  // Rewards  // todo
+  const getRewardValue = (price, lotteryid, ticketnum, rowNum) => {
     //reward value function
-    return 8550;
+    const currentValues = rewardValue;
+    var test = contractFunLottery.methods
+      .calculateReward(price, lotteryid, ticketnum)
+      .call(); // size,lotteryId,ticketnum
+    let newReward = currentValues[rowNum] + test;
+    currentValues[rowNum] = newReward;
+    setRewardValue(currentValues);
+    console.log(rewardValue, "rewardValue");
   };
 
   // row to claim
@@ -166,34 +172,37 @@ export default function Profile() {
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
 
-    const loopTilll = getLatestId(price);
-    loopTilll
-      .then((res) => {
-        for (let i = res; i > 0; i--) {
-          lotteries.push(
-            <Grid item xs={12} md={3}>
-              <LotteryTicket
-                price={price}
-                latestId={getLatestId(price)}
-                updateSizes={updateSizes}
-                updateLotteryIDs={updateLotteryIDs}
-                updateTicketNum={updateTicketNum}
-                rowNum={rowNum}
-              />
-            </Grid>
-          );
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const loopTilll = getLatestId(price);
+    // loopTilll
+    //   .then((res) => {
+    for (let i = 1; i > 0; i--) {
+      lotteries.push(
+        <Grid item xs={12} md={3}>
+          <LotteryTicket
+            price={price}
+            latestId={getLatestId(price)}
+            updateSizes={updateSizes}
+            updateLotteryIDs={updateLotteryIDs}
+            updateTicketNum={updateTicketNum}
+            rowNum={rowNum}
+            getRewardValue={getRewardValue}
+          />
+        </Grid>
+      );
+    }
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
     return lotteries;
   };
   const makeRows = () => {
     for (let i = 0; i < numberofRows; i++) {
       // loop = loop * 10;
+
       const prices = [100, 1000, 10000, 100000];
+
       rows.push(
         <>
           <Grid item xs={12}>
@@ -203,7 +212,7 @@ export default function Profile() {
               </div>
               <div className="rewardprice">
                 <span className="rewardpricetext">
-                  {getRewardValue(prices[i])} &nbsp;
+                  {rewardValue[i]} &nbsp;
                   <span>
                     <img
                       src={sideticket}
@@ -269,6 +278,7 @@ export default function Profile() {
                   updateLotteryIDs={updateLotteryIDs}
                   updateTicketNum={updateTicketNum}
                   rowNum={-1}
+                  getRewardValue={getRewardValue}
                 />
               </Grid>
             );
