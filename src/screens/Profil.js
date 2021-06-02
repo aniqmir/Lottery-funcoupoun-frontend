@@ -67,7 +67,6 @@ export default function Profile() {
   const [ticketNum4, setticketNum4] = React.useState([]);
 
   var rows = [];
-
   const [allLotteries, setAllLotteries] = React.useState([]);
 
   const updateSizes = (val, rowNum) => {
@@ -116,6 +115,9 @@ export default function Profile() {
   };
 
   const [network, setNetwork] = React.useState();
+
+  const [latestIDforrows, setlatestIDforrows] = React.useState([]);
+
   React.useEffect(async () => {
     const web3 = new Web3(Web3.givenProvider);
 
@@ -123,6 +125,34 @@ export default function Profile() {
     if (network === 97) {
       setNetwork(network);
     }
+
+    getLatestId(100).then(
+      (res)=>{
+        setlatestIDforrows(oldArray => [...oldArray, res]);
+        getLatestId(1000).then(
+          (res)=>{
+            setlatestIDforrows(oldArray => [...oldArray, res]);
+            getLatestId(10000).then(
+              (res)=>{
+                setlatestIDforrows(oldArray => [...oldArray, res]);
+                getLatestId(100000).then(
+                  (res)=>{
+                    setlatestIDforrows(oldArray => [...oldArray, res]);
+                  }
+                );
+              }
+            );
+        
+          
+          }
+        );
+    
+       
+      }
+    );
+
+    
+   
   }, []);
 
   const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
@@ -186,15 +216,20 @@ export default function Profile() {
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
 
-    const loopTilll = getLatestId(price);
-    loopTilll
-      .then((res) => {
-        for (let i = 1; i > 0; i--) {
+    // const loopTilll = getLatestId(price);
+    // loopTilll
+    //   .then((res) => {
+         console.log("latestIDforrows[rowNum-1]:",latestIDforrows);
+        var loopchk = latestIDforrows[rowNum-1];
+        if (loopchk != 0){
+          loopchk = loopchk-1;
+        }
+        for (let i = loopchk; i > 0; i--) {
           lotteries.push(
             <Grid item xs={12} md={3}>
               <LotteryTicket
                 price={price}
-                latestId={getLatestId(price)}
+                latestId={latestIDforrows[rowNum-1]}
                 updateSizes={updateSizes}
                 updateLotteryIDs={updateLotteryIDs}
                 updateTicketNum={updateTicketNum}
@@ -203,11 +238,11 @@ export default function Profile() {
               />
             </Grid>
           );
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+         }
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // });
 
     return lotteries;
   };
