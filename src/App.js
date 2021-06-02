@@ -40,6 +40,9 @@ function App() {
 
   const updateAddress = async () => {
     const web3 = window.web3;
+    const network = await web3.eth.net.getId();
+    console.log(network, "transaction");
+
     const accounts = await web3.eth.getAccounts();
     if (accounts !== undefined) {
       setAddress(accounts);
@@ -54,7 +57,6 @@ function App() {
   }, []);
 
   const approvefromWeb3 = async () => {
-
     const web3 = new Web3(Web3.givenProvider);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -67,13 +69,13 @@ function App() {
     );
 
     const accounts = await web3.eth.getAccounts();
+
     if (accounts.length > 0) {
       const balance = await contract.balanceOf(accounts[0]);
       const transaction = await contract.approve(
         FUN_LOTTERY_ADDRESS,
         balance.toNumber()
       );
-      console.log(transaction, "transaction");
       if (!!transaction.hash) {
         setApproved(true);
       }
@@ -83,15 +85,13 @@ function App() {
   const claimMultiple = async () => {
     const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
- 
-
     var sizes = [100]; //size  100, 100, 100 , 1000
 
     var lotteryIDs = [1]; // latestID  1, 1, 1 , 1
 
     var ticketNum = []; // All number of Lottery array  1,4, 5 , 12
 
-    web3.eth.handleRevert = true
+    web3.eth.handleRevert = true;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
@@ -101,11 +101,15 @@ function App() {
       signer
     );
 
-    console.log("signer",signer,contract,sizes,lotteryIDs,ticketNum);
+    console.log("signer", signer, contract, sizes, lotteryIDs, ticketNum);
 
-    const transaction = await contract.claimMultiple(sizes,lotteryIDs,ticketNum);
+    const transaction = await contract.claimMultiple(
+      sizes,
+      lotteryIDs,
+      ticketNum
+    );
 
-    console.log("transaction",transaction);
+    console.log("transaction", transaction);
     //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
     if (!!transaction.hash) {
       console.log("transaction:", transaction);
@@ -114,7 +118,6 @@ function App() {
     await web3.eth.getTransactionReceipt(transaction.hash, (err, txReceipt) =>
       console.log("Err:", err, "txReciept:", txReceipt)
     );
-    
   };
 
   return (
