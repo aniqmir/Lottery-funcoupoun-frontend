@@ -150,7 +150,7 @@ export default function Profile() {
 
     test
       .then((res) => {
-        let newReward = currentValues[rowNum] + res;
+        let newReward = res / 100000000;
         currentValues[rowNum] = newReward;
         setRewardValue(currentValues);
       })
@@ -251,7 +251,7 @@ export default function Profile() {
               </div>
               <div className="rewardprice">
                 <span className="rewardpricetext">
-                  {/* {rewardValue[i]} &nbsp; */}
+                  {rewardValue[i]} &nbsp;
                   <span>
                     <img
                       src={sideticket}
