@@ -172,28 +172,28 @@ export default function Profile() {
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
 
-    // const loopTilll = getLatestId(price);
-    // loopTilll
-    //   .then((res) => {
-    for (let i = 1; i > 0; i--) {
-      lotteries.push(
-        <Grid item xs={12} md={3}>
-          <LotteryTicket
-            price={price}
-            latestId={getLatestId(price)}
-            updateSizes={updateSizes}
-            updateLotteryIDs={updateLotteryIDs}
-            updateTicketNum={updateTicketNum}
-            rowNum={rowNum}
-            getRewardValue={getRewardValue}
-          />
-        </Grid>
-      );
-    }
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
+    const loopTilll = getLatestId(price);
+    loopTilll
+      .then((res) => {
+        for (let i = 1; i > 0; i--) {
+          lotteries.push(
+            <Grid item xs={12} md={3}>
+              <LotteryTicket
+                price={price}
+                latestId={getLatestId(price)}
+                updateSizes={updateSizes}
+                updateLotteryIDs={updateLotteryIDs}
+                updateTicketNum={updateTicketNum}
+                rowNum={rowNum}
+                getRewardValue={getRewardValue}
+              />
+            </Grid>
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     return lotteries;
   };
