@@ -115,6 +115,16 @@ export default function Profile() {
     }
   };
 
+  const [network, setNetwork] = React.useState();
+  React.useEffect(async () => {
+    const web3 = new Web3(Web3.givenProvider);
+
+    const network = await web3.eth.net.getId();
+    if (network === 97) {
+      setNetwork(network);
+    }
+  }, []);
+
   const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
   // Rewards  // todo
   const getRewardValue = (price, lotteryid, ticketnum, rowNum) => {
@@ -131,41 +141,45 @@ export default function Profile() {
 
   // row to claim
   const claim = async (rowNum) => {
-    web3.eth.handleRevert = true;
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+    if (network) {
+      web3.eth.handleRevert = true;
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
 
-    const contract = new ethers.Contract(
-      FUN_LOTTERY_ADDRESS,
-      FUN_LOTTERY_ABI,
-      signer
-    );
+      const contract = new ethers.Contract(
+        FUN_LOTTERY_ADDRESS,
+        FUN_LOTTERY_ABI,
+        signer
+      );
 
-    if (rowNum === 1) {
-      const transaction = await contract.claimMultiple(
-        sizes1,
-        lotteryIDs1,
-        ticketNum1
-      );
-      console.log(transaction);
-    } else if (rowNum === 2) {
-      const transaction = await contract.claimMultiple(
-        sizes2,
-        lotteryIDs2,
-        ticketNum2
-      );
-    } else if (rowNum === 3) {
-      const transaction = await contract.claimMultiple(
-        sizes3,
-        lotteryIDs3,
-        ticketNum3
-      );
+      if (rowNum === 1) {
+        const transaction = await contract.claimMultiple(
+          sizes1,
+          lotteryIDs1,
+          ticketNum1
+        );
+        console.log(transaction);
+      } else if (rowNum === 2) {
+        const transaction = await contract.claimMultiple(
+          sizes2,
+          lotteryIDs2,
+          ticketNum2
+        );
+      } else if (rowNum === 3) {
+        const transaction = await contract.claimMultiple(
+          sizes3,
+          lotteryIDs3,
+          ticketNum3
+        );
+      } else {
+        const transaction = await contract.claimMultiple(
+          sizes4,
+          lotteryIDs4,
+          ticketNum4
+        );
+      }
     } else {
-      const transaction = await contract.claimMultiple(
-        sizes4,
-        lotteryIDs4,
-        ticketNum4
-      );
+      alert("Cannot Claim with current Network");
     }
   };
 

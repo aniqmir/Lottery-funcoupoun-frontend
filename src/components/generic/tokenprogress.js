@@ -40,24 +40,28 @@ const BorderLinearProgress = withStyles({
 const TokenProgress = (props) => {
   // const classes = useStyles();
 
-  const { address, progressValue, total } = props;
+  const { address, progressValue, total, network } = props;
 
   const getPercentage = (val) => {
     return ((parseInt(val) / parseInt(total)) * 100).toFixed(2);
   };
 
   const buyTicket = async () => {
-    let tempAddress;
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-    const accounts = await web3.eth.getAccounts();
-    tempAddress = accounts[0];
+    if (network) {
+      let tempAddress;
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+      const accounts = await web3.eth.getAccounts();
+      tempAddress = accounts[0];
 
-    //buy ticket
-    if (tempAddress === undefined) {
-      //alert connect first
-      alert("Please connect your metamask wallet");
+      //buy ticket
+      if (tempAddress === undefined) {
+        //alert connect first
+        alert("Please connect your metamask wallet");
+      } else {
+        props.buyLotteryfromWeb3(props.lotteryAmount, 1);
+      }
     } else {
-      props.buyLotteryfromWeb3(props.lotteryAmount, 1);
+      alert("Cannot Buy with Current Network");
     }
   };
   return (

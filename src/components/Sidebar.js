@@ -26,6 +26,8 @@ import sideticket from "../assets/sideticket.png";
 
 import history from "../history";
 
+import Web3 from "web3";
+
 import "./components.css";
 import { Divider } from "@material-ui/core";
 
@@ -95,7 +97,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const [network, setNetwork] = React.useState(false);
   // const [connection, setConnection] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -117,13 +119,25 @@ function ResponsiveDrawer(props) {
 
   const approvefromWeb3 = (e) => {
     e.preventDefault();
-    if (props.address.length === 0) {
-      alert("Please connect your metamask wallet");
+    if (network) {
+      if (props.address.length === 0) {
+        alert("Please connect your metamask wallet");
+      } else {
+        props.approvefromWeb3();
+      }
     } else {
-      props.approvefromWeb3();
+      alert("Cannot Approve with Current Network");
     }
   };
 
+  useEffect(async () => {
+    const web3 = new Web3(Web3.givenProvider);
+
+    const network = await web3.eth.net.getId();
+    if (network === 97) {
+      setNetwork(network);
+    }
+  }, []);
   useEffect(() => {
     window !== undefined
       ? setCurrentRoute(window.location.pathname)
@@ -233,7 +247,7 @@ function ResponsiveDrawer(props) {
           <img src={funcoupons} alt="funcoupons" />
           <div>
             <button
-              className="connect"
+              className={"connect"}
               onClick={approvefromWeb3}
               disabled={approved}
             >

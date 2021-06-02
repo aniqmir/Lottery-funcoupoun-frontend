@@ -106,21 +106,14 @@ export default function NavTabs() {
   const [address, setAddress] = React.useState([]);
 
   React.useEffect(() => {
-
     const getLotteryNumbersfromEth = async () => {
-      
-
-      const web3 = new Web3(
-        "https://data-seed-prebsc-1-s1.binance.org:8545/"
-      );
+      const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
       const todoList = new web3.eth.Contract(
         FUN_LOTTERY_ABI,
         FUN_LOTTERY_ADDRESS
       );
-      
 
       const lotteryCount = await todoList.methods.getTicketsPurchased().call();
-  
 
       setProgressValue(lotteryCount);
 
@@ -144,7 +137,7 @@ export default function NavTabs() {
       signer
     );
     const transaction = await contract.buyticket(param1, 1);
-    console.log("transaction",transaction);
+    console.log("transaction", transaction);
   };
 
   const handleChange = (event, newValue) => {
@@ -194,6 +187,16 @@ export default function NavTabs() {
     },
   ];
 
+  const [network, setNetwork] = React.useState();
+  React.useEffect(async () => {
+    const web3 = new Web3(Web3.givenProvider);
+
+    const network = await web3.eth.net.getId();
+    if (network === 97) {
+      setNetwork(network);
+    }
+  }, []);
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.rootbar}>
@@ -234,6 +237,7 @@ export default function NavTabs() {
               progressValue={progressValue[index]}
               address={address}
               buyLotteryfromWeb3={buyLotteryfromWeb3}
+              network={network}
               {...value}
             />
           </div>

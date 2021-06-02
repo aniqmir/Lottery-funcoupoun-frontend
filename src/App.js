@@ -41,7 +41,6 @@ function App() {
   const updateAddress = async () => {
     const web3 = window.web3;
     const network = await web3.eth.net.getId();
-    console.log(network, "transaction");
 
     const accounts = await web3.eth.getAccounts();
     if (accounts !== undefined) {

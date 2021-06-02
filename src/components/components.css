@@ -10,6 +10,17 @@
   cursor: pointer;
 }
 
+.connectdisabled {
+  text-transform: none;
+  border-radius: 5px;
+  background-color: grey;
+  color: #3d1e4d;
+  height: 35px;
+  width: 100px;
+  border: none;
+  margin-right: 10px;
+}
+
 .connectLang {
   text-transform: capitalize;
   color: #c04e88;
