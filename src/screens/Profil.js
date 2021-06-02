@@ -47,7 +47,6 @@ export default function Profile() {
 
   const getLatestId = async (size) => {
     var latestid = await contractFunLottery.methods.getLottoId(size).call();
-
     return latestid;
   };
 
@@ -126,33 +125,18 @@ export default function Profile() {
       setNetwork(network);
     }
 
-    getLatestId(100).then(
-      (res)=>{
-        setlatestIDforrows(oldArray => [...oldArray, res]);
-        getLatestId(1000).then(
-          (res)=>{
-            setlatestIDforrows(oldArray => [...oldArray, res]);
-            getLatestId(10000).then(
-              (res)=>{
-                setlatestIDforrows(oldArray => [...oldArray, res]);
-                getLatestId(100000).then(
-                  (res)=>{
-                    setlatestIDforrows(oldArray => [...oldArray, res]);
-                  }
-                );
-              }
-            );
-        
-          
-          }
-        );
-    
-       
-      }
-    );
-
-    
-   
+    getLatestId(100).then((res) => {
+      setlatestIDforrows((oldArray) => [...oldArray, res]);
+      getLatestId(1000).then((res) => {
+        setlatestIDforrows((oldArray) => [...oldArray, res]);
+        getLatestId(10000).then((res) => {
+          setlatestIDforrows((oldArray) => [...oldArray, res]);
+          getLatestId(100000).then((res) => {
+            setlatestIDforrows((oldArray) => [...oldArray, res]);
+          });
+        });
+      });
+    });
   }, []);
 
   const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
@@ -188,7 +172,6 @@ export default function Profile() {
           lotteryIDs1,
           ticketNum1
         );
-        console.log(transaction);
       } else if (rowNum === 2) {
         const transaction = await contract.claimMultiple(
           sizes2,
@@ -219,30 +202,30 @@ export default function Profile() {
     // const loopTilll = getLatestId(price);
     // loopTilll
     //   .then((res) => {
-         console.log("latestIDforrows[rowNum-1]:",latestIDforrows);
-        var loopchk = latestIDforrows[rowNum-1];
-        if (loopchk != 0){
-          loopchk = loopchk-1;
-        }
-        for (let i = loopchk; i > 0; i--) {
-          lotteries.push(
-            <Grid item xs={12} md={3}>
-              <LotteryTicket
-                price={price}
-                latestId={latestIDforrows[rowNum-1]}
-                updateSizes={updateSizes}
-                updateLotteryIDs={updateLotteryIDs}
-                updateTicketNum={updateTicketNum}
-                rowNum={rowNum}
-                getRewardValue={getRewardValue}
-              />
-            </Grid>
-          );
-         }
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // });
+    var loopchk = latestIDforrows[rowNum - 1];
+    if (loopchk != 0) {
+      loopchk = loopchk - 1;
+      for (let i = loopchk; i > 0; i--) {
+        lotteries.push(
+          <Grid item xs={12} md={3}>
+            <LotteryTicket
+              price={price}
+              latestId={latestIDforrows[rowNum - 1]}
+              updateSizes={updateSizes}
+              updateLotteryIDs={updateLotteryIDs}
+              updateTicketNum={updateTicketNum}
+              rowNum={rowNum}
+              getRewardValue={getRewardValue}
+            />
+          </Grid>
+        );
+      }
+    }
+
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
     return lotteries;
   };
@@ -261,7 +244,7 @@ export default function Profile() {
               </div>
               <div className="rewardprice">
                 <span className="rewardpricetext">
-                  {rewardValue[i]} &nbsp;
+                  {/* {rewardValue[i]} &nbsp; */}
                   <span>
                     <img
                       src={sideticket}
@@ -322,7 +305,7 @@ export default function Profile() {
               <Grid item xs={12} md={3}>
                 <LotteryTicket
                   price={price}
-                  latestId={getLatestId(price)}
+                  latestId={latestIDforrows[index]}
                   updateSizes={updateSizes}
                   updateLotteryIDs={updateLotteryIDs}
                   updateTicketNum={updateTicketNum}

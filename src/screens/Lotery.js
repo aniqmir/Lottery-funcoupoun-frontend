@@ -137,7 +137,16 @@ export default function NavTabs() {
       signer
     );
     const transaction = await contract.buyticket(param1, 1);
-    console.log("transaction", transaction);
+
+    console.log(transaction);
+    // if (transaction) {
+    //   const todoList = new web3.eth.Contract(
+    //     FUN_LOTTERY_ABI,
+    //     FUN_LOTTERY_ADDRESS
+    //   );
+    //   const lotteryCount = await todoList.methods.getTicketsPurchased().call();
+    //   setProgressValue(lotteryCount);
+    // }
   };
 
   const handleChange = (event, newValue) => {

@@ -40,10 +40,10 @@ function App() {
 
   const updateAddress = async () => {
     const web3 = window.web3;
-    const network = await web3.eth.net.getId();
 
     const accounts = await web3.eth.getAccounts();
     if (accounts !== undefined) {
+      localStorage.setItem("accounts", accounts);
       setAddress(accounts);
     }
   };
@@ -99,8 +99,6 @@ function App() {
       FUN_LOTTERY_ABI,
       signer
     );
-
-    console.log("signer", signer, contract, sizes, lotteryIDs, ticketNum);
 
     const transaction = await contract.claimMultiple(
       sizes,

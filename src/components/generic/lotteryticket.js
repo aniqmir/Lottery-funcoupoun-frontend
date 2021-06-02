@@ -26,8 +26,9 @@ const LotteryTicket = (props) => {
     updateTicketNum,
     rowNum,
     getRewardValue,
+    latestId,
   } = props;
-  const [latestId, setLatestId] = React.useState(0);
+  // const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
   const getLotteryId = async () => {
@@ -40,22 +41,20 @@ const LotteryTicket = (props) => {
       FUN_LOTTERY_ADDRESS
     );
 
-    var latestid = await contractFunLottery.methods
-      .getLottoId(price * 10)
-      .call();
+    // var latestid = await contractFunLottery.methods
+    //   .getLottoId(price * 10)
+    //   .call();
 
-    setLatestId(latestid);
+    // setLatestId(latestid);
 
-    const accounts = await web3.eth.getAccounts();
+    // const accounts = await web3.eth.getAccounts();
+    const accounts = localStorage.getItem("accounts");
 
+    console.log(accounts, price, "price");
     // for (let i = latestId; i > 0; i--) {
-    if (accounts.length > 0) {
+    if (accounts) {
       var lotteryCnt = await contractFunLottery.methods
-        .getUserTickets(
-          latestid,
-          accounts[0], //todo
-          price
-        )
+        .getUserTickets(latestId, accounts, price)
         .call();
 
       setLotteryCount(lotteryCnt);
@@ -63,18 +62,18 @@ const LotteryTicket = (props) => {
       for (let i = 0; i < lotteryCnt.length; i++) {
         const checkMapNavigator = await contractFunLottery.methods
           .userTickets(
-            accounts[0], // todo
+            accounts, // todo
             price,
             1,
             lotteryCnt[i]
           )
           .call();
-        getRewardValue(price, latestid, lotteryCnt[i], rowNum);
+        getRewardValue(price, latestId, lotteryCnt[i], rowNum);
 
         if (!checkMapNavigator.redeemed) {
           updateTicketNum(lotteryCnt[i], rowNum);
           updateSizes(price, rowNum);
-          updateLotteryIDs(latestid, rowNum);
+          updateLotteryIDs(latestId, rowNum);
         }
       }
     }
