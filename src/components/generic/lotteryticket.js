@@ -31,6 +31,7 @@ const LotteryTicket = (props) => {
   // const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
+  console.log(latestId, "latestId");
   const getLotteryId = async () => {
     //get Lottery ID here
 
@@ -50,9 +51,8 @@ const LotteryTicket = (props) => {
     // const accounts = await web3.eth.getAccounts();
     const accounts = localStorage.getItem("accounts");
 
-    console.log(accounts, price, "price");
     // for (let i = latestId; i > 0; i--) {
-    if (accounts) {
+    if (latestId && accounts) {
       var lotteryCnt = await contractFunLottery.methods
         .getUserTickets(latestId, accounts, price)
         .call();

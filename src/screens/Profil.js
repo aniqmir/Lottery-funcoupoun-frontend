@@ -147,10 +147,16 @@ export default function Profile() {
     var test = contractFunLottery.methods
       .calculateReward(price, lotteryid, ticketnum)
       .call(); // size,lotteryId,ticketnum
-    let newReward = currentValues[rowNum] + test;
-    currentValues[rowNum] = newReward;
-    setRewardValue(currentValues);
-    console.log(rewardValue, "rewardValue");
+
+    test
+      .then((res) => {
+        let newReward = currentValues[rowNum] + res;
+        currentValues[rowNum] = newReward;
+        setRewardValue(currentValues);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // row to claim
@@ -202,15 +208,16 @@ export default function Profile() {
     // const loopTilll = getLatestId(price);
     // loopTilll
     //   .then((res) => {
-    var loopchk = latestIDforrows[rowNum - 1];
+    var loopchk = latestIDforrows.length !== 0 && latestIDforrows[rowNum - 1];
     if (loopchk != 0) {
-      loopchk = loopchk - 1;
-      for (let i = loopchk; i > 0; i--) {
+      console.log(loopchk, "loopchk");
+
+      for (let i = loopchk - 1; i > 0; i--) {
         lotteries.push(
           <Grid item xs={12} md={3}>
             <LotteryTicket
               price={price}
-              latestId={latestIDforrows[rowNum - 1]}
+              latestId={latestIDforrows[i]}
               updateSizes={updateSizes}
               updateLotteryIDs={updateLotteryIDs}
               updateTicketNum={updateTicketNum}
@@ -300,21 +307,22 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid> */}
-          {[100, 1000, 10000, 100000].map((price, index) => {
-            return (
-              <Grid item xs={12} md={3}>
-                <LotteryTicket
-                  price={price}
-                  latestId={latestIDforrows[index]}
-                  updateSizes={updateSizes}
-                  updateLotteryIDs={updateLotteryIDs}
-                  updateTicketNum={updateTicketNum}
-                  rowNum={-1}
-                  getRewardValue={getRewardValue}
-                />
-              </Grid>
-            );
-          })}
+          {latestIDforrows.length !== 0 &&
+            [100, 1000, 10000, 100000].map((price, index) => {
+              return (
+                <Grid item xs={12} md={3}>
+                  <LotteryTicket
+                    price={price}
+                    latestId={latestIDforrows[index]}
+                    updateSizes={updateSizes}
+                    updateLotteryIDs={updateLotteryIDs}
+                    updateTicketNum={updateTicketNum}
+                    rowNum={-1}
+                    getRewardValue={getRewardValue}
+                  />
+                </Grid>
+              );
+            })}
           <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />
@@ -322,7 +330,7 @@ export default function Profile() {
           </Grid>
         </Grid>
         <Grid container spacing={3} item>
-          {makeRows()}
+          {latestIDforrows.length !== 0 && makeRows()}
         </Grid>
       </Grid>
     </Container>
