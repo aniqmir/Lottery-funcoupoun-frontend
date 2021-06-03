@@ -138,7 +138,6 @@ export default function NavTabs() {
     );
     const transaction = await contract.buyticket(param1, 1);
 
-    console.log(transaction);
     // if (transaction) {
     //   const todoList = new web3.eth.Contract(
     //     FUN_LOTTERY_ABI,

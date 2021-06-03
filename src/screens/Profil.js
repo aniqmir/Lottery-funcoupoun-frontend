@@ -65,6 +65,11 @@ export default function Profile() {
   const [ticketNum3, setticketNum3] = React.useState([]);
   const [ticketNum4, setticketNum4] = React.useState([]);
 
+  const [rewardValue1, setRewardValue1] = React.useState(0);
+  const [rewardValue2, setRewardValue2] = React.useState(0);
+  const [rewardValue3, setRewardValue3] = React.useState(0);
+  const [rewardValue4, setRewardValue4] = React.useState(0);
+
   var rows = [];
   const [allLotteries, setAllLotteries] = React.useState([]);
 
@@ -142,6 +147,7 @@ export default function Profile() {
   const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
   // Rewards  // todo
   const getRewardValue = (price, lotteryid, ticketnum, rowNum) => {
+    console.log(price, lotteryid, ticketnum, "price");
     //reward value function
     const currentValues = rewardValue;
     var test = contractFunLottery.methods
@@ -151,8 +157,18 @@ export default function Profile() {
     test
       .then((res) => {
         let newReward = res / 100000000;
-        currentValues[rowNum] = newReward;
-        setRewardValue(currentValues);
+        if (rowNum === -1) {
+          return;
+        }
+        if (rowNum === 1) {
+          setRewardValue1(newReward);
+        } else if (rowNum === 2) {
+          setRewardValue2(newReward);
+        } else if (rowNum === 3) {
+          setRewardValue3(newReward);
+        } else {
+          setRewardValue4(newReward);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -205,15 +221,7 @@ export default function Profile() {
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
 
-    console.log(loopTill, "loopTill");
-    // const loopTilll = getLatestId(price);
-    // loopTilll
-    //   .then((res) => {
-
-    var loopchk = latestIDforrows.length !== 0 && latestIDforrows[rowNum - 1];
-    if (loopchk != 0) {
-      console.log(loopchk, "loopchk");
-
+    if (loopTill !== 0) {
       for (let i = loopTill - 1; i > 0; i--) {
         lotteries.push(
           <Grid item xs={12} md={3}>
@@ -253,7 +261,14 @@ export default function Profile() {
               </div>
               <div className="rewardprice">
                 <span className="rewardpricetext">
-                  {rewardValue[i]} &nbsp;
+                  {i === 0
+                    ? rewardValue1
+                    : i === 1
+                    ? rewardValue2
+                    : i === 2
+                    ? rewardValue3
+                    : rewardValue4}
+                  &nbsp;
                   <span>
                     <img
                       src={sideticket}

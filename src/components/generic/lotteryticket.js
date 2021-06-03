@@ -31,7 +31,6 @@ const LotteryTicket = (props) => {
   // const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
-  console.log(latestId, "latestId");
   const getLotteryId = async () => {
     //get Lottery ID here
 

@@ -106,10 +106,8 @@ function App() {
       ticketNum
     );
 
-    console.log("transaction", transaction);
     //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
     if (!!transaction.hash) {
-      console.log("transaction:", transaction);
     }
     // wait for 5 seconds
     await web3.eth.getTransactionReceipt(transaction.hash, (err, txReceipt) =>
