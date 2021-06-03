@@ -205,21 +205,21 @@ export default function Profile() {
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
 
+    console.log(loopTill, "loopTill");
     // const loopTilll = getLatestId(price);
     // loopTilll
     //   .then((res) => {
 
-   
     var loopchk = latestIDforrows.length !== 0 && latestIDforrows[rowNum - 1];
     if (loopchk != 0) {
       console.log(loopchk, "loopchk");
 
-      for (let i = loopchk - 1; i > 0; i--) {
+      for (let i = loopTill - 1; i > 0; i--) {
         lotteries.push(
           <Grid item xs={12} md={3}>
             <LotteryTicket
               price={price}
-              latestId={latestIDforrows[loopTill]-1}
+              latestId={i}
               updateSizes={updateSizes}
               updateLotteryIDs={updateLotteryIDs}
               updateTicketNum={updateTicketNum}
@@ -280,7 +280,7 @@ export default function Profile() {
             <p className="headtext">Tirages en Course</p>
           </Grid>
 
-          {makeLotteries(i, prices[i], i + 1)}
+          {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
         </>
       );
     }
