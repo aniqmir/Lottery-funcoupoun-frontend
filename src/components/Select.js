@@ -65,7 +65,10 @@ export default function ControlledOpenSelect(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    if (event.target.value == "USD" || event.target.value == "BNB"){
+      console.log("change",event.target.value);
+      props.onChangeFilter(event.target.value);
+    }
   };
 
   const handleClose = () => {
@@ -93,7 +96,7 @@ export default function ControlledOpenSelect(props) {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={options[0].name}
+          value={props.selected}
           onChange={handleChange}
           variant="outlined"
           classes={{
