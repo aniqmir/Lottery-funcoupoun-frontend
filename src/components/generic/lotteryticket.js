@@ -28,6 +28,8 @@ const LotteryTicket = (props) => {
     getRewardValue,
     latestId,
   } = props;
+
+  console.log(latestId, "latestIdlatestId");
   // const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
@@ -63,12 +65,23 @@ const LotteryTicket = (props) => {
           .userTickets(
             accounts, // todo
             price,
-            1,
+            latestId,
             lotteryCnt[i]
           )
           .call();
 
-        if (!checkMapNavigator.redeemed) {
+        getRewardValue(
+          price,
+          latestId,
+          lotteryCnt[i],
+          rowNum,
+          lotteryCnt.length,
+          i
+        );
+
+        if (checkMapNavigator.redeemed) {
+          console.log("redeemed");
+        } else {
           setLotteryCount((oldArray) => [...oldArray, lotteryCnt[i]]);
           updateTicketNum(lotteryCnt[i], rowNum);
           updateSizes(price, rowNum);
@@ -76,16 +89,16 @@ const LotteryTicket = (props) => {
         }
       }
 
-      for (let y = 0; y < lotteryCnt.length; y++) {
-        getRewardValue(
-          price,
-          latestId,
-          lotteryCnt[y],
-          rowNum,
-          lotteryCnt.length,
-          y
-        );
-      }
+      // for (let y = 0; y < lotteryCnt.length; y++) {
+      //   getRewardValue(
+      //     price,
+      //     latestId,
+      //     lotteryCnt[y],
+      //     rowNum,
+      //     lotteryCnt.length,
+      //     y
+      //   );
+      // }
     }
   };
 

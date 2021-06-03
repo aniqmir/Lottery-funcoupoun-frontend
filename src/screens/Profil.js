@@ -8,7 +8,7 @@ import downarrows from "../assets/downarrows.png";
 import sideticket from "../assets/sideticket.png";
 
 import "./screens.css";
-import { Container } from "@material-ui/core";
+import { CircularProgress, Container } from "@material-ui/core";
 import Web3 from "web3";
 
 import {
@@ -69,6 +69,11 @@ export default function Profile() {
   const [rewardValue2, setRewardValue2] = React.useState(0);
   const [rewardValue3, setRewardValue3] = React.useState(0);
   const [rewardValue4, setRewardValue4] = React.useState(0);
+
+  const [rewardPrevValue1, setRewardPrevValue1] = React.useState(0);
+  const [rewardPrevValue2, setRewardPrevValue2] = React.useState(0);
+  const [rewardPrevValue3, setRewardPrevValue3] = React.useState(0);
+  const [rewardPrevValue4, setRewardPrevValue4] = React.useState(0);
 
   var rows = [];
   const [allLotteries, setAllLotteries] = React.useState([]);
@@ -152,7 +157,6 @@ export default function Profile() {
     len,
     currentVal
   ) => {
-    console.log(len, currentVal, "currentValcurrentVal");
     var test = contractFunLottery.methods
       .calculateReward(price, lotteryid, ticketnum)
       .call();
@@ -163,14 +167,30 @@ export default function Profile() {
         if (rowNum === -1) {
           return;
         }
-        if (rowNum === 1 && len - 1 === currentVal) {
-          setRewardValue1(newReward);
-        } else if (rowNum === 2 && len - 1 === currentVal) {
-          setRewardValue2(newReward);
-        } else if (rowNum === 3 && len - 1 === currentVal) {
-          setRewardValue3(newReward);
-        } else if (rowNum === 4 && len - 1 === currentVal) {
-          setRewardValue4(newReward);
+        if (rowNum === 1) {
+          if (len - 1 === currentVal) {
+            setRewardValue1(rewardPrevValue1 + newReward);
+          } else {
+            setRewardPrevValue1(rewardPrevValue1 + newReward);
+          }
+        } else if (rowNum === 2) {
+          if (len - 1 === currentVal) {
+            setRewardValue2(rewardPrevValue2 + newReward);
+          } else {
+            setRewardPrevValue2(rewardPrevValue2 + newReward);
+          }
+        } else if (rowNum === 3) {
+          if (len - 1 === currentVal) {
+            setRewardValue3(rewardPrevValue3 + newReward);
+          } else {
+            setRewardPrevValue3(rewardPrevValue3 + newReward);
+          }
+        } else if (rowNum === 4) {
+          if (len - 1 === currentVal) {
+            setRewardValue4(rewardPrevValue4 + newReward);
+          } else {
+            setRewardPrevValue4(rewardPrevValue4 + newReward);
+          }
         } else {
           console.log("nothing");
         }
@@ -267,12 +287,12 @@ export default function Profile() {
               <div className="rewardprice">
                 <span className="rewardpricetext">
                   {i === 0
-                    ? rewardValue1
+                    ? rewardValue1.toFixed(2)
                     : i === 1
-                    ? rewardValue2
+                    ? rewardValue2.toFixed(2)
                     : i === 2
-                    ? rewardValue3
-                    : rewardValue4}
+                    ? rewardValue3.toFixed(2)
+                    : rewardValue4.toFixed(2)}
                   &nbsp;
                   <span>
                     <img
@@ -329,7 +349,7 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid> */}
-          {latestIDforrows.length !== 0 &&
+          {latestIDforrows.length !== 0 ? (
             [100, 1000, 10000, 100000].map((price, index) => {
               return (
                 <Grid item xs={12} md={3}>
@@ -344,7 +364,16 @@ export default function Profile() {
                   />
                 </Grid>
               );
-            })}
+            })
+          ) : (
+            <div
+              style={{
+                height: "100vh",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
           <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />
@@ -352,7 +381,7 @@ export default function Profile() {
           </Grid>
         </Grid>
         <Grid container spacing={3} item>
-          {latestIDforrows.length !== 0 && makeRows()}
+          {latestIDforrows.length !== 0 ? makeRows() : <div></div>}
         </Grid>
       </Grid>
     </Container>
