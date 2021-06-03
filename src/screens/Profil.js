@@ -155,15 +155,17 @@ export default function Profile() {
     ticketnum,
     rowNum,
     len,
-    currentVal
+    currentVal,
+    res
   ) => {
-    var test = contractFunLottery.methods
-      .calculateReward(price, lotteryid, ticketnum)
-      .call();
 
-    test
-      .then((res) => {
+    // var test = contractFunLottery.methods
+    //   .calculateReward(price, lotteryid, ticketnum)
+    //   .call();
+    // test
+    //   .then((res) => {
         let newReward = res / 100000000;
+
         if (rowNum === -1) {
           return;
         }
@@ -171,7 +173,7 @@ export default function Profile() {
           if (len - 1 === currentVal) {
             setRewardValue1(rewardPrevValue1 + newReward);
           } else {
-            setRewardPrevValue1(rewardPrevValue1 + newReward);
+            setRewardPrevValue1(prev => prev + newReward);
           }
         } else if (rowNum === 2) {
           if (len - 1 === currentVal) {
@@ -194,10 +196,10 @@ export default function Profile() {
         } else {
           console.log("nothing");
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // });
   };
 
   // row to claim

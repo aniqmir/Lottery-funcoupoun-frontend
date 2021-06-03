@@ -70,14 +70,24 @@ const LotteryTicket = (props) => {
           )
           .call();
 
+          var test = contractFunLottery.methods
+          .calculateReward(price, latestId,   lotteryCnt[i])
+          .call();
+          test.then((res)=>{
+            console.log(res,'reward herer')
+            
         getRewardValue(
           price,
           latestId,
           lotteryCnt[i],
           rowNum,
           lotteryCnt.length,
-          i
+          i,
+          res
         );
+          })
+
+
 
         if (checkMapNavigator.redeemed) {
           console.log("redeemed");
