@@ -144,35 +144,38 @@ export default function Profile() {
     });
   }, []);
 
-  const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
-  // Rewards  // todo
-  const getRewardValue = (price, lotteryid, ticketnum, rowNum) => {
-    console.log(price, lotteryid, ticketnum, "price");
-    //reward value function
-    const currentValues = rewardValue;
-    var test = contractFunLottery.methods
-      .calculateReward(price, lotteryid, ticketnum)
-      .call(); // size,lotteryId,ticketnum
+  const getRewardValue = (price, lotteryid, ticketnum, rowNum, len) => {
+    const accounts = localStorage.getItem("accounts");
+    var lotteryCnt = contractFunLottery.methods
+      .getUserTickets(lotteryid, accounts, price)
+      .call();
+    lotteryCnt.then((res) => {
+      if (res.length === len) {
+        var test = contractFunLottery.methods
+          .calculateReward(price, lotteryid, ticketnum)
+          .call();
 
-    test
-      .then((res) => {
-        let newReward = res / 100000000;
-        if (rowNum === -1) {
-          return;
-        }
-        if (rowNum === 1) {
-          setRewardValue1(newReward);
-        } else if (rowNum === 2) {
-          setRewardValue2(newReward);
-        } else if (rowNum === 3) {
-          setRewardValue3(newReward);
-        } else {
-          setRewardValue4(newReward);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        test
+          .then((res) => {
+            let newReward = res / 100000000;
+            if (rowNum === -1) {
+              return;
+            }
+            if (rowNum === 1) {
+              setRewardValue1(newReward);
+            } else if (rowNum === 2) {
+              setRewardValue2(newReward);
+            } else if (rowNum === 3) {
+              setRewardValue3(newReward);
+            } else {
+              setRewardValue4(newReward);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
   };
 
   // row to claim

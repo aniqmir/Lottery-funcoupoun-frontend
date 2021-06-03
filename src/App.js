@@ -81,39 +81,39 @@ function App() {
     }
   };
 
-  const claimMultiple = async () => {
-    const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+  // const claimMultiple = async () => {
+  //   const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
-    var sizes = [100]; //size  100, 100, 100 , 1000
+  //   var sizes = [100]; //size  100, 100, 100 , 1000
 
-    var lotteryIDs = [1]; // latestID  1, 1, 1 , 1
+  //   var lotteryIDs = [1]; // latestID  1, 1, 1 , 1
 
-    var ticketNum = []; // All number of Lottery array  1,4, 5 , 12
+  //   var ticketNum = []; // All number of Lottery array  1,4, 5 , 12
 
-    web3.eth.handleRevert = true;
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+  //   web3.eth.handleRevert = true;
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
 
-    const contract = new ethers.Contract(
-      FUN_LOTTERY_ADDRESS,
-      FUN_LOTTERY_ABI,
-      signer
-    );
+  //   const contract = new ethers.Contract(
+  //     FUN_LOTTERY_ADDRESS,
+  //     FUN_LOTTERY_ABI,
+  //     signer
+  //   );
 
-    const transaction = await contract.claimMultiple(
-      sizes,
-      lotteryIDs,
-      ticketNum
-    );
+  //   const transaction = await contract.claimMultiple(
+  //     sizes,
+  //     lotteryIDs,
+  //     ticketNum
+  //   );
 
-    //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
-    if (!!transaction.hash) {
-    }
-    // wait for 5 seconds
-    await web3.eth.getTransactionReceipt(transaction.hash, (err, txReceipt) =>
-      console.log("Err:", err, "txReciept:", txReceipt)
-    );
-  };
+  //   //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
+  //   if (!!transaction.hash) {
+  //   }
+  //   // wait for 5 seconds
+  //   await web3.eth.getTransactionReceipt(transaction.hash, (err, txReceipt) =>
+  //     console.log("Err:", err, "txReciept:", txReceipt)
+  //   );
+  // };
 
   return (
     <div>
