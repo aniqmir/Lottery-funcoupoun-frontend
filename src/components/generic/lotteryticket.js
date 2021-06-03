@@ -56,7 +56,7 @@ const LotteryTicket = (props) => {
         .getUserTickets(latestId, accounts, price)
         .call();
 
-      setLotteryCount(lotteryCnt);
+      // setLotteryCount(lotteryCnt);
 
       for (let i = 0; i < lotteryCnt.length; i++) {
         const checkMapNavigator = await contractFunLottery.methods
@@ -70,6 +70,7 @@ const LotteryTicket = (props) => {
         getRewardValue(price, latestId, lotteryCnt[i], rowNum);
 
         if (!checkMapNavigator.redeemed) {
+          setLotteryCount((oldArray) => [...oldArray, lotteryCnt[i]]);
           updateTicketNum(lotteryCnt[i], rowNum);
           updateSizes(price, rowNum);
           updateLotteryIDs(latestId, rowNum);
