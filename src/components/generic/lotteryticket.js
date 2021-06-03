@@ -28,10 +28,11 @@ const LotteryTicket = (props) => {
     getRewardValue,
     latestId,
   } = props;
+
+  console.log(latestId, "latestIdlatestId");
   // const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
-  console.log(latestId, "latestId");
   const getLotteryId = async () => {
     //get Lottery ID here
 
@@ -57,24 +58,57 @@ const LotteryTicket = (props) => {
         .getUserTickets(latestId, accounts, price)
         .call();
 
+      // setLotteryCount(lotteryCnt);
+
       for (let i = 0; i < lotteryCnt.length; i++) {
         const checkMapNavigator = await contractFunLottery.methods
           .userTickets(
             accounts, // todo
             price,
-            1,
+            latestId,
             lotteryCnt[i]
           )
           .call();
-        getRewardValue(price, latestId, lotteryCnt[i], rowNum);
 
-        if (!checkMapNavigator.redeemed) {
-          setLotteryCount(lotteryCnt);
+          var test = contractFunLottery.methods
+          .calculateReward(price, latestId,   lotteryCnt[i])
+          .call();
+          test.then((res)=>{
+            console.log(res,'reward herer')
+            
+        getRewardValue(
+          price,
+          latestId,
+          lotteryCnt[i],
+          rowNum,
+          lotteryCnt.length,
+          i,
+          res
+        );
+          })
+
+
+
+        if (checkMapNavigator.redeemed) {
+          console.log("redeemed");
+        } else {
+          setLotteryCount((oldArray) => [...oldArray, lotteryCnt[i]]);
           updateTicketNum(lotteryCnt[i], rowNum);
           updateSizes(price, rowNum);
           updateLotteryIDs(latestId, rowNum);
         }
       }
+
+      // for (let y = 0; y < lotteryCnt.length; y++) {
+      //   getRewardValue(
+      //     price,
+      //     latestId,
+      //     lotteryCnt[y],
+      //     rowNum,
+      //     lotteryCnt.length,
+      //     y
+      //   );
+      // }
     }
   };
 

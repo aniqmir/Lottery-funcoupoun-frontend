@@ -8,7 +8,7 @@ import downarrows from "../assets/downarrows.png";
 import sideticket from "../assets/sideticket.png";
 
 import "./screens.css";
-import { Container } from "@material-ui/core";
+import { CircularProgress, Container } from "@material-ui/core";
 import Web3 from "web3";
 
 import {
@@ -64,6 +64,16 @@ export default function Profile() {
   const [ticketNum2, setticketNum2] = React.useState([]);
   const [ticketNum3, setticketNum3] = React.useState([]);
   const [ticketNum4, setticketNum4] = React.useState([]);
+
+  const [rewardValue1, setRewardValue1] = React.useState(0);
+  const [rewardValue2, setRewardValue2] = React.useState(0);
+  const [rewardValue3, setRewardValue3] = React.useState(0);
+  const [rewardValue4, setRewardValue4] = React.useState(0);
+
+  const [rewardPrevValue1, setRewardPrevValue1] = React.useState(0);
+  const [rewardPrevValue2, setRewardPrevValue2] = React.useState(0);
+  const [rewardPrevValue3, setRewardPrevValue3] = React.useState(0);
+  const [rewardPrevValue4, setRewardPrevValue4] = React.useState(0);
 
   var rows = [];
   const [allLotteries, setAllLotteries] = React.useState([]);
@@ -139,24 +149,57 @@ export default function Profile() {
     });
   }, []);
 
-  const [rewardValue, setRewardValue] = React.useState([0, 0, 0, 0]);
-  // Rewards  // todo
-  const getRewardValue = (price, lotteryid, ticketnum, rowNum) => {
-    //reward value function
-    const currentValues = rewardValue;
-    var test = contractFunLottery.methods
-      .calculateReward(price, lotteryid, ticketnum)
-      .call(); // size,lotteryId,ticketnum
+  const getRewardValue = (
+    price,
+    lotteryid,
+    ticketnum,
+    rowNum,
+    len,
+    currentVal,
+    res
+  ) => {
 
-    test
-      .then((res) => {
+    // var test = contractFunLottery.methods
+    //   .calculateReward(price, lotteryid, ticketnum)
+    //   .call();
+    // test
+    //   .then((res) => {
         let newReward = res / 100000000;
-        currentValues[rowNum] = newReward;
-        setRewardValue(currentValues);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+        if (rowNum === -1) {
+          return;
+        }
+        if (rowNum === 1) {
+          if (len - 1 === currentVal) {
+            setRewardValue1(rewardPrevValue1 + newReward);
+          } else {
+            setRewardPrevValue1(prev => prev + newReward);
+          }
+        } else if (rowNum === 2) {
+          if (len - 1 === currentVal) {
+            setRewardValue2(rewardPrevValue2 + newReward);
+          } else {
+            setRewardPrevValue2(rewardPrevValue2 + newReward);
+          }
+        } else if (rowNum === 3) {
+          if (len - 1 === currentVal) {
+            setRewardValue3(rewardPrevValue3 + newReward);
+          } else {
+            setRewardPrevValue3(rewardPrevValue3 + newReward);
+          }
+        } else if (rowNum === 4) {
+          if (len - 1 === currentVal) {
+            setRewardValue4(rewardPrevValue4 + newReward);
+          } else {
+            setRewardPrevValue4(rewardPrevValue4 + newReward);
+          }
+        } else {
+          console.log("nothing");
+        }
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // });
   };
 
   // row to claim
@@ -205,21 +248,13 @@ export default function Profile() {
   const makeLotteries = (loopTill, price, rowNum) => {
     const lotteries = [];
 
-    // const loopTilll = getLatestId(price);
-    // loopTilll
-    //   .then((res) => {
-
-   
-    var loopchk = latestIDforrows.length !== 0 && latestIDforrows[rowNum - 1];
-    if (loopchk != 0) {
-      console.log(loopchk, "loopchk");
-
-      for (let i = loopchk - 1; i > 0; i--) {
+    if (loopTill !== 0) {
+      for (let i = loopTill - 1; i > 0; i--) {
         lotteries.push(
           <Grid item xs={12} md={3}>
             <LotteryTicket
               price={price}
-              latestId={latestIDforrows[loopTill]-1}
+              latestId={i}
               updateSizes={updateSizes}
               updateLotteryIDs={updateLotteryIDs}
               updateTicketNum={updateTicketNum}
@@ -253,7 +288,14 @@ export default function Profile() {
               </div>
               <div className="rewardprice">
                 <span className="rewardpricetext">
-                  {rewardValue[i]} &nbsp;
+                  {i === 0
+                    ? rewardValue1.toFixed(2)
+                    : i === 1
+                    ? rewardValue2.toFixed(2)
+                    : i === 2
+                    ? rewardValue3.toFixed(2)
+                    : rewardValue4.toFixed(2)}
+                  &nbsp;
                   <span>
                     <img
                       src={sideticket}
@@ -280,7 +322,7 @@ export default function Profile() {
             <p className="headtext">Tirages en Course</p>
           </Grid>
 
-          {makeLotteries(i, prices[i], i + 1)}
+          {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
         </>
       );
     }
@@ -309,7 +351,7 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid> */}
-          {latestIDforrows.length !== 0 &&
+          {latestIDforrows.length !== 0 ? (
             [100, 1000, 10000, 100000].map((price, index) => {
               return (
                 <Grid item xs={12} md={3}>
@@ -324,7 +366,16 @@ export default function Profile() {
                   />
                 </Grid>
               );
-            })}
+            })
+          ) : (
+            <div
+              style={{
+                height: "100vh",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
           <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />
@@ -332,7 +383,7 @@ export default function Profile() {
           </Grid>
         </Grid>
         <Grid container spacing={3} item>
-          {latestIDforrows.length !== 0 && makeRows()}
+          {latestIDforrows.length !== 0 ? makeRows() : <div></div>}
         </Grid>
       </Grid>
     </Container>
