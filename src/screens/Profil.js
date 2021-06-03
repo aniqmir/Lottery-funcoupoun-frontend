@@ -144,38 +144,40 @@ export default function Profile() {
     });
   }, []);
 
-  const getRewardValue = (price, lotteryid, ticketnum, rowNum, len) => {
-    const accounts = localStorage.getItem("accounts");
-    var lotteryCnt = contractFunLottery.methods
-      .getUserTickets(lotteryid, accounts, price)
+  const getRewardValue = (
+    price,
+    lotteryid,
+    ticketnum,
+    rowNum,
+    len,
+    currentVal
+  ) => {
+    console.log(len, currentVal, "currentValcurrentVal");
+    var test = contractFunLottery.methods
+      .calculateReward(price, lotteryid, ticketnum)
       .call();
-    lotteryCnt.then((res) => {
-      if (res.length === len) {
-        var test = contractFunLottery.methods
-          .calculateReward(price, lotteryid, ticketnum)
-          .call();
 
-        test
-          .then((res) => {
-            let newReward = res / 100000000;
-            if (rowNum === -1) {
-              return;
-            }
-            if (rowNum === 1) {
-              setRewardValue1(newReward);
-            } else if (rowNum === 2) {
-              setRewardValue2(newReward);
-            } else if (rowNum === 3) {
-              setRewardValue3(newReward);
-            } else {
-              setRewardValue4(newReward);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    });
+    test
+      .then((res) => {
+        let newReward = res / 100000000;
+        if (rowNum === -1) {
+          return;
+        }
+        if (rowNum === 1 && len - 1 === currentVal) {
+          setRewardValue1(newReward);
+        } else if (rowNum === 2 && len - 1 === currentVal) {
+          setRewardValue2(newReward);
+        } else if (rowNum === 3 && len - 1 === currentVal) {
+          setRewardValue3(newReward);
+        } else if (rowNum === 4 && len - 1 === currentVal) {
+          setRewardValue4(newReward);
+        } else {
+          console.log("nothing");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // row to claim

@@ -82,7 +82,8 @@ const LotteryTicket = (props) => {
           latestId,
           lotteryCnt[y],
           rowNum,
-          lotteryCnt.length
+          lotteryCnt.length,
+          y
         );
       }
     }
