@@ -5,6 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 import sideticket from "../assets/sideticket.png";
+import { SelectAllRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   quantityRoot: {
@@ -63,9 +64,11 @@ export default function ControlledOpenSelect(props) {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const { options, selected, selectValue } = props;
 
   const handleChange = (event) => {
     setAge(event.target.value);
+    selected(event.target.value);
   };
 
   const handleClose = () => {
@@ -75,8 +78,6 @@ export default function ControlledOpenSelect(props) {
   const handleOpen = () => {
     setOpen(true);
   };
-
-  const { options } = props;
 
   return (
     <div>
@@ -93,7 +94,7 @@ export default function ControlledOpenSelect(props) {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={options[0].name}
+          value={selectValue}
           onChange={handleChange}
           variant="outlined"
           classes={{

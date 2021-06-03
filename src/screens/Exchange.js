@@ -42,6 +42,13 @@ export default function SimpleCard() {
     minutes: "00",
     seconds: "00",
   });
+
+  const [fromValue, setFromValue] = useState("");
+  const [toValue, setToValue] = useState("");
+
+  const [fromSelected, setFromSelected] = useState("USD");
+  const [toSelected, setToSelected] = useState("FUNC");
+
   useEffect(() => {
     //timer logic
     var countDownDate = new Date("Jul 5, 2021 15:37:25").getTime();
@@ -72,6 +79,18 @@ export default function SimpleCard() {
     };
   }, []);
 
+  const fromSelectedHandle = (value) => {
+    setFromSelected(value);
+  };
+
+  const toSelectedHandle = (value) => {
+    setToSelected(value);
+  };
+
+  const unlock = () => {
+    //unlock logic here
+    console.log(fromValue, toValue, fromSelected, toSelected, "allValues");
+  };
   return (
     <div style={{ minHeight: "84.5vh" }}>
       <div className="timer">
@@ -130,7 +149,11 @@ export default function SimpleCard() {
                       From
                     </Grid>
                     <Grid item xs={5}>
-                      <input className="fromInput" placeholder="0.0" />
+                      <input
+                        className="fromInput"
+                        onChange={(e) => setFromValue(e.target.value)}
+                        placeholder="0.0"
+                      />
                     </Grid>
                     <Grid item xs={7} container spacing={4}>
                       {/* <Grid item xs={2}>
@@ -150,6 +173,8 @@ export default function SimpleCard() {
                         <div style={{ marginLeft: "60px" }}>
                           <Select
                             options={[{ name: "USD" }, { name: "BNB" }]}
+                            selected={fromSelectedHandle}
+                            selectValue={fromSelected}
                           />
                         </div>
                       </Grid>
@@ -171,7 +196,11 @@ export default function SimpleCard() {
                       To
                     </Grid>
                     <Grid item xs={5}>
-                      <input className="fromInput" placeholder="0.0" />
+                      <input
+                        className="fromInput"
+                        onChange={(e) => setToValue(e.target.value)}
+                        placeholder="0.0"
+                      />
                     </Grid>
                     <Grid item xs={7} container spacing={4}>
                       {/* <Grid item xs={2}>
@@ -189,7 +218,11 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select options={[{ name: "FUNC" }]} />
+                          <Select
+                            options={[{ name: "FUNC" }]}
+                            selected={toSelectedHandle}
+                            selectValue={toSelected}
+                          />
                         </div>
                       </Grid>
                     </Grid>
@@ -199,7 +232,9 @@ export default function SimpleCard() {
             </Grid>
           </CardContent>
           <CardActions>
-            <button className="unlockButton">Unlock Button</button>
+            <button onClick={unlock} className="unlockButton">
+              Unlock Button
+            </button>
           </CardActions>
         </Card>
       </div>
