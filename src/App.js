@@ -50,15 +50,19 @@ function App() {
     );
 
     const accounts = await web3.eth.getAccounts();
+
     if (accounts !== undefined) {
       localStorage.setItem("accounts", accounts);
       setAddress(accounts);
 
       //user gain here
-      const userGainer = await contractFunLottery.methods
-        .userGain(accounts[0])
-        .call();
-      setUserGainValue(userGainer);
+      console.log(accounts, "asasasas");
+      if (accounts.length !== 0) {
+        const userGainer = await contractFunLottery.methods
+          .userGain(accounts[0])
+          .call();
+        setUserGainValue(userGainer / 100000000);
+      }
     }
   };
 
