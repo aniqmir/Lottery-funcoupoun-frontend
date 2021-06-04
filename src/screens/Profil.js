@@ -70,13 +70,12 @@ export default function Profile() {
   const [rewardValue3, setRewardValue3] = React.useState(0);
   const [rewardValue4, setRewardValue4] = React.useState(0);
 
-  const [rewardPrevValue1, setRewardPrevValue1] = React.useState(0);
-  const [rewardPrevValue2, setRewardPrevValue2] = React.useState(0);
-  const [rewardPrevValue3, setRewardPrevValue3] = React.useState(0);
-  const [rewardPrevValue4, setRewardPrevValue4] = React.useState(0);
+  const [rewardPrevValue1, setRewardPrevValue1] = React.useState([0]);
+  const [rewardPrevValue2, setRewardPrevValue2] = React.useState([0]);
+  const [rewardPrevValue3, setRewardPrevValue3] = React.useState([0]);
+  const [rewardPrevValue4, setRewardPrevValue4] = React.useState([0]);
 
   var rows = [];
-  const [allLotteries, setAllLotteries] = React.useState([]);
 
   const updateSizes = (val, rowNum) => {
     if (rowNum === -1) {
@@ -105,6 +104,22 @@ export default function Profile() {
       setlotteryIDs3((oldArray) => [...oldArray, val]);
     } else {
       setlotteryIDs4((oldArray) => [...oldArray, val]);
+    }
+  };
+
+  const updateRewardValues = (rowNum, len, currentVal, res) => {
+    let newReward = res / 100000000;
+    if (rowNum === -1) {
+      return;
+    }
+    if (rowNum === 1) {
+      setRewardPrevValue1((oldArray) => [...oldArray, newReward]);
+    } else if (rowNum === 2) {
+      setRewardPrevValue2((oldArray) => [...oldArray, newReward]);
+    } else if (rowNum === 3) {
+      setRewardPrevValue3((oldArray) => [...oldArray, newReward]);
+    } else {
+      setRewardPrevValue4((oldArray) => [...oldArray, newReward]);
     }
   };
 
@@ -158,48 +173,42 @@ export default function Profile() {
     currentVal,
     res
   ) => {
+    let newReward = res / 100000000;
 
-    // var test = contractFunLottery.methods
-    //   .calculateReward(price, lotteryid, ticketnum)
-    //   .call();
-    // test
-    //   .then((res) => {
-        let newReward = res / 100000000;
-
-        if (rowNum === -1) {
-          return;
-        }
-        if (rowNum === 1) {
-          if (len - 1 === currentVal) {
-            setRewardValue1(rewardPrevValue1 + newReward);
-          } else {
-            setRewardPrevValue1(prev => prev + newReward);
-          }
-        } else if (rowNum === 2) {
-          if (len - 1 === currentVal) {
-            setRewardValue2(rewardPrevValue2 + newReward);
-          } else {
-            setRewardPrevValue2(rewardPrevValue2 + newReward);
-          }
-        } else if (rowNum === 3) {
-          if (len - 1 === currentVal) {
-            setRewardValue3(rewardPrevValue3 + newReward);
-          } else {
-            setRewardPrevValue3(rewardPrevValue3 + newReward);
-          }
-        } else if (rowNum === 4) {
-          if (len - 1 === currentVal) {
-            setRewardValue4(rewardPrevValue4 + newReward);
-          } else {
-            setRewardPrevValue4(rewardPrevValue4 + newReward);
-          }
-        } else {
-          console.log("nothing");
-        }
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // });
+    if (rowNum === -1) {
+      return;
+    }
+    if (rowNum === 1) {
+      if (len - 1 === currentVal) {
+        // setRewardValue1(rewardPrevValue1.reduce((a,b)=>a+b) + newReward);
+      } else {
+        setRewardPrevValue1((prev) => [...prev, newReward]);
+      }
+    } else if (rowNum === 2) {
+      if (len - 1 === currentVal) {
+        setRewardValue2(rewardPrevValue2 + newReward);
+      } else {
+        setRewardPrevValue2((prev) => prev + newReward);
+      }
+    } else if (rowNum === 3) {
+      if (len - 1 === currentVal) {
+        setRewardValue3(rewardPrevValue3 + newReward);
+      } else {
+        setRewardPrevValue3((prev) => prev + newReward);
+      }
+    } else if (rowNum === 4) {
+      if (len - 1 === currentVal) {
+        setRewardValue4(rewardPrevValue4 + newReward);
+      } else {
+        setRewardPrevValue4((prev) => prev + newReward);
+      }
+    } else {
+      console.log("nothing");
+    }
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   };
 
   // row to claim
@@ -259,7 +268,7 @@ export default function Profile() {
               updateLotteryIDs={updateLotteryIDs}
               updateTicketNum={updateTicketNum}
               rowNum={rowNum}
-              getRewardValue={getRewardValue}
+              updateRewardValues={updateRewardValues}
             />
           </Grid>
         );
@@ -289,12 +298,12 @@ export default function Profile() {
               <div className="rewardprice">
                 <span className="rewardpricetext">
                   {i === 0
-                    ? rewardValue1.toFixed(2)
+                    ? rewardPrevValue1.reduce((a, b) => a + b).toFixed(2)
                     : i === 1
-                    ? rewardValue2.toFixed(2)
+                    ? rewardPrevValue2.reduce((a, b) => a + b).toFixed(2)
                     : i === 2
-                    ? rewardValue3.toFixed(2)
-                    : rewardValue4.toFixed(2)}
+                    ? rewardPrevValue3.reduce((a, b) => a + b).toFixed(2)
+                    : rewardPrevValue4.reduce((a, b) => a + b).toFixed(2)}
                   &nbsp;
                   <span>
                     <img
@@ -362,7 +371,7 @@ export default function Profile() {
                     updateLotteryIDs={updateLotteryIDs}
                     updateTicketNum={updateTicketNum}
                     rowNum={-1}
-                    getRewardValue={getRewardValue}
+                    updateRewardValues={updateRewardValues}
                   />
                 </Grid>
               );

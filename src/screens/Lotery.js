@@ -129,14 +129,20 @@ export default function NavTabs() {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+
     const signer = provider.getSigner();
+    console.log(signer, "providerprovider");
 
     const contract = new ethers.Contract(
       FUN_LOTTERY_ADDRESS,
       FUN_LOTTERY_ABI,
       signer
     );
-    const transaction = await contract.buyticket(param1, 1);
+    try {
+      const transaction = await contract.buyticket(param1, 1);
+    } catch (err) {
+      alert("Please Approve FUNC to buy Ticket");
+    }
 
     // if (transaction) {
     //   const todoList = new web3.eth.Contract(

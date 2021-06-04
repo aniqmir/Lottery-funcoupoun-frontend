@@ -12,6 +12,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+// const Lottery = React.lazy(() => import('../screens/Lotery'));
+// const Profile = React.lazy(() => import('../screens/Profil'));
+// const Exchange = React.lazy(() => import('../screens/Exchange'));
+// const Roadmap = React.lazy(() => import('../screens/Roadmap'));
+// const Token = React.lazy(() => import('../screens/Token'));
+
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
@@ -93,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-  const { window, approved } = props;
+  const { window, approved, userGainValue } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -215,7 +221,7 @@ function ResponsiveDrawer(props) {
                 color: "#dd4d8c",
               }}
             >
-              100 $
+              {userGainValue.toFixed(2)} $
             </span>
           </ListItem>
         </List>
