@@ -1,4 +1,4 @@
-export const EXCHANGE_ADDRESS = "0x81397Be0c08eeA2eAe7515d9D30FEa0c7f6280f0";
+export const EXCHANGE_ADDRESS = "0x38373Fe9f2502C23aDc17cDD6d2fFd7cF9ec5385";
 
 export const EXCHANGE_ABI = [
 	{
