@@ -70,12 +70,12 @@ const LotteryTicket = (props) => {
           )
           .call();
 
-        var test = contractFunLottery.methods
-          .calculateReward(price, latestId, lotteryCnt[i])
-          .call();
-        test.then((res) => {
-          updateRewardValues(rowNum, lotteryCnt.length, i, res);
-        });
+        // var test = contractFunLottery.methods
+        //   .calculateReward(price, latestId, lotteryCnt[i])
+        //   .call();
+        // test.then((res) => {
+        //   updateRewardValues(rowNum, lotteryCnt.length, i, res);
+        // });
 
         if (checkMapNavigator.redeemed) {
           console.log("redeemed");
@@ -84,6 +84,13 @@ const LotteryTicket = (props) => {
           updateTicketNum(lotteryCnt[i], rowNum);
           updateSizes(price, rowNum);
           updateLotteryIDs(latestId, rowNum);
+
+          var test = contractFunLottery.methods
+            .calculateReward(price, latestId, lotteryCnt[i])
+            .call();
+          test.then((res) => {
+            updateRewardValues(rowNum, lotteryCnt.length, i, res);
+          });
         }
       }
     }

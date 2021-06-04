@@ -12,6 +12,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+// const Lottery = React.lazy(() => import('../screens/Lotery'));
+// const Profile = React.lazy(() => import('../screens/Profil'));
+// const Exchange = React.lazy(() => import('../screens/Exchange'));
+// const Roadmap = React.lazy(() => import('../screens/Roadmap'));
+// const Token = React.lazy(() => import('../screens/Token'));
+
 import Lottery from "../screens/Lotery";
 import Profile from "../screens/Profil";
 import Exchange from "../screens/Exchange";
