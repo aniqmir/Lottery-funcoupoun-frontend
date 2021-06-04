@@ -14,6 +14,7 @@ import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "./smartcontract/funcoin";
 function App() {
   const [address, setAddress] = useState([]);
   const [approved, setApproved] = useState(false);
+  const [userGainValue, setUserGainValue] = useState(0);
 
   const connectToMetaMask = async () => {
     if (address.length === 0) {
@@ -41,10 +42,22 @@ function App() {
   const updateAddress = async () => {
     const web3 = window.web3;
 
+    const web33 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+
+    const contractFunLottery = new web33.eth.Contract(
+      FUN_LOTTERY_ABI,
+      FUN_LOTTERY_ADDRESS
+    );
+
     const accounts = await web3.eth.getAccounts();
     if (accounts !== undefined) {
       localStorage.setItem("accounts", accounts);
       setAddress(accounts);
+
+      //user gain here
+      const userGainer = await contractFunLottery.methods.userGain(accounts[0]);
+      console.log(userGainer, "userGainer");
+      // setUserGainValue(userGainer)
     }
   };
 
@@ -75,45 +88,12 @@ function App() {
         FUN_LOTTERY_ADDRESS,
         balance.toNumber()
       );
+
       if (!!transaction.hash) {
         setApproved(true);
       }
     }
   };
-
-  // const claimMultiple = async () => {
-  //   const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
-
-  //   var sizes = [100]; //size  100, 100, 100 , 1000
-
-  //   var lotteryIDs = [1]; // latestID  1, 1, 1 , 1
-
-  //   var ticketNum = []; // All number of Lottery array  1,4, 5 , 12
-
-  //   web3.eth.handleRevert = true;
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-
-  //   const contract = new ethers.Contract(
-  //     FUN_LOTTERY_ADDRESS,
-  //     FUN_LOTTERY_ABI,
-  //     signer
-  //   );
-
-  //   const transaction = await contract.claimMultiple(
-  //     sizes,
-  //     lotteryIDs,
-  //     ticketNum
-  //   );
-
-  //   //const claimMultiple(uint256[] memory _sizes, uint256[] memory _lotteryids, uint256[] memory _ticketnums)
-  //   if (!!transaction.hash) {
-  //   }
-  //   // wait for 5 seconds
-  //   await web3.eth.getTransactionReceipt(transaction.hash, (err, txReceipt) =>
-  //     console.log("Err:", err, "txReciept:", txReceipt)
-  //   );
-  // };
 
   return (
     <div>
@@ -122,6 +102,7 @@ function App() {
         approvefromWeb3={approvefromWeb3}
         address={address}
         approved={approved}
+        userGainValue={userGainValue}
       />
     </div>
   );

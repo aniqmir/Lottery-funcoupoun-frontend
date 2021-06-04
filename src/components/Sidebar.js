@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveDrawer(props) {
-  const { window, approved } = props;
+  const { window, approved, userGainValue } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -221,7 +221,7 @@ function ResponsiveDrawer(props) {
                 color: "#dd4d8c",
               }}
             >
-              100 $
+              {userGainValue} $
             </span>
           </ListItem>
         </List>
