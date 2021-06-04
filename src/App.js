@@ -89,13 +89,17 @@ function App() {
 
     if (accounts.length > 0) {
       const balance = await contract.balanceOf(accounts[0]);
-      const transaction = await contract.approve(
-        FUN_LOTTERY_ADDRESS,
-        balance.toNumber()
-      );
 
-      if (!!transaction.hash) {
-        setApproved(true);
+      if (balance.toNumber() === 0) {
+        alert("Fun Coupons Not Available");
+      } else {
+        const transaction = await contract.approve(
+          FUN_LOTTERY_ADDRESS,
+          balance.toNumber()
+        );
+        if (!!transaction.hash) {
+          setApproved(true);
+        }
       }
     }
   };
