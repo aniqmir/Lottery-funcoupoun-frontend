@@ -104,7 +104,12 @@ export default function SimpleCard() {
       EXCHANGE_ABI,
       signer
     );
+    const network = await web3.eth.net.getId();
 
+    if (network === 97) {
+        alert("Cannot Approve with Current Network");
+      }
+    
     const accounts = await web3.eth.getAccounts();
    
     if(accounts[0].len !== 0){
