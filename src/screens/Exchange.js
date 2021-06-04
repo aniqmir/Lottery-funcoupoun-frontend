@@ -14,6 +14,11 @@ import {
   EXCHANGE_ADDRESS,
 } from "../smartcontract/exchangelottery";
 
+import {
+  USD_CONTRACT_ABI,
+  USD_CONTRACT_ADDRESS,
+} from "../smartcontract/usdcontract";
+
 import { ethers } from "ethers";
 
 import Web3 from "web3";
@@ -39,6 +44,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+
 });
 
 export default function SimpleCard() {
@@ -57,15 +63,18 @@ export default function SimpleCard() {
   const [bnbRate, setbnbRate] = useState(0);
   const [inputValue, setinputValue] = useState(0);
   const [outputValue, setoutputValue] = useState(0);
+  const [showValue, setshowValue] = useState(false);
 
 
   const filterChangeHandler = (selectedValue) => {
     setfromExchange(selectedValue);
     if(fromExchange == "BNB"){ 
+      setshowValue(true);
       setinputValue(0);
       setoutputValue(0);
 
     } else if(fromExchange == "USD"){
+      setshowValue(false);
       setinputValue(0);
       setoutputValue(0);
     }
@@ -90,7 +99,6 @@ export default function SimpleCard() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
 
-
     const contract = new ethers.Contract(
       EXCHANGE_ADDRESS,
       EXCHANGE_ABI,
@@ -98,17 +106,72 @@ export default function SimpleCard() {
     );
 
     const accounts = await web3.eth.getAccounts();
+   
+    if(accounts[0].len !== 0){
+      if(inputValue == 0){
+        alert("Value Cannot be zero",accounts);
+      }else{
+        if(fromExchange == "BNB"){
+      
+          var amount = '' +inputValue*1000000000000000000;
+          const gaslimit =  await web3.eth.getBlock("latest").gasLimit;
+          let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, 
+          value: amount,gas:gaslimit }); //40002
+          console.log("transaction:",send);
+  
+      } else if(fromExchange == "USD"){
+         var amount = '' +inputValue*1000000000000000000;
+         console.log("amount:",amount)
+          const transaction = await contract.buyWithUsdc(amount);
+          console.log("transaction:",transaction);
 
+      }
 
+    }
+        
+    }else{
+      console.log(accounts);
+      alert("Please connect your metamask wallet",accounts);
+    }
     // TODO
      // const transaction = await contract.buyWithBnb({ from: accounts[0], to: EXCHANGE_ADDRESS, value:'12'});
-      let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, value: web3.utils.toWei('0.5', 'ether'),gas:40002
-      });
+      // let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, value: web3.utils.toWei('0.5', 'ether'),gas:40002
+      // });
 
-      console.log("transaction",send);
-      console.log("buy");
-
+     // const transaction = await contract.buyWithBnb();
   };
+
+  const onApprove = async() => {
+    console.log("approve");
+    const web3 = new Web3(Web3.givenProvider);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(
+      USD_CONTRACT_ADDRESS,
+      USD_CONTRACT_ABI,
+      signer
+    );
+
+    const accounts = await web3.eth.getAccounts();
+   
+    if(accounts[0].len !== 0){
+     
+
+        const balance = await contract.balanceOf(accounts[0]);
+        console.log("balance:",balance);
+        
+        const transaction = await contract.approve(
+          EXCHANGE_ADDRESS,
+          (''+balance)
+        );
+
+        console.log("transaction:",transaction);
+        
+    }
+    ///
+
+  }
 
   useEffect(() => {
     const getExchangeValuefromEth = async () => {
@@ -126,6 +189,7 @@ export default function SimpleCard() {
 
       setbnbRate(BNBRate);
       setoutputValue(0);
+      setinputValue(0);
 
     };
     getExchangeValuefromEth();
@@ -289,7 +353,10 @@ export default function SimpleCard() {
             </Grid>
           </CardContent>
           <CardActions>
-            <button onClick={onBuy} className="unlockButton">Buy</button>
+            <button  style={{ display: showValue ? "block" : "none" }} onClick={onApprove} className="unlockButton">Approve</button>
+          </CardActions>
+          <CardActions>
+            <button   onClick={onBuy} className="unlockButton">Buy</button>
           </CardActions>
         </Card>
       </div>
