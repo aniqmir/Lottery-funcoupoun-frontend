@@ -9,6 +9,14 @@ import Select from "../components/Select";
 import settings from "../assets/settings.png";
 import refresh from "../assets/refresh.png";
 import exchangearrow from "../assets/exchangearrow.png";
+import {
+  EXCHANGE_ABI,
+  EXCHANGE_ADDRESS,
+} from "../smartcontract/exchangelottery";
+
+import { ethers } from "ethers";
+
+import Web3 from "web3";
 
 import "./screens.css";
 
@@ -43,13 +51,84 @@ export default function SimpleCard() {
     seconds: "00",
   });
 
-  const [fromValue, setFromValue] = useState("");
-  const [toValue, setToValue] = useState("");
+  const [fromExchange, setfromExchange] = useState('BNB');
+  const [toExchange, settoExchange] = useState('FUNC');
+  const [usdRate, setusdRate] = useState(0);
+  const [bnbRate, setbnbRate] = useState(0);
+  const [inputValue, setinputValue] = useState(0);
+  const [outputValue, setoutputValue] = useState(0);
 
-  const [fromSelected, setFromSelected] = useState("USD");
-  const [toSelected, setToSelected] = useState("FUNC");
+
+  const filterChangeHandler = (selectedValue) => {
+    setfromExchange(selectedValue);
+    if(fromExchange == "BNB"){ 
+      setinputValue(0);
+      setoutputValue(0);
+
+    } else if(fromExchange == "USD"){
+      setinputValue(0);
+      setoutputValue(0);
+    }
+  };
+
+  const handleChange = (e)  =>{
+    console.log('handle change called',e.target.value);
+    // setinputValue(e.target.value);
+    if(fromExchange == "BNB"){ 
+      setinputValue(e.target.value);
+      setoutputValue(e.target.value*bnbRate);
+
+    } else if(fromExchange == "USD"){
+      setinputValue(e.target.value);
+      setoutputValue(e.target.value*usdRate);
+    }
+  };
+
+  const onBuy =async() =>{
+    const web3 = new Web3(Web3.givenProvider);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+
+    const contract = new ethers.Contract(
+      EXCHANGE_ADDRESS,
+      EXCHANGE_ABI,
+      signer
+    );
+
+    const accounts = await web3.eth.getAccounts();
+
+
+    // TODO
+     // const transaction = await contract.buyWithBnb({ from: accounts[0], to: EXCHANGE_ADDRESS, value:'12'});
+      let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, value: web3.utils.toWei('0.5', 'ether'),gas:40002
+      });
+
+      console.log("transaction",send);
+      console.log("buy");
+
+  };
 
   useEffect(() => {
+    const getExchangeValuefromEth = async () => {
+
+      const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+      const todoList = new web3.eth.Contract(
+        EXCHANGE_ABI,
+        EXCHANGE_ADDRESS
+      );
+
+      const USDRate = await todoList.methods.usdRate().call();
+
+      setusdRate(USDRate);
+      const BNBRate = await todoList.methods.bnbRate().call();
+
+      setbnbRate(BNBRate);
+      setoutputValue(0);
+
+    };
+    getExchangeValuefromEth();
     //timer logic
     var countDownDate = new Date("Jul 5, 2021 15:37:25").getTime();
     const startTimer = () => {
@@ -79,18 +158,6 @@ export default function SimpleCard() {
     };
   }, []);
 
-  const fromSelectedHandle = (value) => {
-    setFromSelected(value);
-  };
-
-  const toSelectedHandle = (value) => {
-    setToSelected(value);
-  };
-
-  const unlock = () => {
-    //unlock logic here
-    console.log(fromValue, toValue, fromSelected, toSelected, "allValues");
-  };
   return (
     <div style={{ minHeight: "84.5vh" }}>
       <div className="timer">
@@ -149,11 +216,7 @@ export default function SimpleCard() {
                       From
                     </Grid>
                     <Grid item xs={5}>
-                      <input
-                        className="fromInput"
-                        onChange={(e) => setFromValue(e.target.value)}
-                        placeholder="0.0"
-                      />
+                      <input value={inputValue} onChange={(e) => {handleChange(e)}} className="fromInput" placeholder="0.0" />
                     </Grid>
                     <Grid item xs={7} container spacing={4}>
                       {/* <Grid item xs={2}>
@@ -171,10 +234,12 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select
-                            options={[{ name: "USD" }, { name: "BNB" }]}
-                            selected={fromSelectedHandle}
-                            selectValue={fromSelected}
+                          <Select 
+                            options={[{ name: "BNB" }, { name: "USD" }]}
+                            
+                            selected={fromExchange}
+                            onChangeFilter={filterChangeHandler}
+
                           />
                         </div>
                       </Grid>
@@ -196,11 +261,7 @@ export default function SimpleCard() {
                       To
                     </Grid>
                     <Grid item xs={5}>
-                      <input
-                        className="fromInput"
-                        onChange={(e) => setToValue(e.target.value)}
-                        placeholder="0.0"
-                      />
+                      <input readOnly value={outputValue} className="fromInput" placeholder="0.0" />
                     </Grid>
                     <Grid item xs={7} container spacing={4}>
                       {/* <Grid item xs={2}>
@@ -218,11 +279,7 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select
-                            options={[{ name: "FUNC" }]}
-                            selected={toSelectedHandle}
-                            selectValue={toSelected}
-                          />
+                          <Select options={[{ name: "FUNC" }]}  selected={toExchange} />
                         </div>
                       </Grid>
                     </Grid>
@@ -232,9 +289,7 @@ export default function SimpleCard() {
             </Grid>
           </CardContent>
           <CardActions>
-            <button onClick={unlock} className="unlockButton">
-              Unlock Button
-            </button>
+            <button onClick={onBuy} className="unlockButton">Buy</button>
           </CardActions>
         </Card>
       </div>
