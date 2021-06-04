@@ -221,7 +221,7 @@ function ResponsiveDrawer(props) {
                 color: "#dd4d8c",
               }}
             >
-              {userGainValue} $
+              {userGainValue.toFixed(2)} $
             </span>
           </ListItem>
         </List>
