@@ -125,7 +125,7 @@ export default function NavTabs() {
     getLotteryNumbersfromEth();
   }, []);
 
-  const buyLotteryfromWeb3 = async (param1, param2, param3) => {
+  const buyLotteryfromWeb3 = async (amount, ticketsToBuy) => {
     // const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -138,10 +138,17 @@ export default function NavTabs() {
       signer
     );
     try {
-      const transaction = await contract.buyticket(param1, 1);
+      const transaction = await contract.buyticket(amount, ticketsToBuy);
       console.log(transaction, "transaction buy");
     } catch (err) {
-      alert("Please Approve FUNC to buy Ticket");
+      console.log(err);
+      if (
+        err.data.message === "execution reverted: Not enough tickets available"
+      ) {
+        alert("Not enough tickets available");
+      } else {
+        alert("Please Approve FUNC to buy Ticket");
+      }
     }
 
     // if (transaction) {

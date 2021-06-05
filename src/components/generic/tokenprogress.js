@@ -45,15 +45,7 @@ const TokenProgress = (props) => {
   const [ticketsToBuy, setTicketsToBuy] = React.useState(1);
 
   const ticketsToBuyHandler = (e) => {
-    if (e.target.value < 1) {
-      alert("Tickets cannot be less than 1");
-      setTicketsToBuy(1);
-    } else if (e.target.value > 100) {
-      alert("Tickets cannot be greater than 100");
-      setTicketsToBuy(100);
-    } else {
-      setTicketsToBuy(parseInt(e.target.value));
-    }
+    setTicketsToBuy(parseInt(e.target.value));
   };
 
   const getPercentage = (val) => {
@@ -61,21 +53,29 @@ const TokenProgress = (props) => {
   };
 
   const buyTicket = async () => {
-    if (network) {
-      let tempAddress;
-      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
-      const accounts = await web3.eth.getAccounts();
-      tempAddress = accounts[0];
-
-      //buy ticket
-      if (tempAddress === undefined) {
-        //alert connect first
-        alert("Please connect your metamask wallet");
-      } else {
-        props.buyLotteryfromWeb3(props.lotteryAmount, ticketsToBuy);
-      }
+    if (ticketsToBuy < 1) {
+      alert("Tickets cannot be less than 1");
+      setTicketsToBuy(1);
+    } else if (ticketsToBuy > 100) {
+      alert("Tickets cannot be greater than 100");
+      setTicketsToBuy(100);
     } else {
-      alert("Cannot Buy with Current Network");
+      if (network) {
+        let tempAddress;
+        const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+        const accounts = await web3.eth.getAccounts();
+        tempAddress = accounts[0];
+
+        //buy ticket
+        if (tempAddress === undefined) {
+          //alert connect first
+          alert("Please connect your metamask wallet");
+        } else {
+          props.buyLotteryfromWeb3(props.lotteryAmount, ticketsToBuy);
+        }
+      } else {
+        alert("Cannot Buy with Current Network");
+      }
     }
   };
   return (
@@ -220,7 +220,7 @@ const TokenProgress = (props) => {
           }}
           onClick={buyTicket}
         >
-          Buy Tickets <b>Available : {total - progressValue}</b>
+          Buy Tickets ( <b>Available : {total - progressValue}</b> )
         </div>
       </Grid>
       <Grid item xs={8} md={6} lg={1}>
