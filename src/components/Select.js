@@ -61,12 +61,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledOpenSelect(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
     if (event.target.value == "USD" || event.target.value == "BNB") {
-      console.log("change", event.target.value);
       props.onChangeFilter(event.target.value);
     }
   };

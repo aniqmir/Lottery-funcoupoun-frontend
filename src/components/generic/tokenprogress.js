@@ -40,7 +40,7 @@ const BorderLinearProgress = withStyles({
 const TokenProgress = (props) => {
   // const classes = useStyles();
 
-  const { address, progressValue, total, network } = props;
+  const { progressValue, total, network } = props;
 
   const getPercentage = (val) => {
     return ((parseInt(val) / parseInt(total)) * 100).toFixed(2);

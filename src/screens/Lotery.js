@@ -126,12 +126,11 @@ export default function NavTabs() {
   }, []);
 
   const buyLotteryfromWeb3 = async (param1, param2, param3) => {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+    // const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
     const signer = provider.getSigner();
-    console.log(signer, "providerprovider");
 
     const contract = new ethers.Contract(
       FUN_LOTTERY_ADDRESS,
@@ -140,6 +139,7 @@ export default function NavTabs() {
     );
     try {
       const transaction = await contract.buyticket(param1, 1);
+      console.log(transaction, "transaction buy");
     } catch (err) {
       alert("Please Approve FUNC to buy Ticket");
     }

@@ -56,7 +56,7 @@ function App() {
       setAddress(accounts);
 
       //user gain here
-      console.log(accounts, "asasasas");
+
       if (accounts.length !== 0) {
         const userGainer = await contractFunLottery.methods
           .userGain(accounts[0])

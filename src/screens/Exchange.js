@@ -44,7 +44,6 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-
 });
 
 export default function SimpleCard() {
@@ -57,43 +56,39 @@ export default function SimpleCard() {
     seconds: "00",
   });
 
-  const [fromExchange, setfromExchange] = useState('BNB');
-  const [toExchange, settoExchange] = useState('FUNC');
+  const [fromExchange, setfromExchange] = useState("BNB");
+  const [toExchange, settoExchange] = useState("FUNC");
   const [usdRate, setusdRate] = useState(0);
   const [bnbRate, setbnbRate] = useState(0);
   const [inputValue, setinputValue] = useState(0);
   const [outputValue, setoutputValue] = useState(0);
   const [showValue, setshowValue] = useState(false);
 
-
   const filterChangeHandler = (selectedValue) => {
     setfromExchange(selectedValue);
-    if(fromExchange == "BNB"){ 
+    if (fromExchange == "BNB") {
       setshowValue(true);
       setinputValue(0);
       setoutputValue(0);
-
-    } else if(fromExchange == "USD"){
+    } else if (fromExchange == "USD") {
       setshowValue(false);
       setinputValue(0);
       setoutputValue(0);
     }
   };
 
-  const handleChange = (e)  =>{
-    console.log('handle change called',e.target.value);
+  const handleChange = (e) => {
     // setinputValue(e.target.value);
-    if(fromExchange == "BNB"){ 
+    if (fromExchange == "BNB") {
       setinputValue(e.target.value);
-      setoutputValue(e.target.value*bnbRate);
-
-    } else if(fromExchange == "USD"){
+      setoutputValue(e.target.value * bnbRate);
+    } else if (fromExchange == "USD") {
       setinputValue(e.target.value);
-      setoutputValue(e.target.value*usdRate);
+      setoutputValue(e.target.value * usdRate);
     }
   };
 
-  const onBuy =async() =>{
+  const onBuy = async () => {
     const web3 = new Web3(Web3.givenProvider);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -109,45 +104,41 @@ export default function SimpleCard() {
     // if (network === 97) {
     //     alert("Cannot Approve with Current Network");
     //   }
-    
+
     const accounts = await web3.eth.getAccounts();
-   
-    if(accounts[0].len !== 0){
-      if(inputValue == 0){
-        alert("Value Cannot be zero",accounts);
-      }else{
-        if(fromExchange == "BNB"){
-      
-          var amount = '' +inputValue*1000000000000000000;
-          const gaslimit =  await web3.eth.getBlock("latest").gasLimit;
-          let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, 
-          value: amount,gas:gaslimit }); //40002
-          console.log("transaction:",send);
-  
-      } else if(fromExchange == "USD"){
-         var amount = '' +inputValue*1000000000000000000;
-         console.log("amount:",amount)
+
+    if (accounts[0].len !== 0) {
+      if (inputValue == 0) {
+        alert("Value Cannot be zero", accounts);
+      } else {
+        if (fromExchange == "BNB") {
+          var amount = "" + inputValue * 1000000000000000000;
+          const gaslimit = await web3.eth.getBlock("latest").gasLimit;
+          let send = web3.eth.sendTransaction({
+            from: accounts[0],
+            to: EXCHANGE_ADDRESS,
+            value: amount,
+            gas: gaslimit,
+          }); //40002
+          console.log("transaction:", send);
+        } else if (fromExchange == "USD") {
+          var amount = "" + inputValue * 1000000000000000000;
           const transaction = await contract.buyWithUsdc(amount);
-          console.log("transaction:",transaction);
-
+          console.log("transaction:", transaction);
+        }
       }
-
-    }
-        
-    }else{
-      console.log(accounts);
-      alert("Please connect your metamask wallet",accounts);
+    } else {
+      alert("Please connect your metamask wallet", accounts);
     }
     // TODO
-     // const transaction = await contract.buyWithBnb({ from: accounts[0], to: EXCHANGE_ADDRESS, value:'12'});
-      // let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, value: web3.utils.toWei('0.5', 'ether'),gas:40002
-      // });
+    // const transaction = await contract.buyWithBnb({ from: accounts[0], to: EXCHANGE_ADDRESS, value:'12'});
+    // let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, value: web3.utils.toWei('0.5', 'ether'),gas:40002
+    // });
 
-     // const transaction = await contract.buyWithBnb();
+    // const transaction = await contract.buyWithBnb();
   };
 
-  const onApprove = async() => {
-    console.log("approve");
+  const onApprove = async () => {
     const web3 = new Web3(Web3.givenProvider);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -159,33 +150,23 @@ export default function SimpleCard() {
     );
 
     const accounts = await web3.eth.getAccounts();
-   
-    if(accounts[0].len !== 0){
-     
 
-        const balance = await contract.balanceOf(accounts[0]);
-        console.log("balance:",balance);
-        
-        const transaction = await contract.approve(
-          EXCHANGE_ADDRESS,
-          (''+balance)
-        );
+    if (accounts[0].len !== 0) {
+      const balance = await contract.balanceOf(accounts[0]);
+      const transaction = await contract.approve(
+        EXCHANGE_ADDRESS,
+        "" + balance
+      );
 
-        console.log("transaction:",transaction);
-        
+      console.log("transaction:", transaction);
     }
     ///
-
-  }
+  };
 
   useEffect(() => {
     const getExchangeValuefromEth = async () => {
-
       const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
-      const todoList = new web3.eth.Contract(
-        EXCHANGE_ABI,
-        EXCHANGE_ADDRESS
-      );
+      const todoList = new web3.eth.Contract(EXCHANGE_ABI, EXCHANGE_ADDRESS);
 
       const USDRate = await todoList.methods.usdRate().call();
 
@@ -195,7 +176,6 @@ export default function SimpleCard() {
       setbnbRate(BNBRate);
       setoutputValue(0);
       setinputValue(0);
-
     };
     getExchangeValuefromEth();
     //timer logic
@@ -285,7 +265,14 @@ export default function SimpleCard() {
                       From
                     </Grid>
                     <Grid item xs={5}>
-                      <input value={inputValue} onChange={(e) => {handleChange(e)}} className="fromInput" placeholder="0.0" />
+                      <input
+                        value={inputValue}
+                        onChange={(e) => {
+                          handleChange(e);
+                        }}
+                        className="fromInput"
+                        placeholder="0.0"
+                      />
                     </Grid>
                     <Grid item xs={7} container spacing={4}>
                       {/* <Grid item xs={2}>
@@ -303,12 +290,10 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select 
+                          <Select
                             options={[{ name: "BNB" }, { name: "USD" }]}
-                            
                             selected={fromExchange}
                             onChangeFilter={filterChangeHandler}
-
                           />
                         </div>
                       </Grid>
@@ -330,7 +315,12 @@ export default function SimpleCard() {
                       To
                     </Grid>
                     <Grid item xs={5}>
-                      <input readOnly value={outputValue} className="fromInput" placeholder="0.0" />
+                      <input
+                        readOnly
+                        value={outputValue}
+                        className="fromInput"
+                        placeholder="0.0"
+                      />
                     </Grid>
                     <Grid item xs={7} container spacing={4}>
                       {/* <Grid item xs={2}>
@@ -348,7 +338,10 @@ export default function SimpleCard() {
                         style={{ marginLeft: "40px", marginTop: "-11px" }}
                       >
                         <div style={{ marginLeft: "60px" }}>
-                          <Select options={[{ name: "FUNC" }]}  selected={toExchange} />
+                          <Select
+                            options={[{ name: "FUNC" }]}
+                            selected={toExchange}
+                          />
                         </div>
                       </Grid>
                     </Grid>
@@ -358,10 +351,18 @@ export default function SimpleCard() {
             </Grid>
           </CardContent>
           <CardActions>
-            <button  style={{ display: showValue ? "block" : "none" }} onClick={onApprove} className="unlockButton">Approve</button>
+            <button
+              style={{ display: showValue ? "block" : "none" }}
+              onClick={onApprove}
+              className="unlockButton"
+            >
+              Approve
+            </button>
           </CardActions>
           <CardActions>
-            <button   onClick={onBuy} className="unlockButton">Buy</button>
+            <button onClick={onBuy} className="unlockButton">
+              Buy
+            </button>
           </CardActions>
         </Card>
       </div>

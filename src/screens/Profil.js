@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
@@ -18,7 +18,7 @@ import {
 
 import { ethers } from "ethers";
 
-import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
+// import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -34,12 +34,6 @@ export default function Profile() {
   var numberofRows = 4;
   const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
 
-  const [mostLatestId, setMostLatestId] = React.useState({
-    100: "",
-    1000: "",
-    10000: "",
-    100000: "",
-  });
   const contractFunLottery = new web3.eth.Contract(
     FUN_LOTTERY_ABI,
     FUN_LOTTERY_ADDRESS
@@ -64,11 +58,6 @@ export default function Profile() {
   const [ticketNum2, setticketNum2] = React.useState([]);
   const [ticketNum3, setticketNum3] = React.useState([]);
   const [ticketNum4, setticketNum4] = React.useState([]);
-
-  const [rewardValue1, setRewardValue1] = React.useState(0);
-  const [rewardValue2, setRewardValue2] = React.useState(0);
-  const [rewardValue3, setRewardValue3] = React.useState(0);
-  const [rewardValue4, setRewardValue4] = React.useState(0);
 
   const [rewardPrevValue1, setRewardPrevValue1] = React.useState([0]);
   const [rewardPrevValue2, setRewardPrevValue2] = React.useState([0]);
@@ -166,53 +155,6 @@ export default function Profile() {
     });
   }, []);
 
-  // const getRewardValue = (
-  //   price,
-  //   lotteryid,
-  //   ticketnum,
-  //   rowNum,
-  //   len,
-  //   currentVal,
-  //   res
-  // ) => {
-  //   let newReward = res / 100000000;
-
-  //   if (rowNum === -1) {
-  //     return;
-  //   }
-  //   if (rowNum === 1) {
-  //     if (len - 1 === currentVal) {
-  //       // setRewardValue1(rewardPrevValue1.reduce((a,b)=>a+b) + newReward);
-  //     } else {
-  //       setRewardPrevValue1((prev) => [...prev, newReward]);
-  //     }
-  //   } else if (rowNum === 2) {
-  //     if (len - 1 === currentVal) {
-  //       setRewardValue2(rewardPrevValue2 + newReward);
-  //     } else {
-  //       setRewardPrevValue2((prev) => prev + newReward);
-  //     }
-  //   } else if (rowNum === 3) {
-  //     if (len - 1 === currentVal) {
-  //       setRewardValue3(rewardPrevValue3 + newReward);
-  //     } else {
-  //       setRewardPrevValue3((prev) => prev + newReward);
-  //     }
-  //   } else if (rowNum === 4) {
-  //     if (len - 1 === currentVal) {
-  //       setRewardValue4(rewardPrevValue4 + newReward);
-  //     } else {
-  //       setRewardPrevValue4((prev) => prev + newReward);
-  //     }
-  //   } else {
-  //     console.log("nothing");
-  //   }
-  //   // })
-  //   // .catch((error) => {
-  //   //   console.log(error);
-  //   // });
-  // };
-
   // row to claim
   const claim = async (rowNum) => {
     if (network) {
@@ -232,24 +174,28 @@ export default function Profile() {
           lotteryIDs1,
           ticketNum1
         );
+        console.log(transaction, "transaction1");
       } else if (rowNum === 2) {
         const transaction = await contract.claimMultiple(
           sizes2,
           lotteryIDs2,
           ticketNum2
         );
+        console.log(transaction, "transaction2");
       } else if (rowNum === 3) {
         const transaction = await contract.claimMultiple(
           sizes3,
           lotteryIDs3,
           ticketNum3
         );
+        console.log(transaction, "transaction3");
       } else {
         const transaction = await contract.claimMultiple(
           sizes4,
           lotteryIDs4,
           ticketNum4
         );
+        console.log(transaction, "transaction4");
       }
     } else {
       alert("Cannot Claim with current Network");
