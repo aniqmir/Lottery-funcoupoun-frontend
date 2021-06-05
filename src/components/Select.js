@@ -65,8 +65,8 @@ export default function ControlledOpenSelect(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    if (event.target.value == "USD" || event.target.value == "BNB"){
-      console.log("change",event.target.value);
+    if (event.target.value == "USD" || event.target.value == "BNB") {
+      console.log("change", event.target.value);
       props.onChangeFilter(event.target.value);
     }
   };
@@ -109,7 +109,7 @@ export default function ControlledOpenSelect(props) {
           </MenuItem> */}
           {options.map((option, index) => {
             return (
-              <MenuItem value={option.name}>
+              <MenuItem value={option.name} key={index}>
                 <div style={{ display: "flex" }}>
                   <img alt="furc" src={sideticket} style={{ width: "20px" }} />
                   &nbsp;{option.name}

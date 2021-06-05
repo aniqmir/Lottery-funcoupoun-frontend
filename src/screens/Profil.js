@@ -75,6 +75,7 @@ export default function Profile() {
   const [rewardPrevValue3, setRewardPrevValue3] = React.useState([0]);
   const [rewardPrevValue4, setRewardPrevValue4] = React.useState([0]);
 
+  const [loading, setLoading] = React.useState(true);
   var rows = [];
 
   const updateSizes = (val, rowNum) => {
@@ -158,58 +159,59 @@ export default function Profile() {
           setlatestIDforrows((oldArray) => [...oldArray, res]);
           getLatestId(100000).then((res) => {
             setlatestIDforrows((oldArray) => [...oldArray, res]);
+            setLoading(false);
           });
         });
       });
     });
   }, []);
 
-  const getRewardValue = (
-    price,
-    lotteryid,
-    ticketnum,
-    rowNum,
-    len,
-    currentVal,
-    res
-  ) => {
-    let newReward = res / 100000000;
+  // const getRewardValue = (
+  //   price,
+  //   lotteryid,
+  //   ticketnum,
+  //   rowNum,
+  //   len,
+  //   currentVal,
+  //   res
+  // ) => {
+  //   let newReward = res / 100000000;
 
-    if (rowNum === -1) {
-      return;
-    }
-    if (rowNum === 1) {
-      if (len - 1 === currentVal) {
-        // setRewardValue1(rewardPrevValue1.reduce((a,b)=>a+b) + newReward);
-      } else {
-        setRewardPrevValue1((prev) => [...prev, newReward]);
-      }
-    } else if (rowNum === 2) {
-      if (len - 1 === currentVal) {
-        setRewardValue2(rewardPrevValue2 + newReward);
-      } else {
-        setRewardPrevValue2((prev) => prev + newReward);
-      }
-    } else if (rowNum === 3) {
-      if (len - 1 === currentVal) {
-        setRewardValue3(rewardPrevValue3 + newReward);
-      } else {
-        setRewardPrevValue3((prev) => prev + newReward);
-      }
-    } else if (rowNum === 4) {
-      if (len - 1 === currentVal) {
-        setRewardValue4(rewardPrevValue4 + newReward);
-      } else {
-        setRewardPrevValue4((prev) => prev + newReward);
-      }
-    } else {
-      console.log("nothing");
-    }
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-  };
+  //   if (rowNum === -1) {
+  //     return;
+  //   }
+  //   if (rowNum === 1) {
+  //     if (len - 1 === currentVal) {
+  //       // setRewardValue1(rewardPrevValue1.reduce((a,b)=>a+b) + newReward);
+  //     } else {
+  //       setRewardPrevValue1((prev) => [...prev, newReward]);
+  //     }
+  //   } else if (rowNum === 2) {
+  //     if (len - 1 === currentVal) {
+  //       setRewardValue2(rewardPrevValue2 + newReward);
+  //     } else {
+  //       setRewardPrevValue2((prev) => prev + newReward);
+  //     }
+  //   } else if (rowNum === 3) {
+  //     if (len - 1 === currentVal) {
+  //       setRewardValue3(rewardPrevValue3 + newReward);
+  //     } else {
+  //       setRewardPrevValue3((prev) => prev + newReward);
+  //     }
+  //   } else if (rowNum === 4) {
+  //     if (len - 1 === currentVal) {
+  //       setRewardValue4(rewardPrevValue4 + newReward);
+  //     } else {
+  //       setRewardPrevValue4((prev) => prev + newReward);
+  //     }
+  //   } else {
+  //     console.log("nothing");
+  //   }
+  //   // })
+  //   // .catch((error) => {
+  //   //   console.log(error);
+  //   // });
+  // };
 
   // row to claim
   const claim = async (rowNum) => {
@@ -360,10 +362,10 @@ export default function Profile() {
           <Grid item xs={12}>
             <p className="headtext">Tirages en Course</p>
           </Grid> */}
-          {latestIDforrows.length !== 0 ? (
+          {!loading && latestIDforrows.length !== 0 ? (
             [100, 1000, 10000, 100000].map((price, index) => {
               return (
-                <Grid item xs={12} md={3}>
+                <Grid item xs={12} md={3} key={index}>
                   <LotteryTicket
                     price={price}
                     latestId={latestIDforrows[index]}
@@ -392,7 +394,7 @@ export default function Profile() {
           </Grid>
         </Grid>
         <Grid container spacing={3} item>
-          {latestIDforrows.length !== 0 ? makeRows() : <div></div>}
+          {!loading && latestIDforrows.length !== 0 ? makeRows() : <div></div>}
         </Grid>
       </Grid>
     </Container>

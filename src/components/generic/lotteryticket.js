@@ -29,7 +29,6 @@ const LotteryTicket = (props) => {
     latestId,
   } = props;
 
-  console.log(latestId, "latestIdlatestId");
   // const [latestId, setLatestId] = React.useState(0);
   const [lotteryCount, setLotteryCount] = React.useState([]);
 
@@ -43,9 +42,9 @@ const LotteryTicket = (props) => {
       FUN_LOTTERY_ADDRESS
     );
 
-    // var latestid = await contractFunLottery.methods
-    //   .getLottoId(price * 10)
-    //   .call();
+    var latestiddd = await contractFunLottery.methods
+      .getLottoId(price * 10)
+      .call();
 
     // setLatestId(latestid);
 
@@ -53,13 +52,16 @@ const LotteryTicket = (props) => {
     const accounts = localStorage.getItem("accounts");
 
     // for (let i = latestId; i > 0; i--) {
+    console.log(latestId, latestiddd, "pricepricepriceprice");
     if (latestId && accounts) {
+      console.log(price, "pricepricepriceprice");
       var lotteryCnt = await contractFunLottery.methods
         .getUserTickets(latestId, accounts, price)
         .call();
 
       // setLotteryCount(lotteryCnt);
 
+      console.log(lotteryCnt, "lotteryCntlotteryCnt");
       for (let i = 0; i < lotteryCnt.length; i++) {
         const checkMapNavigator = await contractFunLottery.methods
           .userTickets(
@@ -80,6 +82,7 @@ const LotteryTicket = (props) => {
         if (checkMapNavigator.redeemed) {
           console.log("redeemed");
         } else {
+          console.log(lotteryCnt[i], "lotteryCnt[i]lotteryCnt[i]", price);
           setLotteryCount((oldArray) => [...oldArray, lotteryCnt[i]]);
           updateTicketNum(lotteryCnt[i], rowNum);
           updateSizes(price, rowNum);
