@@ -39,3 +39,13 @@
 .selectitems:hover {
   background: #323159 !important;
 }
+
+.buyInput {
+  width: 80%;
+  height: 50px;
+  border-radius: 5px;
+  font-family: ITCAvant;
+  font-size: 16px;
+  text-align: center;
+  background: #b4ffa4;
+}

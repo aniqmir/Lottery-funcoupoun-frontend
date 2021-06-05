@@ -42,6 +42,20 @@ const TokenProgress = (props) => {
 
   const { progressValue, total, network } = props;
 
+  const [ticketsToBuy, setTicketsToBuy] = React.useState(1);
+
+  const ticketsToBuyHandler = (e) => {
+    if (e.target.value < 1) {
+      alert("Tickets cannot be less than 1");
+      setTicketsToBuy(1);
+    } else if (e.target.value > 100) {
+      alert("Tickets cannot be greater than 100");
+      setTicketsToBuy(100);
+    } else {
+      setTicketsToBuy(parseInt(e.target.value));
+    }
+  };
+
   const getPercentage = (val) => {
     return ((parseInt(val) / parseInt(total)) * 100).toFixed(2);
   };
@@ -58,7 +72,7 @@ const TokenProgress = (props) => {
         //alert connect first
         alert("Please connect your metamask wallet");
       } else {
-        props.buyLotteryfromWeb3(props.lotteryAmount, 1);
+        props.buyLotteryfromWeb3(props.lotteryAmount, ticketsToBuy);
       }
     } else {
       alert("Cannot Buy with Current Network");
@@ -145,7 +159,7 @@ const TokenProgress = (props) => {
           </Typography> */}
         </div>
       </Grid>
-      <Grid item container xs={12} md={12} lg={3}>
+      <Grid item container xs={12} md={12} lg={2}>
         <Grid item xs={12}>
           <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :{" "}
           {props.position1} $
@@ -206,8 +220,16 @@ const TokenProgress = (props) => {
           }}
           onClick={buyTicket}
         >
-          Tickets Available : {total - progressValue}
+          Buy Tickets <b>Available : {total - progressValue}</b>
         </div>
+      </Grid>
+      <Grid item xs={8} md={6} lg={1}>
+        <input
+          type="number"
+          className="buyInput"
+          value={ticketsToBuy}
+          onChange={ticketsToBuyHandler}
+        />
       </Grid>
     </Grid>
   );
