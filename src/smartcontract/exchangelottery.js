@@ -1,4 +1,4 @@
-export const EXCHANGE_ADDRESS = "0x16EADA1AFe977ACb7c3A17136F174651AF12f1bd";
+export const EXCHANGE_ADDRESS = "0x38373Fe9f2502C23aDc17cDD6d2fFd7cF9ec5385";
 
 export const EXCHANGE_ABI = [
 	{
@@ -70,19 +70,6 @@ export const EXCHANGE_ABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "buyWithBnb",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -209,5 +196,9 @@ export const EXCHANGE_ABI = [
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	}
 ];
