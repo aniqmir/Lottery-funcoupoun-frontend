@@ -56,6 +56,8 @@ const TokenProgress = (props) => {
     if (ticketsToBuy < 1) {
       alert("Tickets cannot be less than 1");
       setTicketsToBuy(1);
+    } else if (ticketsToBuy > total - progressValue) {
+      alert("Total tickets available are " + (total - progressValue));
     } else if (ticketsToBuy > 100) {
       alert("Tickets cannot be greater than 100");
       setTicketsToBuy(100);
@@ -207,7 +209,8 @@ const TokenProgress = (props) => {
           i
         </div>
       </Grid>
-      <Grid item xs={8} md={6} lg={4}>
+      <Grid item xs={4} md={6} lg={1}></Grid>
+      <Grid item xs={8} md={6} lg={3}>
         {/* <img src={ticket} alt="ticket" /> */}
         <div
           style={{
@@ -220,7 +223,7 @@ const TokenProgress = (props) => {
           }}
           onClick={buyTicket}
         >
-          Buy Tickets ( <b>Available : {total - progressValue}</b> )
+          Buy Tickets {total - progressValue}
         </div>
       </Grid>
       <Grid item xs={8} md={6} lg={1}>

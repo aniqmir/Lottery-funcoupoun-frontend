@@ -43,10 +43,11 @@
 .buyInput {
   width: 80%;
   padding: 3px;
-  margin: 10px;
+  height: 44.5px;
   border-radius: 5px;
   font-family: ITCAvant;
   font-size: 16px;
   text-align: center;
   background: #b4ffa4;
+  border: none;
 }
