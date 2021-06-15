@@ -93,6 +93,7 @@ import imagept1 from "../assets/projectimages/pt1.png";
 import imagept3 from "../assets/projectimages/pt3.png";
 import imagept5 from "../assets/projectimages/pt5.png";
 import imagept7 from "../assets/projectimages/pt7.png";
+import image64 from "../assets/projectimages/1stWinner502ndWinner.png";
 
 import "./project.css";
 
@@ -178,12 +179,12 @@ export default function Project() {
       <div id="Roadmap">
         <img src={image62} alt="secondaryimage" />
       </div>
-      {/* <div id="4thto10th18toshare10">
+      <div id="Project4thto10th18toshare10">
         <img src={image63} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="1stWinner502ndWinner">
+      </div>
+      <div id="Project1stWinner502ndWinner">
         <img src={image64} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="Thejackpotdividing">
         <img src={image65} alt="secondaryimage" />
       </div>

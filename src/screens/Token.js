@@ -3,7 +3,7 @@ import "./token.css";
 import image1 from "../assets/tokenimages/TokenReleaseSchedule.png";
 import image2 from "../assets/tokenimages/TokenReleaseDistribu.png";
 import image3 from "../assets/tokenimages/FUNCAllocationDistri.png";
-// import image4 from "../assets/tokenimages/75MTotalSupplyHARDCA.png";
+import image4 from "../assets/tokenimages/75MTotalSupplyHARDCA.png";
 import image5 from "../assets/tokenimages/SalesDetails.png";
 import image6 from "../assets/tokenimages/Objetdynamiquevector_1.png";
 import image7 from "../assets/tokenimages/CommunityRoundPublic.png";
@@ -11,7 +11,7 @@ import image8 from "../assets/tokenimages/TypeSPLTOKENONBinanc.png";
 import image9 from "../assets/tokenimages/Bydistributingourpub.png";
 import image10 from "../assets/tokenimages/Saleparticipantsmayc.png";
 import image11 from "../assets/tokenimages/FUNC.png";
-// import image12 from "../assets/tokenimages/25Supplyrasingatotal.png";
+import image12 from "../assets/tokenimages/25Supplyrasingatotal.png";
 import image13 from "../assets/tokenimages/FUNCTokenResume.png";
 import image14 from "../assets/tokenimages/FUNCTokenDistributio.png";
 import image15 from "../assets/tokenimages/Details.png";
@@ -24,22 +24,22 @@ import image21 from "../assets/tokenimages/ofTotalSupply.png";
 import image22 from "../assets/tokenimages/NumofTokens.png";
 import image23 from "../assets/tokenimages/PriceperToken.png";
 import image24 from "../assets/tokenimages/CommunityRound.png";
-// import image25 from "../assets/tokenimages/1stJuly2021.png";
-// import image26 from "../assets/tokenimages/4months.png";
-// import image27 from "../assets/tokenimages/1stNovember2021.png";
-// import image28 from "../assets/tokenimages/100min1000max.png";
+import image25 from "../assets/tokenimages/1stJuly2021.png";
+import image26 from "../assets/tokenimages/4months.png";
+import image27 from "../assets/tokenimages/1stNovember2021.png";
+import image28 from "../assets/tokenimages/100min1000max.png";
 import image29 from "../assets/tokenimages/BTCETHUSDC.png";
 import image30 from "../assets/tokenimages/layer_10.png";
-// import image31 from "../assets/tokenimages/75M.png";
+import image31 from "../assets/tokenimages/75M.png";
 import image32 from "../assets/tokenimages/layer_08.png";
 import image33 from "../assets/tokenimages/PublicSale.png";
-// import image34 from "../assets/tokenimages/1stAugust2021.png";
-// import image35 from "../assets/tokenimages/3months.png";
-// import image36 from "../assets/tokenimages/1stNovember2021_0.png";
-// import image37 from "../assets/tokenimages/100min1500max.png";
+import image34 from "../assets/tokenimages/1stAugust2021.png";
+import image35 from "../assets/tokenimages/3months.png";
+import image36 from "../assets/tokenimages/1stNovember2021_0.png";
+import image37 from "../assets/tokenimages/100min1500max.png";
 import image38 from "../assets/tokenimages/BTCETHUSDCcopie.png";
 import image39 from "../assets/tokenimages/layer_15.png";
-// import image40 from "../assets/tokenimages/1125M.png";
+import image40 from "../assets/tokenimages/1125M.png";
 import image41 from "../assets/tokenimages/layer_012.png";
 import image42 from "../assets/tokenimages/Objetdynamiquevector_2.png";
 import image43 from "../assets/tokenimages/Objetdynamiquevector_3.png";
@@ -57,9 +57,9 @@ const Token = () => {
       <div id="FUNCAllocationDistri">
         <img src={image3} alt="secondaryimage" />
       </div>
-      {/* <div id="75MTotalSupplyHARDCA">
+      <div id="Token75MTotalSupplyHARDCA">
         <img src={image4} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="SalesDetails">
         <img src={image5} alt="secondaryimage" />
       </div>
@@ -81,9 +81,9 @@ const Token = () => {
       <div id="FUNC">
         <img src={image11} alt="secondaryimage" />
       </div>
-      {/* <div id="25Supplyrasingatotal">
+      <div id="Token25Supplyrasingatotal">
         <img src={image12} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="FUNCTokenResume">
         <img src={image13} alt="secondaryimage" />
       </div>
@@ -120,54 +120,54 @@ const Token = () => {
       <div id="CommunityRound">
         <img src={image24} alt="secondaryimage" />
       </div>
-      {/* <div id="1stJuly2021">
+      <div id="Token1stJuly2021">
         <img src={image25} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="4months">
+      </div>
+      <div id="Token4months">
         <img src={image26} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="1stNovember2021">
+      </div>
+      <div id="Token1stNovember2021">
         <img src={image27} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="100min1000max">
+      </div>
+      <div id="Token100min1000max">
         <img src={image28} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="BTCETHUSDC">
         <img src={image29} alt="secondaryimage" />
       </div>
       <div id="layer_10">
         <img src={image30} alt="secondaryimage" />
       </div>
-      {/* <div id="75M">
+      <div id="Token75M">
         <img src={image31} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="layer_08">
         <img src={image32} alt="secondaryimage" />
       </div>
       <div id="PublicSale">
         <img src={image33} alt="secondaryimage" />
       </div>
-      {/* <div id="1stAugust2021">
+      <div id="Token1stAugust2021">
         <img src={image34} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="3months">
+      </div>
+      <div id="Token3months">
         <img src={image35} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="1stNovember2021_0">
+      </div>
+      <div id="Token1stNovember2021_0">
         <img src={image36} alt="secondaryimage" />
-      </div> */}
-      {/* <div id="100min1500max">
+      </div>
+      <div id="Token100min1500max">
         <img src={image37} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="BTCETHUSDCcopie">
         <img src={image38} alt="secondaryimage" />
       </div>
       <div id="layer_15">
         <img src={image39} alt="secondaryimage" />
       </div>
-      {/* <div id="1125M">
+      <div id="Token1125M">
         <img src={image40} alt="secondaryimage" />
-      </div> */}
+      </div>
       <div id="layer_012">
         <img src={image41} alt="secondaryimage" />
       </div>
