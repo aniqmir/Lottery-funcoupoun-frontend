@@ -223,7 +223,7 @@ const TokenProgress = (props) => {
           }}
           onClick={buyTicket}
         >
-          Buy Tickets {total - progressValue}
+          Buy Tickets
         </div>
       </Grid>
       <Grid item xs={8} md={6} lg={1}>
