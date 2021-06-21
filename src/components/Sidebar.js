@@ -114,6 +114,7 @@ function ResponsiveDrawer(props) {
     setCurrentRoute(`/${route}`);
     history.push(route);
   };
+
   const [currentRoute, setCurrentRoute] = React.useState(
     window !== undefined ? window.location.pathname : "/"
   );
@@ -250,7 +251,12 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <img src={funcoupons} alt="funcoupons" />
+          <img
+            src={funcoupons}
+            onClick={() => changeRoute("/Lottery")}
+            alt="funcoupons"
+            style={{ cursor: "pointer" }}
+          />
           <div>
             <button
               className={"connect"}

@@ -14,7 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import Lottery from "../screens/Lotery";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, useHistory } from "react-router-dom";
 
 import funcoupons from "../assets/funcoupons.png";
 import mongain from "../assets/mongain.png";
@@ -129,6 +129,9 @@ function ResponsiveDrawer(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  const redirectTo = () => {
+    history.push("/Lottery");
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -143,7 +146,7 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <img src={funcoupons} alt="funcoupons" />
+          <img onClick={redirectTo} src={funcoupons} alt="funcoupons" />
           <div>
             <button className="connect">Connect</button>
             <span className="connectLang">FR</span>
