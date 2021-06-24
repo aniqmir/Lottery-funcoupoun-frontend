@@ -6,13 +6,13 @@ import {
 import { Grid } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Typography from "@material-ui/core/Typography";
-
+import Tooltip from "@material-ui/core/Tooltip";
 import sideticket from "../../assets/sideticket.png";
 import equal from "../../assets/equal.png";
 import goldcrown from "../../assets/goldcrown.svg";
 import silvercrown from "../../assets/silvercrown.svg";
 import bronzecrown from "../../assets/bronzecrown.svg";
-
+import information from "../../assets/information.png";
 import Web3 from "web3";
 // import ticket from "../../assets/ticket.png";
 import "./genericcomponents.css";
@@ -73,7 +73,7 @@ const TokenProgress = (props) => {
           //alert connect first
           alert("Please connect your metamask wallet");
         } else {
-          props.buyLotteryfromWeb3(props.lotteryAmount, ticketsToBuy);
+          props.buyLotteryfromWeb3(props.lotteryAmount.value, ticketsToBuy);
         }
       } else {
         alert("Cannot Buy with Current Network");
@@ -102,13 +102,18 @@ const TokenProgress = (props) => {
           <Grid
             item
             xs={3}
-            md={3}
+            md={4}
             container
             justify="center"
             alignItems="center"
             alignContent="center"
           >
-            <span className="fcPrice"> {10 * props.lotteryAmount} Fc</span>
+            <span
+              className="fcPrice"
+              style={{ fontFamily: "ITCAvantMedium", fontSize: "24px" }}
+            >
+              {10 * props.lotteryAmount.value} $
+            </span>
           </Grid>
           <Grid item xs={3} md={2}>
             <img src={sideticket} alt="sideticket" style={{ width: "40px" }} />
@@ -125,7 +130,7 @@ const TokenProgress = (props) => {
             <img alt="equal" src={equal} />
           </Grid>
           <Grid item xs={6} md={4}>
-            <span className="ticketPrice">$ {props.lotteryAmount}</span>
+            <span className="ticketPrice">$ {props.lotteryAmount.show}</span>
           </Grid>
         </Grid>
       </Grid>
@@ -163,20 +168,35 @@ const TokenProgress = (props) => {
       </Grid>
       <Grid item container xs={12} md={12} lg={2}>
         <Grid item xs={12}>
-          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :{" "}
-          {props.position1} $
+          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :
+          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
+            {props.position1} $
+          </span>
         </Grid>
         <Grid item xs={12}>
           <img src={silvercrown} alt="silvercrown" style={{ width: "20px" }} />{" "}
-          : {props.position2} $
+          :
+          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
+            {props.position2} $
+          </span>
         </Grid>
         <Grid item xs={6}>
           <img src={bronzecrown} alt="bronzecrown" style={{ width: "20px" }} />{" "}
-          : {props.position3} $
+          :
+          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
+            {props.position3} $
+          </span>
         </Grid>
       </Grid>
 
-      <Grid item container xs={12} md={12} lg={4}>
+      <Grid
+        item
+        container
+        xs={12}
+        md={12}
+        lg={4}
+        style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}
+      >
         <Grid item xs={12}>
           {props.position4.name} : {props.position4.price} $ to share
         </Grid>
@@ -192,7 +212,7 @@ const TokenProgress = (props) => {
       </Grid>
 
       <Grid item xs={4} md={6} lg={1}>
-        <div
+        {/* <div
           style={{
             background: "#b4ffa4",
             borderRadius: "50px",
@@ -205,9 +225,16 @@ const TokenProgress = (props) => {
             textAlign: "center",
             cursor: "pointer",
           }}
+        > */}
+        <Tooltip
+          title="Buy tickets in
+order to play and try to win FUNC ! More tickets you buy, more chances you have to be the king
+The lottery will run right after all the tickets are sold, you can check your winning in the profile
+page"
         >
-          i
-        </div>
+          <img src={information} style={{ cursor: "pointer" }} />
+        </Tooltip>
+        {/* </div> */}
       </Grid>
       <Grid item xs={4} md={6} lg={1}></Grid>
       <Grid item xs={8} md={6} lg={3}>
@@ -220,6 +247,8 @@ const TokenProgress = (props) => {
             padding: "10px",
             margin: "10px",
             cursor: "pointer",
+            fontFamily: "ITCAvantMedium",
+            textAlign: "center",
           }}
           onClick={buyTicket}
         >

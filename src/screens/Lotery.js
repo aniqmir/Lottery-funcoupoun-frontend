@@ -95,7 +95,12 @@ const useStyles = makeStyles((theme) => ({
 export default function NavTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const lotteryArray = [100, 1000, 10000, 100000];
+  const lotteryArray = [
+    { value: 100, show: "100" },
+    { value: 1000, show: "1000" },
+    { value: 10000, show: "10 000" },
+    { value: 100000, show: "100 000" },
+  ];
 
   const [progressValue, setProgressValue] = React.useState({
     0: 0,

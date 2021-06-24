@@ -236,9 +236,11 @@ export default function SimpleCard() {
         <Card className={classes.root}>
           <CardContent>
             <Grid container spacing={3}>
-              <Grid item xs={6} spacing={1} container>
+              <Grid item xs={10} spacing={1} container>
                 <Grid item xs={12}>
-                  <span className="exchangeTitle">Exchange</span>
+                  <span className="exchangeTitle">
+                    Buy FUNC and get ready to play
+                  </span>
                 </Grid>
                 <Grid item xs={12}>
                   <span style={{ fontFamily: "ITCAvant" }}>
@@ -246,15 +248,15 @@ export default function SimpleCard() {
                   </span>
                 </Grid>
               </Grid>
-              <Grid item xs={6} container>
+              <Grid item xs={2} container>
                 <Grid item xs={6}>
                   {/* <img src={settings} /> */}
                 </Grid>
                 <Grid item xs={3}>
-                  <img alt="settings" className="exchangeIcon" src={settings} />
+                  {/* <img alt="settings" className="exchangeIcon" src={settings} /> */}
                 </Grid>
                 <Grid item xs={3}>
-                  <img alt="refresh" className="exchangeIcon" src={refresh} />
+                  {/* <img alt="refresh" className="exchangeIcon" src={refresh} /> */}
                 </Grid>
               </Grid>
 

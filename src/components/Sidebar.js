@@ -27,7 +27,7 @@ import Token from "../screens/Token";
 import { Router, Route, Redirect } from "react-router-dom";
 
 import funcoupons from "../assets/funcoupons.png";
-import mongain from "../assets/mongain.png";
+import rewardside from "../assets/rewardside.png";
 import sideticket from "../assets/sideticket.png";
 
 import history from "../history";
@@ -197,8 +197,9 @@ function ResponsiveDrawer(props) {
               style={{
                 marginLeft: "1rem",
               }}
+              onClick={() => changeRoute("/Profile")}
             >
-              <img src={mongain} alt="mongain" />
+              <img src={rewardside} alt="mongain" />
             </span>
           </ListItem>
           <ListItem alignItems="center" button divider={true}>
@@ -222,7 +223,7 @@ function ResponsiveDrawer(props) {
                 color: "#dd4d8c",
               }}
             >
-              {userGainValue.toFixed(2)} $
+              0.01 ${/* {userGainValue.toFixed(2)} $ */}
             </span>
           </ListItem>
         </List>
@@ -263,7 +264,8 @@ function ResponsiveDrawer(props) {
               onClick={approvefromWeb3}
               disabled={approved}
             >
-              {approved ? "Approved" : "Approve"}
+              {approved ? `Approved` : "Approve"}{" "}
+              {approved && <span>&#10004;</span>}
             </button>
             <button className="connect" onClick={connectToMetaMask}>
               {props.address.length === 0

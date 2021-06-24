@@ -5,6 +5,12 @@
 }
 
 @font-face {
+  font-family: "ITCAvantMedium";
+  src: local("ITCAvantMedium"),
+    url(./fonts/ITCAvantGardeGothicMedium.otf) format("truetype");
+}
+
+@font-face {
   font-family: "HarlowItalic";
   src: local("HarlowItalic"),
     url(./fonts/HarlowSolidItalicItalic.ttf) format("truetype");
