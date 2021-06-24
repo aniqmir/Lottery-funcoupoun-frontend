@@ -10,6 +10,7 @@ import {
 } from "../../smartcontract/funlottery";
 
 import "./genericcomponents.css";
+import { provider } from "../../smartcontract/networkid";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -35,7 +36,7 @@ const LotteryTicket = (props) => {
   const getLotteryId = async () => {
     //get Lottery ID here
 
-    const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+    const web3 = new Web3(provider);
 
     const contractFunLottery = new web3.eth.Contract(
       FUN_LOTTERY_ABI,

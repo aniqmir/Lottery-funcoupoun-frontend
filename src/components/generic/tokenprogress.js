@@ -80,6 +80,21 @@ const TokenProgress = (props) => {
       }
     }
   };
+
+  const getValuewithSpaces = (tpVal) => {
+    if (tpVal === 1000) {
+      return "1000";
+    }
+    if (tpVal === 10000) {
+      return "10 000";
+    }
+    if (tpVal === 100000) {
+      return "100 000";
+    }
+    if (tpVal === 1000000) {
+      return "1 000 000";
+    }
+  };
   return (
     <Grid
       container
@@ -92,8 +107,8 @@ const TokenProgress = (props) => {
       style={{ margin: "15px", width: "75%" }}
     >
       <Grid item xs={2} md={12}>
-        <span style={{ color: "#9026ff", fontSize: "1.2rem", fontWeight: 700 }}>
-          #{props.keys}
+        <span style={{ color: "#9026ff", fontSize: "1.5rem", fontWeight: 700 }}>
+          # {props.latestValues[props.keys - 1]}
         </span>
       </Grid>
       <Grid item xs={10} md={12} container direction="row">
@@ -110,9 +125,9 @@ const TokenProgress = (props) => {
           >
             <span
               className="fcPrice"
-              style={{ fontFamily: "ITCAvantMedium", fontSize: "24px" }}
+              style={{ fontFamily: "ITCAvant", fontSize: "24px" }}
             >
-              {10 * props.lotteryAmount.value} $
+              {getValuewithSpaces(10 * props.lotteryAmount.value)} $
             </span>
           </Grid>
           <Grid item xs={3} md={2}>
@@ -180,7 +195,7 @@ const TokenProgress = (props) => {
             {props.position2} $
           </span>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <img src={bronzecrown} alt="bronzecrown" style={{ width: "20px" }} />{" "}
           :
           <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
@@ -247,7 +262,7 @@ page"
             padding: "10px",
             margin: "10px",
             cursor: "pointer",
-            fontFamily: "ITCAvantMedium",
+            fontFamily: "ITCAvant",
             textAlign: "center",
           }}
           onClick={buyTicket}

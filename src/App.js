@@ -10,6 +10,7 @@ import {
 } from "./smartcontract/funlottery";
 
 import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "./smartcontract/funcoin";
+import { provider } from "./smartcontract/networkid";
 
 function App() {
   const [address, setAddress] = useState([]);
@@ -42,7 +43,7 @@ function App() {
   const updateAddress = async () => {
     const web3 = window.web3;
 
-    const web33 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+    const web33 = new Web3(provider);
 
     const contractFunLottery = new web33.eth.Contract(
       FUN_LOTTERY_ABI,
@@ -91,7 +92,9 @@ function App() {
       const balance = await contract.balanceOf(accounts[0]);
 
       if (balance.toNumber() === 0) {
-        alert("Fun Coupons Not Available");
+        alert(
+          "Fun Coupons Not Available, First you should get FUNC in the exchange to play"
+        );
       } else {
         const transaction = await contract.approve(
           FUN_LOTTERY_ADDRESS,

@@ -24,6 +24,7 @@ import { ethers } from "ethers";
 import Web3 from "web3";
 
 import "./screens.css";
+import { provider } from "../smartcontract/networkid";
 
 const useStyles = makeStyles({
   root: {
@@ -165,7 +166,7 @@ export default function SimpleCard() {
 
   useEffect(() => {
     const getExchangeValuefromEth = async () => {
-      const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+      const web3 = new Web3(provider);
       const todoList = new web3.eth.Contract(EXCHANGE_ABI, EXCHANGE_ADDRESS);
 
       const USDRate = await todoList.methods.usdRate().call();

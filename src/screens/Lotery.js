@@ -19,6 +19,7 @@ import { ethers } from "ethers";
 import downarrows from "../assets/downarrows.png";
 
 import "./screens.css";
+import { networkid, provider } from "../smartcontract/networkid";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -112,7 +113,7 @@ export default function NavTabs() {
 
   React.useEffect(() => {
     const getLotteryNumbersfromEth = async () => {
-      const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+      const web3 = new Web3(provider);
       const todoList = new web3.eth.Contract(
         FUN_LOTTERY_ABI,
         FUN_LOTTERY_ADDRESS
@@ -130,6 +131,32 @@ export default function NavTabs() {
     getLotteryNumbersfromEth();
   }, []);
 
+  const [latestIDforrows, setlatestIDforrows] = React.useState([]);
+
+  const web3 = new Web3(Web3.givenProvider);
+  const contractFunLottery = new web3.eth.Contract(
+    FUN_LOTTERY_ABI,
+    FUN_LOTTERY_ADDRESS
+  );
+  const getLatestId = async (size) => {
+    var latestid = await contractFunLottery.methods.getLottoId(size).call();
+    return latestid;
+  };
+
+  React.useEffect(() => {
+    getLatestId(100).then((res) => {
+      setlatestIDforrows((oldArray) => [...oldArray, res]);
+      getLatestId(1000).then((res) => {
+        setlatestIDforrows((oldArray) => [...oldArray, res]);
+        getLatestId(10000).then((res) => {
+          setlatestIDforrows((oldArray) => [...oldArray, res]);
+          getLatestId(100000).then((res) => {
+            setlatestIDforrows((oldArray) => [...oldArray, res]);
+          });
+        });
+      });
+    });
+  }, []);
   const buyLotteryfromWeb3 = async (amount, ticketsToBuy) => {
     // const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
@@ -218,7 +245,7 @@ export default function NavTabs() {
     const web3 = new Web3(Web3.givenProvider);
 
     const network = await web3.eth.net.getId();
-    if (network === 97) {
+    if (network === networkid) {
       setNetwork(network);
     }
   }, []);
@@ -254,20 +281,22 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        {lotteryValues.map((value, index) => (
-          <div className="tokenProgressMain" key={index}>
-            <TokenProgress
-              key={index}
-              keys={index + 1}
-              lotteryAmount={lotteryArray[index]}
-              progressValue={progressValue[index]}
-              address={address}
-              buyLotteryfromWeb3={buyLotteryfromWeb3}
-              network={network}
-              {...value}
-            />
-          </div>
-        ))}
+        {latestIDforrows.length !== 0 &&
+          lotteryValues.map((value, index) => (
+            <div className="tokenProgressMain" key={index}>
+              <TokenProgress
+                key={index}
+                keys={index + 1}
+                lotteryAmount={lotteryArray[index]}
+                progressValue={progressValue[index]}
+                address={address}
+                buyLotteryfromWeb3={buyLotteryfromWeb3}
+                network={network}
+                latestValues={latestIDforrows}
+                {...value}
+              />
+            </div>
+          ))}
         <div className="downarrows">
           <img src={downarrows} alt="downarrows" />
         </div>

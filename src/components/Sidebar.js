@@ -12,6 +12,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+import { networkid, provider } from "../smartcontract/networkid";
 // const Lottery = React.lazy(() => import('../screens/Lotery'));
 // const Profile = React.lazy(() => import('../screens/Profil'));
 // const Exchange = React.lazy(() => import('../screens/Exchange'));
@@ -138,11 +139,12 @@ function ResponsiveDrawer(props) {
   };
 
   useEffect(async () => {
-    const web3 = new Web3(Web3.givenProvider);
+    const web3 = new Web3(provider);
 
     const network = await web3.eth.net.getId();
-    if (network === 97) {
+    if (network === networkid) {
       setNetwork(network);
+    } else {
     }
   }, []);
   useEffect(() => {
@@ -202,7 +204,12 @@ function ResponsiveDrawer(props) {
               <img src={rewardside} alt="mongain" />
             </span>
           </ListItem>
-          <ListItem alignItems="center" button divider={true}>
+          <ListItem
+            alignItems="center"
+            button
+            divider={true}
+            onClick={() => changeRoute("/Exchange")}
+          >
             <span
               style={{
                 marginLeft: "1rem",
@@ -223,7 +230,7 @@ function ResponsiveDrawer(props) {
                 color: "#dd4d8c",
               }}
             >
-              0.01 ${/* {userGainValue.toFixed(2)} $ */}
+              0.10 ${/* {userGainValue.toFixed(2)} $ */}
             </span>
           </ListItem>
         </List>

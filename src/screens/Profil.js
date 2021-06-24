@@ -19,6 +19,7 @@ import {
 } from "../smartcontract/funlottery";
 
 import { ethers } from "ethers";
+import { networkid, provider } from "../smartcontract/networkid";
 
 // import { FUN_COIN_ADDRESS, FUN_COIN_ABI } from "../smartcontract/funcoin";
 
@@ -34,7 +35,7 @@ export default function Profile() {
   // const classes = useStyles();
 
   var numberofRows = 4;
-  const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545/");
+  const web3 = new Web3(provider);
 
   const contractFunLottery = new web3.eth.Contract(
     FUN_LOTTERY_ABI,
@@ -138,7 +139,7 @@ export default function Profile() {
     const web3 = new Web3(Web3.givenProvider);
 
     const network = await web3.eth.net.getId();
-    if (network === 97) {
+    if (network === networkid) {
       setNetwork(network);
     }
 
@@ -233,8 +234,12 @@ export default function Profile() {
     return lotteries;
   };
 
+  var displayStyle = {};
   const getRewardValue = (rewarddd) => {
     let sum = rewarddd.reduce((a, b) => a + b);
+    if (sum == 0) {
+      displayStyle = { display: "none" };
+    }
     return sum === 0 ? "" : sum.toFixed(2);
   };
   const makeRows = () => {
@@ -245,7 +250,7 @@ export default function Profile() {
 
       rows.push(
         <>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={displayStyle}>
             <div style={{ display: "flex" }}>
               <Tooltip
                 title={
@@ -289,8 +294,8 @@ export default function Profile() {
                   }}
                 />
               </Tooltip>
-              <div className="rewardprice">
-                <span className="rewardpricetext">
+              <div className="rewardprice" style={displayStyle}>
+                <span className="rewardpricetext" style={displayStyle}>
                   {i === 0
                     ? getRewardValue(rewardPrevValue1)
                     : i === 1
@@ -316,12 +321,13 @@ export default function Profile() {
               <button
                 className="claim"
                 onClick={(claimMultiple) => claim(i + 1)}
+                style={displayStyle}
               >
                 Claim
               </button>
             </div>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={displayStyle}>
             <p className="headtext">Past Draws</p>
           </Grid>
 
