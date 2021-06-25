@@ -109,7 +109,7 @@ function ResponsiveDrawer(props) {
             )
           )}
           {[1, 2, 3, 4, 5, 6].map((item, index) => (
-            <ListItem key={index} alignItems="center"></ListItem>
+            <ListItem key={item} alignItems="center"></ListItem>
           ))}
           <ListItem alignItems="center" button divider={true}>
             <img src={mongain} alt="mongain" />

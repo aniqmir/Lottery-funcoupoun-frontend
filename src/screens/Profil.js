@@ -235,12 +235,15 @@ export default function Profile() {
   };
 
   var displayStyle = {};
+  var rowStyle = { display: "flex" };
+
   const getRewardValue = (rewarddd) => {
     let sum = rewarddd.reduce((a, b) => a + b);
-    if (sum == 0) {
+
+    if (sum === 0) {
       displayStyle = { display: "none" };
-    }
-    return sum === 0 ? "" : sum.toFixed(2);
+      return "";
+    } else return sum.toFixed(2);
   };
   const makeRows = () => {
     for (let i = 0; i < numberofRows; i++) {
@@ -250,9 +253,9 @@ export default function Profile() {
 
       rows.push(
         <>
-          <Grid item xs={12} style={displayStyle}>
-            <div style={{ display: "flex" }}>
-              <Tooltip
+          <Grid item xs={12}>
+            <div style={rowStyle}>
+              {/* <Tooltip
                 title={
                   <Grid
                     container
@@ -283,19 +286,19 @@ export default function Profile() {
                     </Grid>
                   </Grid>
                 }
-              >
-                <img
-                  src={information}
-                  style={{
-                    height: "40px",
-                    width: "auto",
-                    marginLeft: "100px",
-                    marginTop: "52px",
-                  }}
-                />
-              </Tooltip>
-              <div className="rewardprice" style={displayStyle}>
-                <span className="rewardpricetext" style={displayStyle}>
+              > */}
+              <img
+                src={information}
+                style={{
+                  height: "40px",
+                  width: "auto",
+                  marginLeft: "100px",
+                  marginTop: "52px",
+                }}
+              />
+              {/* </Tooltip> */}
+              <div className="rewardprice">
+                <span className="rewardpricetext">
                   {i === 0
                     ? getRewardValue(rewardPrevValue1)
                     : i === 1
@@ -327,8 +330,10 @@ export default function Profile() {
               </button>
             </div>
           </Grid>
-          <Grid item xs={12} style={displayStyle}>
-            <p className="headtext">Past Draws</p>
+          <Grid item xs={12}>
+            <p className="headtext" style={displayStyle}>
+              Past Draws
+            </p>
           </Grid>
 
           {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
@@ -337,6 +342,7 @@ export default function Profile() {
     }
     return rows;
   };
+
   return (
     <Container>
       <Grid container spacing={6}>
@@ -344,48 +350,48 @@ export default function Profile() {
           <Grid item xs={12}>
             <div style={{ display: "flex" }}>
               <div>
-                <Tooltip
-                  title={
-                    <Grid
-                      container
-                      spacing={1}
-                      style={{ fontFamily: "ITCAvantMedium", fontSize: "12px" }}
-                    >
-                      <Grid item xs={12}>
-                        Lottery # 1
-                      </Grid>
-                      <Grid item xs={12}>
-                        Ticket 17 earned you 6 $
-                      </Grid>
-                      <Grid item xs={12}>
-                        Lottery # 9
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>Ticket 56 earned you 124 $</div>
-                        <div>Ticket 139 earned you 520 $</div>
-                        <div>Ticket 2654 earned you 1 730 $</div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        Lottery # 12
-                      </Grid>
-                      <Grid item xs={12}>
-                        <div>Ticket 1687 earned you 4 120 $</div>
-                        <div>Ticket 603 earned you 2 000 $</div>
-                        <div>Ticket 12785 earned you 250 $</div>
-                      </Grid>
+                {/* <Tooltip
+                title={
+                  <Grid
+                    container
+                    spacing={1}
+                    style={{ fontFamily: "ITCAvantMedium", fontSize: "12px" }}
+                  >
+                    <Grid item xs={12}>
+                      Lottery # 1
                     </Grid>
-                  }
-                >
-                  <img
-                    src={information}
-                    style={{
-                      height: "40px",
-                      width: "auto",
-                      marginLeft: "100px",
-                      marginTop: "52px",
-                    }}
-                  />
-                </Tooltip>
+                    <Grid item xs={12}>
+                      Ticket 17 earned you 6 $
+                    </Grid>
+                    <Grid item xs={12}>
+                      Lottery # 9
+                    </Grid>
+                    <Grid item xs={12}>
+                      <div>Ticket 56 earned you 124 $</div>
+                      <div>Ticket 139 earned you 520 $</div>
+                      <div>Ticket 2654 earned you 1 730 $</div>
+                    </Grid>
+                    <Grid item xs={12}>
+                      Lottery # 12
+                    </Grid>
+                    <Grid item xs={12}>
+                      <div>Ticket 1687 earned you 4 120 $</div>
+                      <div>Ticket 603 earned you 2 000 $</div>
+                      <div>Ticket 12785 earned you 250 $</div>
+                    </Grid>
+                  </Grid>
+                }
+                > */}
+                <img
+                  src={information}
+                  style={{
+                    height: "40px",
+                    width: "auto",
+                    marginLeft: "100px",
+                    marginTop: "52px",
+                  }}
+                />
+                {/* </Tooltip> */}
               </div>
               <div className="rewardimage">
                 <p className="rewardtext">REWARD</p>
@@ -404,7 +410,7 @@ export default function Profile() {
           {!loading && latestIDforrows.length !== 0 ? (
             [100, 1000, 10000, 100000].map((price, index) => {
               return (
-                <Grid item xs={12} md={3} key={index}>
+                <Grid item xs={12} md={3} key={price}>
                   <LotteryTicket
                     price={price}
                     latestId={latestIDforrows[index]}

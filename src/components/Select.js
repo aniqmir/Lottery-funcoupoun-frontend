@@ -107,7 +107,7 @@ export default function ControlledOpenSelect(props) {
           </MenuItem> */}
           {options.map((option, index) => {
             return (
-              <MenuItem value={option.name} key={index}>
+              <MenuItem value={option.name} key={option.name}>
                 <div style={{ display: "flex" }}>
                   <img alt="furc" src={sideticket} style={{ width: "20px" }} />
                   &nbsp;{option.name}
