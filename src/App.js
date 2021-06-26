@@ -93,7 +93,7 @@ function App() {
 
       if (balance.toNumber() === 0) {
         alert(
-          "Fun Coupons Not Available, First you should get FUNC in the exchange to play"
+          "Fun Coupons Not Available, first you should get FUNC in the exchange to play"
         );
       } else {
         const transaction = await contract.approve(
