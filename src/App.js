@@ -75,6 +75,7 @@ function App() {
   }, []);
 
   const approvefromWeb3 = async () => {
+    console.log(Web3.givenProvider, "Web3.givenProvider");
     const web3 = new Web3(Web3.givenProvider);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);

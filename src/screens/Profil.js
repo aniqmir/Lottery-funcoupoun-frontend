@@ -137,10 +137,11 @@ export default function Profile() {
 
   React.useEffect(async () => {
     const web3 = new Web3(Web3.givenProvider);
-
-    const network = await web3.eth.net.getId();
-    if (network === networkid) {
-      setNetwork(network);
+    if (Web3.givenProvider !== null) {
+      const network = await web3.eth.net.getId();
+      if (network === networkid) {
+        setNetwork(network);
+      }
     }
 
     getLatestId(100).then((res) => {

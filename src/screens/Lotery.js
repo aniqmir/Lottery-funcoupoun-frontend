@@ -133,14 +133,22 @@ export default function NavTabs() {
 
   const [latestIDforrows, setlatestIDforrows] = React.useState([]);
 
-  const web3 = new Web3(Web3.givenProvider);
-  const contractFunLottery = new web3.eth.Contract(
-    FUN_LOTTERY_ABI,
-    FUN_LOTTERY_ADDRESS
-  );
+  var contractFunLottery = {};
+
+  if (Web3.givenProvider !== null) {
+    const web3 = new Web3(Web3.givenProvider);
+
+    contractFunLottery = new web3.eth.Contract(
+      FUN_LOTTERY_ABI,
+      FUN_LOTTERY_ADDRESS
+    );
+  }
+
   const getLatestId = async (size) => {
-    var latestid = await contractFunLottery.methods.getLottoId(size).call();
-    return latestid;
+    if (Web3.givenProvider !== null) {
+      var latestid = await contractFunLottery.methods.getLottoId(size).call();
+      return latestid;
+    }
   };
 
   React.useEffect(() => {
@@ -174,9 +182,7 @@ export default function NavTabs() {
       console.log(transaction, "transaction buy");
     } catch (err) {
       console.log(err);
-      if (
-        err.data.message === "execution reverted: Not enough tickets available"
-      ) {
+      if (err.code == 4001) {
         alert("Not enough tickets available");
       } else {
         alert("Please Approve FUNC to buy Ticket");
@@ -244,9 +250,12 @@ export default function NavTabs() {
   React.useEffect(async () => {
     const web3 = new Web3(Web3.givenProvider);
 
-    const network = await web3.eth.net.getId();
-    if (network === networkid) {
-      setNetwork(network);
+    if (Web3.givenProvider !== null) {
+      const network = await web3.eth.net.getId();
+
+      if (network === networkid) {
+        setNetwork(network);
+      }
     }
   }, []);
 

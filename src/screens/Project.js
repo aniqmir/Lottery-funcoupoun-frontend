@@ -102,16 +102,16 @@ export default function Project() {
   return (
     <div id="backgroundProject">
       <div id="Rectangle1">
-        <img src={image1} alt="secondaryimage" />
+        {/* <img src={image1} alt="secondaryimage" /> */}
       </div>
       <div id="Rectangle1copie3">
-        <img src={image2} alt="secondaryimage" />
+        {/* <img src={image2} alt="secondaryimage" /> */}
       </div>
       <div id="Rectangle1copie4">
-        <img src={image3} alt="secondaryimage" />
+        {/* <img src={image3} alt="secondaryimage" /> */}
       </div>
       <div id="Rectangle1copie">
-        <img src={image4} alt="secondaryimage" />
+        {/* <img src={image4} alt="secondaryimage" /> */}
       </div>
       <div id="Rectangle1copie2">
         <img src={image5} alt="secondaryimage" />
