@@ -83,7 +83,7 @@ const TokenProgress = (props) => {
 
   const getValuewithSpaces = (tpVal) => {
     if (tpVal === 1000) {
-      return "1000";
+      return "1 000";
     }
     if (tpVal === 10000) {
       return "10 000";

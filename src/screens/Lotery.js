@@ -98,7 +98,7 @@ export default function NavTabs() {
   const [value, setValue] = React.useState(0);
   const lotteryArray = [
     { value: 100, show: "100" },
-    { value: 1000, show: "1000" },
+    { value: 1000, show: "1 000" },
     { value: 10000, show: "10 000" },
     { value: 100000, show: "100 000" },
   ];
