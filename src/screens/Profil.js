@@ -242,110 +242,326 @@ export default function Profile() {
     let sum = rewarddd.reduce((a, b) => a + b);
 
     if (sum === 0) {
-      displayStyle = { display: "none" };
-      return "";
+      return 0;
     } else return sum.toFixed(2);
   };
   const makeRows = () => {
+    const prices = [100, 1000, 10000, 100000];
     for (let i = 0; i < numberofRows; i++) {
-      // loop = loop * 10;
-
-      const prices = [100, 1000, 10000, 100000];
-
-      rows.push(
-        <>
-          <Grid item xs={12}>
-            <div style={rowStyle}>
-              {/* <Tooltip
-                title={
-                  <Grid
-                    container
-                    spacing={1}
-                    style={{ fontFamily: "ITCAvantMedium", fontSize: "12px" }}
-                  >
-                    <Grid item xs={12}>
-                      Lottery # 1
-                    </Grid>
-                    <Grid item xs={12}>
-                      Ticket 17 earned you 6 $
-                    </Grid>
-                    <Grid item xs={12}>
-                      Lottery # 9
-                    </Grid>
-                    <Grid item xs={12}>
-                      <div>Ticket 56 earned you 124 $</div>
-                      <div>Ticket 139 earned you 520 $</div>
-                      <div>Ticket 2654 earned you 1 730 $</div>
-                    </Grid>
-                    <Grid item xs={12}>
-                      Lottery # 12
-                    </Grid>
-                    <Grid item xs={12}>
-                      <div>Ticket 1687 earned you 4 120 $</div>
-                      <div>Ticket 603 earned you 2 000 $</div>
-                      <div>Ticket 12785 earned you 250 $</div>
-                    </Grid>
-                  </Grid>
-                }
-              > */}
-              <img
-                src={information}
-                style={{
-                  height: "40px",
-                  width: "auto",
-                  marginLeft: "100px",
-                  marginTop: "52px",
-                }}
-              />
-              {/* </Tooltip> */}
-              <div className="rewardprice">
-                <span className="rewardpricetext">
-                  {i === 0
-                    ? getRewardValue(rewardPrevValue1)
-                    : i === 1
-                    ? getRewardValue(rewardPrevValue2)
-                    : i === 2
-                    ? getRewardValue(rewardPrevValue3)
-                    : getRewardValue(rewardPrevValue4)}
-                  &nbsp;
-                  <span>
-                    <img
-                      src={sideticket}
-                      alt="sideticket"
-                      style={{ width: "40px", height: "auto" }}
-                    />
+      if (i === 0) {
+        const sum1 = getRewardValue(rewardPrevValue1);
+        // if (sum1 > 0) {
+        rows.push(
+          <>
+            <Grid item xs={12} style={sum1 === 0 ? { display: "none" } : {}}>
+              <div style={rowStyle}>
+                <img
+                  src={information}
+                  style={{
+                    height: "40px",
+                    width: "auto",
+                    marginLeft: "100px",
+                    marginTop: "52px",
+                  }}
+                />
+                {/* </Tooltip> */}
+                <div className="rewardprice">
+                  <span className="rewardpricetext">
+                    {sum1}
+                    &nbsp;
+                    <span>
+                      <img
+                        src={sideticket}
+                        alt="sideticket"
+                        style={{ width: "40px", height: "auto" }}
+                      />
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
-            </div>
-          </Grid>
+            </Grid>
 
-          <Grid item xs={12}>
-            <div className="rewardcenter">
-              <button
-                className="claim"
-                onClick={(claimMultiple) => claim(i + 1)}
-                style={displayStyle}
-              >
-                Claim
-              </button>
-            </div>
-          </Grid>
-          <Grid item xs={12}>
-            <p className="headtext" style={displayStyle}>
-              Past Draws
-            </p>
-          </Grid>
+            <Grid item xs={12}>
+              <div className="rewardcenter">
+                <button
+                  className="claim"
+                  onClick={(claimMultiple) => claim(i + 1)}
+                  style={displayStyle}
+                >
+                  Claim
+                </button>
+              </div>
+            </Grid>
+            <Grid item xs={12}>
+              <p className="headtext" style={displayStyle}>
+                Past Draws
+              </p>
+            </Grid>
 
-          {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
-        </>
-      );
+            {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
+          </>
+        );
+        // }
+      } else if (i === 1) {
+        const sum2 = getRewardValue(rewardPrevValue2);
+
+        rows.push(
+          <>
+            <Grid item xs={12} style={sum2 === 0 ? { display: "none" } : {}}>
+              <div style={rowStyle}>
+                {/* <Tooltip
+                  title={
+                    <Grid
+                      container
+                      spacing={1}
+                      style={{ fontFamily: "ITCAvantMedium", fontSize: "12px" }}
+                    >
+                      <Grid item xs={12}>
+                        Lottery # 1
+                      </Grid>
+                      <Grid item xs={12}>
+                        Ticket 17 earned you 6 $
+                      </Grid>
+                      <Grid item xs={12}>
+                        Lottery # 9
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>Ticket 56 earned you 124 $</div>
+                        <div>Ticket 139 earned you 520 $</div>
+                        <div>Ticket 2654 earned you 1 730 $</div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        Lottery # 12
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>Ticket 1687 earned you 4 120 $</div>
+                        <div>Ticket 603 earned you 2 000 $</div>
+                        <div>Ticket 12785 earned you 250 $</div>
+                      </Grid>
+                    </Grid>
+                  }
+                > */}
+                <img
+                  src={information}
+                  style={{
+                    height: "40px",
+                    width: "auto",
+                    marginLeft: "100px",
+                    marginTop: "52px",
+                  }}
+                />
+                {/* </Tooltip> */}
+                <div className="rewardprice">
+                  <span className="rewardpricetext">
+                    {sum2}
+                    &nbsp;
+                    <span>
+                      <img
+                        src={sideticket}
+                        alt="sideticket"
+                        style={{ width: "40px", height: "auto" }}
+                      />
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </Grid>
+
+            <Grid item xs={12} style={sum2 === 0 ? { display: "none" } : {}}>
+              <div className="rewardcenter">
+                <button
+                  className="claim"
+                  onClick={(claimMultiple) => claim(i + 1)}
+                  style={displayStyle}
+                >
+                  Claim
+                </button>
+              </div>
+            </Grid>
+            <Grid item xs={12} style={sum2 === 0 ? { display: "none" } : {}}>
+              <p className="headtext" style={displayStyle}>
+                Past Draws
+              </p>
+            </Grid>
+
+            {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
+          </>
+        );
+      } else if (i === 2) {
+        const sum3 = getRewardValue(rewardPrevValue3);
+        rows.push(
+          <>
+            <Grid item xs={12} style={sum3 === 0 ? { display: "none" } : {}}>
+              <div style={rowStyle}>
+                {/* <Tooltip
+                  title={
+                    <Grid
+                      container
+                      spacing={1}
+                      style={{ fontFamily: "ITCAvantMedium", fontSize: "12px" }}
+                    >
+                      <Grid item xs={12}>
+                        Lottery # 1
+                      </Grid>
+                      <Grid item xs={12}>
+                        Ticket 17 earned you 6 $
+                      </Grid>
+                      <Grid item xs={12}>
+                        Lottery # 9
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>Ticket 56 earned you 124 $</div>
+                        <div>Ticket 139 earned you 520 $</div>
+                        <div>Ticket 2654 earned you 1 730 $</div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        Lottery # 12
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>Ticket 1687 earned you 4 120 $</div>
+                        <div>Ticket 603 earned you 2 000 $</div>
+                        <div>Ticket 12785 earned you 250 $</div>
+                      </Grid>
+                    </Grid>
+                  }
+                > */}
+                <img
+                  src={information}
+                  style={{
+                    height: "40px",
+                    width: "auto",
+                    marginLeft: "100px",
+                    marginTop: "52px",
+                  }}
+                />
+                {/* </Tooltip> */}
+                <div className="rewardprice">
+                  <span className="rewardpricetext">
+                    {sum3}
+                    &nbsp;
+                    <span>
+                      <img
+                        src={sideticket}
+                        alt="sideticket"
+                        style={{ width: "40px", height: "auto" }}
+                      />
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </Grid>
+
+            <Grid item xs={12} style={sum3 === 0 ? { display: "none" } : {}}>
+              <div className="rewardcenter">
+                <button
+                  className="claim"
+                  onClick={(claimMultiple) => claim(i + 1)}
+                  style={displayStyle}
+                >
+                  Claim
+                </button>
+              </div>
+            </Grid>
+            <Grid item xs={12} style={sum3 === 0 ? { display: "none" } : {}}>
+              <p className="headtext" style={displayStyle}>
+                Past Draws
+              </p>
+            </Grid>
+
+            {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
+          </>
+        );
+      } else {
+        const sum4 = getRewardValue(rewardPrevValue3);
+        rows.push(
+          <>
+            <Grid item xs={12} style={sum4 === 0 ? { display: "none" } : {}}>
+              <div style={rowStyle}>
+                {/* <Tooltip
+                  title={
+                    <Grid
+                      container
+                      spacing={1}
+                      style={{ fontFamily: "ITCAvantMedium", fontSize: "12px" }}
+                    >
+                      <Grid item xs={12}>
+                        Lottery # 1
+                      </Grid>
+                      <Grid item xs={12}>
+                        Ticket 17 earned you 6 $
+                      </Grid>
+                      <Grid item xs={12}>
+                        Lottery # 9
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>Ticket 56 earned you 124 $</div>
+                        <div>Ticket 139 earned you 520 $</div>
+                        <div>Ticket 2654 earned you 1 730 $</div>
+                      </Grid>
+                      <Grid item xs={12}>
+                        Lottery # 12
+                      </Grid>
+                      <Grid item xs={12}>
+                        <div>Ticket 1687 earned you 4 120 $</div>
+                        <div>Ticket 603 earned you 2 000 $</div>
+                        <div>Ticket 12785 earned you 250 $</div>
+                      </Grid>
+                    </Grid>
+                  }
+                > */}
+                <img
+                  src={information}
+                  style={{
+                    height: "40px",
+                    width: "auto",
+                    marginLeft: "100px",
+                    marginTop: "52px",
+                  }}
+                />
+                {/* </Tooltip> */}
+                <div className="rewardprice">
+                  <span className="rewardpricetext">
+                    {sum4}
+                    &nbsp;
+                    <span>
+                      <img
+                        src={sideticket}
+                        alt="sideticket"
+                        style={{ width: "40px", height: "auto" }}
+                      />
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </Grid>
+
+            <Grid item xs={12} style={sum4 === 0 ? { display: "none" } : {}}>
+              <div className="rewardcenter">
+                <button
+                  className="claim"
+                  onClick={(claimMultiple) => claim(i + 1)}
+                  style={displayStyle}
+                >
+                  Claim
+                </button>
+              </div>
+            </Grid>
+            <Grid item xs={12} style={sum4 === 0 ? { display: "none" } : {}}>
+              <p className="headtext" style={displayStyle}>
+                Past Draws
+              </p>
+            </Grid>
+
+            {makeLotteries(latestIDforrows[i], prices[i], i + 1)}
+          </>
+        );
+      }
     }
     return rows;
   };
 
   return (
-    <Container>
+    <Container style={{ minHeight: "90vh" }}>
       <Grid container spacing={6}>
         <Grid container item spacing={3}>
           <Grid item xs={12}>
