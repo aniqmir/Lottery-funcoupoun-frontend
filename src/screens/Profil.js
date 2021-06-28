@@ -286,14 +286,21 @@ export default function Profile() {
                 <button
                   className="claim"
                   onClick={(claimMultiple) => claim(i + 1)}
-                  style={displayStyle}
+                  style={sum1 === 0 ? { display: "none" } : {}}
                 >
                   Claim
                 </button>
               </div>
             </Grid>
             <Grid item xs={12}>
-              <p className="headtext" style={displayStyle}>
+              <p
+                className="headtext"
+                style={
+                  sum1 === 0 && latestIDforrows[i] <= 1
+                    ? { display: "none" }
+                    : {}
+                }
+              >
                 Past Draws
               </p>
             </Grid>
@@ -304,7 +311,7 @@ export default function Profile() {
         // }
       } else if (i === 1) {
         const sum2 = getRewardValue(rewardPrevValue2);
-
+        console.log(latestIDforrows[i], "latestIDforrows[i]");
         rows.push(
           <>
             <Grid item xs={12} style={sum2 === 0 ? { display: "none" } : {}}>
@@ -378,7 +385,13 @@ export default function Profile() {
                 </button>
               </div>
             </Grid>
-            <Grid item xs={12} style={sum2 === 0 ? { display: "none" } : {}}>
+            <Grid
+              item
+              xs={12}
+              style={
+                sum2 === 0 && latestIDforrows[i] <= 1 ? { display: "none" } : {}
+              }
+            >
               <p className="headtext" style={displayStyle}>
                 Past Draws
               </p>
@@ -462,7 +475,13 @@ export default function Profile() {
                 </button>
               </div>
             </Grid>
-            <Grid item xs={12} style={sum3 === 0 ? { display: "none" } : {}}>
+            <Grid
+              item
+              xs={12}
+              style={
+                sum3 === 0 && latestIDforrows[i] <= 1 ? { display: "none" } : {}
+              }
+            >
               <p className="headtext" style={displayStyle}>
                 Past Draws
               </p>
@@ -475,7 +494,13 @@ export default function Profile() {
         const sum4 = getRewardValue(rewardPrevValue3);
         rows.push(
           <>
-            <Grid item xs={12} style={sum4 === 0 ? { display: "none" } : {}}>
+            <Grid
+              item
+              xs={12}
+              style={
+                sum4 === 0 && latestIDforrows[i] <= 1 ? { display: "none" } : {}
+              }
+            >
               <div style={rowStyle}>
                 {/* <Tooltip
                   title={
