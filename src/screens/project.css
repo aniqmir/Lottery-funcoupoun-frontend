@@ -13,6 +13,8 @@ body {
   height: 5436px;
   overflow: hidden;
   z-index: 0;
+  color: white;
+  font-family: ITCAvantMedium;
 }
 
 #Arrireplan {
@@ -286,10 +288,10 @@ body {
 }
 
 #FUNCOUPONSPitch {
-  left: 549px;
+  left: 556px;
   top: 185px;
   position: absolute;
-  width: 223px;
+  /* width: 223px; */
   height: 16px;
   z-index: 31;
 }
@@ -318,6 +320,8 @@ body {
   position: absolute;
   width: 421px;
   height: 148px;
+  text-align: center;
+  font-size: 12px;
   z-index: 34;
 }
 
@@ -328,6 +332,7 @@ body {
   width: 232px;
   height: 45px;
   z-index: 35;
+  text-align: center;
 }
 
 #DiscoveringtheFunCou {
@@ -337,6 +342,7 @@ body {
   width: 424px;
   height: 126px;
   z-index: 36;
+  text-align: center;
 }
 
 #ExpandFun {
@@ -368,7 +374,7 @@ body {
 
 #Project1stWinner502ndWinner {
   left: 507px;
-  top: 2822px;
+  top: 2818px;
   position: absolute;
   width: 141px;
   height: 60px;
@@ -406,7 +412,7 @@ body {
   left: 453px;
   top: 385px;
   position: absolute;
-  width: 413px;
+  text-align: center;
   height: 57px;
   z-index: 44;
 }
@@ -415,7 +421,7 @@ body {
   left: 441px;
   top: 1239px;
   position: absolute;
-  width: 81px;
+  width: 90px;
   height: 25px;
   z-index: 45;
 }
@@ -424,16 +430,16 @@ body {
   left: 618px;
   top: 1231px;
   position: absolute;
-  width: 97px;
+  width: 118px;
   height: 40px;
   z-index: 46;
 }
 
 #Experience {
-  left: 817px;
-  top: 1358px;
+  left: 810px;
+  top: 1354px;
   position: absolute;
-  width: 68px;
+  width: 61px;
   height: 12px;
   z-index: 47;
 }
@@ -449,10 +455,11 @@ body {
 
 #YourMetamaskWallet {
   left: 467px;
-  top: 3094px;
+  top: 3089px;
   position: absolute;
   width: 99px;
   height: 26px;
+  text-align: center;
   z-index: 49;
 }
 
@@ -520,8 +527,9 @@ body {
 }
 
 #FUNCLotteriesBSCBloc {
+  text-align: center;
   left: 758px;
-  top: 3094px;
+  top: 3087px;
   position: absolute;
   width: 100px;
   height: 26px;
@@ -539,11 +547,12 @@ body {
 
 #LotteryFinished {
   left: 759px;
-  top: 3232px;
+  top: 3221px;
   position: absolute;
   width: 98px;
   height: 12px;
   z-index: 59;
+  text-align: center;
 }
 
 #Rectangle1copie10 {
@@ -557,11 +566,12 @@ body {
 
 #WinnersDeclared {
   left: 781px;
-  top: 3356px;
+  top: 3349px;
   position: absolute;
   width: 58px;
   height: 26px;
   z-index: 61;
+  text-align: center;
 }
 
 #Rectangle1copie11 {
@@ -575,11 +585,12 @@ body {
 
 #Winnersreceivetheirp {
   left: 759px;
-  top: 3487px;
+  top: 3480px;
   position: absolute;
-  width: 102px;
+  width: 105px;
   height: 27px;
   z-index: 63;
+  text-align: center;
 }
 
 #Rectangle1copie7 {
@@ -593,18 +604,19 @@ body {
 
 #FunCouponsExchange {
   left: 475px;
-  top: 3284px;
+  top: 3279px;
   position: absolute;
   width: 83px;
   height: 28px;
   z-index: 65;
+  text-align: center;
 }
 
 #HighPerformanceLowFe {
-  left: 807px;
+  left: 799px;
   top: 1231px;
   position: absolute;
-  width: 91px;
+  width: 115px;
   height: 40px;
   z-index: 66;
 }
@@ -632,6 +644,7 @@ body {
   top: 1571px;
   position: absolute;
   width: 434px;
+  text-align: center;
   height: 672px;
   z-index: 69;
 }
@@ -658,7 +671,6 @@ body {
   left: 321px;
   top: 628px;
   position: absolute;
-  width: 285px;
   height: 14px;
   z-index: 72;
 }
@@ -667,7 +679,6 @@ body {
   left: 689px;
   top: 628px;
   position: absolute;
-  width: 184px;
   height: 16px;
   z-index: 73;
 }
@@ -854,7 +865,7 @@ body {
 
 #Ligne3 {
   left: 614px;
-  top: 3117px;
+  top: 3105px;
   position: absolute;
   width: 96px;
   height: 4px;
