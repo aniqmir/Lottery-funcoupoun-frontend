@@ -41,11 +41,29 @@
   color: #b4ffa4;
 }
 .ticketPrice {
-  font-size: 2rem;
-  font-weight: 700;
+  font-family: "ITCAvant";
   color: #a2ffe2;
+  font-size: 2rem;
+  text-align: end;
 }
 
+.buyTicketsButton {
+  background: #b4ffa4;
+  color: black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  font-family: ITCAvant;
+  text-align: center;
+}
+.buyTicketsButton:hover {
+  background: #d9ffa7;
+}
+
+.iconnn:hover {
+  background: #d9ffa7;
+}
 .downarrows {
   width: 100%;
   display: flex;

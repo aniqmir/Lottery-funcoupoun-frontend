@@ -163,15 +163,17 @@ export default function Project() {
       </div>
       <div id="FUNCOUPONSPitch">
         <p style={{ color: "hsl(173deg 88% 66%)", fontSize: "20px" }}>
-          FUN COUPONS PITCH
+          <b>FUN COUPONS PITCH</b>
         </p>
       </div>
       <div id="Introduction">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>Introduction</span>
+        <span style={{ color: "#a821ff", fontSize: "20px" }}>
+          <b>Introduction</b>
+        </span>
       </div>
       <div id="TraditionalvsFunCoup">
         <span style={{ color: "#a821ff", fontSize: "20px" }}>
-          Traditional vs Fun Coupons Lotteries
+          <b>Traditional vs Fun Coupons Lotteries</b>
         </span>
       </div>
       <div id="Insteadofcreatingacl">
@@ -196,9 +198,9 @@ export default function Project() {
         </span>
       </div>
       <div id="HowtheFunCouponsLott">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>
           How the Fun Coupons Lotteries Works?
-        </span>
+        </b>
       </div>
       <div id="DiscoveringtheFunCou">
         <span style={{ color: "#fff", fontSize: "12px" }}>
@@ -223,10 +225,10 @@ export default function Project() {
         </span>
       </div>
       <div id="ExpandFun">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>Expand Fun</span>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>Expand Fun</b>
       </div>
       <div id="Roadmap">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>Roadmap</span>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>Roadmap</b>
       </div>
       <div id="Project4thto10th18toshare10">
         <span style={{ fontSize: "11px" }}>
@@ -268,14 +270,14 @@ export default function Project() {
       </div>
 
       <div id="DistributionLotterie">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>
           Distribution Lotteries
-        </span>
+        </b>
       </div>
       <div id="LotteryMechanismOver">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>
           Lottery Mechanism Overview
-        </span>
+        </b>
       </div>
       <div id="FunCouponsisthenextg">
         <span style={{ color: "white", textAlign: "center", fontSize: "12px" }}>
@@ -291,23 +293,21 @@ export default function Project() {
         </span>
       </div>
       <div id="HighChanceLotteries">
-        <span style={{ fontSize: "12px" }}>High Chance Lotteries</span>
+        <b style={{ fontSize: "12px" }}>High Chance Lotteries</b>
       </div>
       <div id="DecentralizedTrustwo">
-        <span style={{ fontSize: "12px" }}>
-          Decentralized & Trustworthy Games
-        </span>
+        <b style={{ fontSize: "12px" }}>Decentralized & Trustworthy Games</b>
       </div>
       <div id="Experience">
-        <span>Experience</span>
+        <b>Experience</b>
       </div>
       <div id="Rectangle1copie6">
         <img src={image26} alt="secondaryimage" />
       </div>
       <div id="YourMetamaskWallet">
-        <span style={{ color: "#01cd8b", fontSize: "12px" }}>
+        <b style={{ color: "#01cd8b", fontSize: "12px" }}>
           Your Metamask Wallet
-        </span>
+        </b>
       </div>
       <div id="ChangeyourBNBoryourU">
         <img src={image28} alt="secondaryimage" />
@@ -331,50 +331,46 @@ export default function Project() {
         <img src={image36} alt="secondaryimage" />
       </div>
       <div id="FUNCLotteriesBSCBloc">
-        <span style={{ color: "#fe4c8f", fontSize: "12px" }}>
+        <b style={{ color: "#fe4c8f", fontSize: "12px" }}>
           FUNC Lotteries BSC Blockchain
-        </span>
+        </b>
       </div>
       <div id="Rectangle1copie9">
         <img src={image38} alt="secondaryimage" />
       </div>
       <div id="LotteryFinished">
-        <span style={{ color: "#01cd8b", fontSize: "12px" }}>
-          Lottery Finished
-        </span>
+        <b style={{ color: "#01cd8b", fontSize: "12px" }}>Lottery Finished</b>
       </div>
       <div id="Rectangle1copie10">
         <img src={image40} alt="secondaryimage" />
       </div>
       <div id="WinnersDeclared">
-        <span style={{ color: "#897531", fontSize: "12px" }}>
-          Winners Declared
-        </span>
+        <b style={{ color: "#897531", fontSize: "12px" }}>Winners Declared</b>
       </div>
       <div id="Rectangle1copie11">
         <img src={image42} alt="secondaryimage" />
       </div>
       <div id="Winnersreceivetheirp">
-        <span style={{ color: "#905e8b", fontSize: "12px" }}>
+        <b style={{ color: "#905e8b", fontSize: "12px" }}>
           Winners Recieve Their Prizes
-        </span>
+        </b>
       </div>
       <div id="Rectangle1copie7">
         <img src={image44} alt="secondaryimage" />
       </div>
       <div id="FunCouponsExchange">
-        <span style={{ color: "#943c2a", fontSize: "12px" }}>
+        <b style={{ color: "#943c2a", fontSize: "12px" }}>
           Fun Coupons Exchange
-        </span>
+        </b>
       </div>
       <div id="HighPerformanceLowFe">
-        <span style={{ fontSize: "12px" }}>High Performance Low Fees</span>
+        <b style={{ fontSize: "12px" }}>High Performance Low Fees</b>
       </div>
       <div id="VotingToken">
-        <span style={{ fontSize: "12px" }}>Voting Token</span>
+        <b style={{ fontSize: "12px" }}>Voting Token</b>
       </div>
       <div id="EcoFriendly">
-        <span style={{ fontSize: "12px" }}>Eco Friendly</span>
+        <b style={{ fontSize: "12px" }}>Eco Friendly</b>
       </div>
       <div id="HighChanceLotteriesU">
         <span style={{ color: "#3fe7b3", fontSize: "12px" }}>
@@ -447,24 +443,24 @@ export default function Project() {
         </span>
       </div>
       <div id="FunCouponsFeatures">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>
           Fun Coupons Features
-        </span>
+        </b>
       </div>
       <div id="FunCouponsOverview">
-        <span style={{ color: "#a821ff", fontSize: "20px" }}>
+        <b style={{ color: "#a821ff", fontSize: "20px" }}>
           Fun Coupons Overview
-        </span>
+        </b>
       </div>
       <div id="TraditionalOnlineLot">
-        <span style={{ color: "#f85100", fontSize: "18px" }}>
-          Traditional Online Lottery Issues
-        </span>
+        <b style={{ color: "#f85100", fontSize: "18px" }}>
+          <b>Traditional Online Lottery Issues</b>
+        </b>
       </div>
       <div id="FunCouponsSolution">
-        <span style={{ color: "#b56d93", fontSize: "18px" }}>
+        <b style={{ color: "#b56d93", fontSize: "18px" }}>
           Fun Coupons Solution
-        </span>
+        </b>
       </div>
       <div id="Ligne2">
         <img src={image54} alt="secondaryimage" />

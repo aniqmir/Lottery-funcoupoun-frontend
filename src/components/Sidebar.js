@@ -279,7 +279,8 @@ function ResponsiveDrawer(props) {
                 ? "Connect"
                 : props.address[0].slice(0, 5)}
             </button>
-            <span className="connectLang">FR</span>
+
+            <span className="connectLang">EN </span>
           </div>
         </Toolbar>
       </AppBar>

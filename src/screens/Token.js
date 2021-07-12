@@ -1,6 +1,5 @@
 import React from "react";
 import "./token.css";
-import image1 from "../assets/tokenimages/TokenReleaseSchedule.png";
 import image6 from "../assets/tokenimages/Objetdynamiquevector_1.png";
 import image7 from "../assets/tokenimages/CommunityRoundPublic.png";
 import image11 from "../assets/tokenimages/FUNC.png";
@@ -11,17 +10,19 @@ const Token = () => {
   return (
     <div id="background">
       <div id="TokenReleaseSchedule">
-        <img src={image1} alt="secondaryimage" />
+        <b style={{ fontSize: "21px", color: "#a821ff" }}>
+          Token Release Schedule
+        </b>
       </div>
       <div id="TokenReleaseDistribu">
-        <p style={{ fontSize: "21px", color: "#a821ff" }}>
+        <b style={{ fontSize: "21px", color: "#a821ff" }}>
           Token Release Distribution Details
-        </p>
+        </b>
       </div>
       <div id="FUNCAllocationDistri">
-        <p style={{ fontSize: "21px", color: "#a821ff" }}>
+        <b style={{ fontSize: "21px", color: "#a821ff" }}>
           FUNC Allocation Distribution
-        </p>
+        </b>
       </div>
       <div id="Token75MTotalSupplyHARDCA">
         <span>
@@ -33,7 +34,7 @@ const Token = () => {
         </span>
       </div>
       <div id="SalesDetails">
-        <p style={{ fontSize: "21px", color: "#a821ff" }}>Sales Details</p>
+        <b style={{ fontSize: "21px", color: "#a821ff" }}>Sales Details</b>
       </div>
       <div id="Objetdynamiquevector_1">
         <img src={image6} alt="secondaryimage" />
@@ -159,12 +160,12 @@ const Token = () => {
         </span>
       </div>
       <div id="FUNCTokenResume">
-        <p style={{ fontSize: "21px", color: "#a821ff" }}>FUNC Token Resume</p>
+        <b style={{ fontSize: "21px", color: "#a821ff" }}>FUNC Token Resume</b>
       </div>
       <div id="FUNCTokenDistributio">
-        <p style={{ fontSize: "21px", color: "#a821ff" }}>
+        <b style={{ fontSize: "21px", color: "#a821ff" }}>
           FUNC Token Distribution
-        </p>
+        </b>
       </div>
       <div id="Details">
         <span style={{ color: "white", fontSize: "12px" }}>Details</span>

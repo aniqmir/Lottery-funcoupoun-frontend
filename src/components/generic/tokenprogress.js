@@ -106,50 +106,46 @@ const TokenProgress = (props) => {
       spacing={1}
       style={{ margin: "15px", width: "75%" }}
     >
-      <Grid item xs={2} md={12}>
+      <Grid item xs={12}>
         <span style={{ color: "#9026ff", fontSize: "1.5rem", fontWeight: 700 }}>
           # {props.latestValues[props.keys - 1]}
         </span>
       </Grid>
-      <Grid item xs={10} md={12} container direction="row">
-        <Grid item xs={1} md={6}></Grid>
-        <Grid item md={6} container justify="flex-end" alignContent="flex-end">
-          <Grid
-            item
-            xs={3}
-            md={4}
-            container
-            justify="center"
-            alignItems="center"
-            alignContent="center"
+      <Grid
+        item
+        xs={12}
+        container
+        justify="flex-end"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item>
+          <span
+            className="fcPrice"
+            style={{ fontFamily: "ITCAvant", fontSize: "20px" }}
           >
-            <span
-              className="fcPrice"
-              style={{ fontFamily: "ITCAvant", fontSize: "24px" }}
-            >
-              {getValuewithSpaces(10 * props.lotteryAmount.value)} $
-            </span>
-          </Grid>
-          <Grid item xs={3} md={2}>
-            <img src={sideticket} alt="sideticket" style={{ width: "40px" }} />
-          </Grid>
-          <Grid
-            item
-            xs={2}
-            md={2}
-            container
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-          >
-            <img alt="equal" src={equal} />
-          </Grid>
-          <Grid item xs={6} md={4}>
-            <span className="ticketPrice">$ {props.lotteryAmount.show}</span>
-          </Grid>
+            {getValuewithSpaces(10 * props.lotteryAmount.value)}
+          </span>
+        </Grid>
+        <Grid item>
+          <img
+            src={sideticket}
+            alt="sideticket"
+            style={{ width: "40px", height: "45px" }}
+          />
+        </Grid>
+        <Grid item>
+          <img
+            alt="equal"
+            src={equal}
+            style={{ width: "12px", height: "8px" }}
+          />
+        </Grid>
+        <Grid item>
+          <span className="ticketPrice">$ {props.lotteryAmount.show}</span>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={12}>
+      <Grid item md={12}>
         <div style={{ position: "relative" }}>
           <BorderLinearProgress
             variant="determinate"
@@ -168,37 +164,26 @@ const TokenProgress = (props) => {
           >
             {getPercentage(progressValue)}&nbsp;%
           </Typography>
-          {/* <Typography
-            style={{
-              position: "absolute",
-              color: "white",
-              top: 0,
-              left: "95%",
-              transform: "translateX(-50%)",
-            }}
-          >
-            50
-          </Typography> */}
         </div>
       </Grid>
       <Grid item container xs={12} md={12} lg={2}>
         <Grid item xs={12}>
-          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :
-          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
+          <img src={goldcrown} alt="goldcrown" style={{ width: "20px" }} /> :{" "}
+          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "small" }}>
             {props.position1} $
           </span>
         </Grid>
         <Grid item xs={12}>
           <img src={silvercrown} alt="silvercrown" style={{ width: "20px" }} />{" "}
-          :
-          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
+          :{" "}
+          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "small" }}>
             {props.position2} $
           </span>
         </Grid>
         <Grid item xs={12}>
           <img src={bronzecrown} alt="bronzecrown" style={{ width: "20px" }} />{" "}
-          :
-          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}>
+          :{" "}
+          <span style={{ fontFamily: "ITCAvantMedium", fontSize: "small" }}>
             {props.position3} $
           </span>
         </Grid>
@@ -210,7 +195,8 @@ const TokenProgress = (props) => {
         xs={12}
         md={12}
         lg={4}
-        style={{ fontFamily: "ITCAvantMedium", fontSize: "medium" }}
+        justify="space-evenly"
+        style={{ fontFamily: "ITCAvantMedium", fontSize: "small" }}
       >
         <Grid item xs={12}>
           {props.position4.name} : {props.position4.price} $ to share
@@ -226,51 +212,32 @@ const TokenProgress = (props) => {
         </Grid>
       </Grid>
 
-      <Grid item xs={4} md={6} lg={1}>
-        {/* <div
-          style={{
-            background: "#b4ffa4",
-            borderRadius: "50px",
-            padding: "10px",
-            margin: "10px",
-            width: "50px",
-            color: "black",
-            fontSize: "20px",
-            fontWeight: 600,
-            textAlign: "center",
-            cursor: "pointer",
-          }}
-        > */}
+      <Grid
+        item
+        xs={4}
+        md={6}
+        lg={1}
+        container
+        alignItems="center"
+        justify="flex-end"
+      >
         <Tooltip
           title="Buy tickets in
 order to play and try to win FUNC ! More tickets you buy, more chances you have to be the king
 The lottery will run right after all the tickets are sold, you can check your winning in the profile
 page"
         >
-          <img src={information} style={{ cursor: "pointer" }} />
+          <img src={information} />
         </Tooltip>
         {/* </div> */}
       </Grid>
       <Grid item xs={4} md={6} lg={1}></Grid>
       <Grid item xs={8} md={6} lg={3}>
-        {/* <img src={ticket} alt="ticket" /> */}
-        <div
-          style={{
-            background: "#b4ffa4",
-            color: "black",
-            borderRadius: "5px",
-            padding: "10px",
-            margin: "10px",
-            cursor: "pointer",
-            fontFamily: "ITCAvant",
-            textAlign: "center",
-          }}
-          onClick={buyTicket}
-        >
+        <div className="buyTicketsButton" onClick={buyTicket}>
           Buy Tickets
         </div>
       </Grid>
-      <Grid item xs={8} md={6} lg={1}>
+      <Grid item xs={8} md={6} lg={1} container alignItems="center">
         <input
           type="number"
           className="buyInput"

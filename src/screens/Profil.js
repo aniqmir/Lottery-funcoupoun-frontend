@@ -1,11 +1,10 @@
 import React from "react";
 // import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Tooltip from "@material-ui/core/Tooltip";
+// import Tooltip from "@material-ui/core/Tooltip";
 
 import LotteryTicket from "../components/generic/lotteryticket";
 
-import downarrows from "../assets/downarrows.png";
 import information from "../assets/information.png";
 import sideticket from "../assets/sideticket.png";
 
@@ -67,6 +66,7 @@ export default function Profile() {
   const [rewardPrevValue3, setRewardPrevValue3] = React.useState([0]);
   const [rewardPrevValue4, setRewardPrevValue4] = React.useState([0]);
 
+  console.log(rewardPrevValue4);
   const [loading, setLoading] = React.useState(true);
   var rows = [];
 
@@ -674,11 +674,11 @@ export default function Profile() {
               <CircularProgress />
             </div>
           )}
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <div className="downarrows">
               <img src={downarrows} alt="downarrows" />
             </div>
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid container spacing={3} item>
           {!loading && latestIDforrows.length !== 0 ? makeRows() : <div></div>}

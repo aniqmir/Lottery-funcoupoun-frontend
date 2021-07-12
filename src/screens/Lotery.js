@@ -16,8 +16,6 @@ import {
 
 import { ethers } from "ethers";
 
-import downarrows from "../assets/downarrows.png";
-
 import "./screens.css";
 import { networkid, provider } from "../smartcontract/networkid";
 
@@ -275,7 +273,7 @@ export default function NavTabs() {
             classes={{
               root: classes.tabsroot,
             }}
-            label="Lotery"
+            label="Lottery"
             // href="/trash"
             {...a11yProps(0)}
           />
@@ -283,7 +281,7 @@ export default function NavTabs() {
             classes={{
               root: classes.tabsroot,
             }}
-            label="Saving Lotery"
+            label="Saving Lottery"
             // href="/drafts"
             {...a11yProps(1)}
           />
@@ -306,9 +304,9 @@ export default function NavTabs() {
               />
             </div>
           ))}
-        <div className="downarrows">
+        {/* <div className="downarrows">
           <img src={downarrows} alt="downarrows" />
-        </div>
+        </div> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div

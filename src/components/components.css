@@ -9,6 +9,9 @@
   margin-right: 10px;
   cursor: pointer;
 }
+.connect:hover {
+  background-color: #c04d60;
+}
 
 .connectdisabled {
   text-transform: none;
@@ -26,6 +29,11 @@
   color: #c04e88;
 }
 
+.connectLangIcon {
+  color: #c04e88;
+  transform: translate(-25px, 19px);
+  width: 25px;
+}
 .selectitems {
   position: absolute;
   background: #323159 !important;

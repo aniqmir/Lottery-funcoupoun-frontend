@@ -6,8 +6,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Select from "../components/Select";
 
-import settings from "../assets/settings.png";
-import refresh from "../assets/refresh.png";
 import exchangearrow from "../assets/exchangearrow.png";
 import {
   EXCHANGE_ABI,
@@ -58,7 +56,7 @@ export default function SimpleCard() {
   });
 
   const [fromExchange, setfromExchange] = useState("BNB");
-  const [toExchange, settoExchange] = useState("FUNC");
+  const [toExchange] = useState("FUNC");
   const [usdRate, setusdRate] = useState(0);
   const [bnbRate, setbnbRate] = useState(0);
   const [inputValue, setinputValue] = useState(0);
@@ -67,11 +65,11 @@ export default function SimpleCard() {
 
   const filterChangeHandler = (selectedValue) => {
     setfromExchange(selectedValue);
-    if (fromExchange == "BNB") {
+    if (fromExchange === "BNB") {
       setshowValue(true);
       setinputValue(0);
       setoutputValue(0);
-    } else if (fromExchange == "USD") {
+    } else if (fromExchange === "USD") {
       setshowValue(false);
       setinputValue(0);
       setoutputValue(0);
@@ -80,7 +78,7 @@ export default function SimpleCard() {
 
   const handleChange = (e) => {
     // setinputValue(e.target.value);
-    if (fromExchange == "BNB") {
+    if (fromExchange === "BNB") {
       setinputValue(e.target.value);
       setoutputValue(e.target.value * bnbRate);
     } else if (fromExchange == "USD") {
@@ -109,10 +107,10 @@ export default function SimpleCard() {
     const accounts = await web3.eth.getAccounts();
 
     if (accounts[0].len !== 0) {
-      if (inputValue == 0) {
+      if (inputValue === 0) {
         alert("Value Cannot be zero", accounts);
       } else {
-        if (fromExchange == "BNB") {
+        if (fromExchange === "BNB") {
           var amount = "" + inputValue * 1000000000000000000;
           const gaslimit = await web3.eth.getBlock("latest").gasLimit;
           let send = web3.eth.sendTransaction({
@@ -122,7 +120,7 @@ export default function SimpleCard() {
             gas: gaslimit,
           }); //40002
           console.log("transaction:", send);
-        } else if (fromExchange == "USD") {
+        } else if (fromExchange === "USD") {
           var amount = "" + inputValue * 1000000000000000000;
           const transaction = await contract.buyWithUsdc(amount);
           console.log("transaction:", transaction);
