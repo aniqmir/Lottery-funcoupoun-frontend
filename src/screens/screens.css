@@ -4,6 +4,36 @@
   justify-content: center;
 }
 
+.inProgress {
+  font-family: HarlowItalic;
+  font-size: 64px;
+  letter-spacing: 10;
+  display: flex;
+  opacity: 45%;
+  filter: blur(3px);
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/lotteryBlur.JPG");
+  object-fit: contain;
+  min-height: 72.5vh;
+  background-repeat: no-repeat;
+}
+.bg-text {
+  /* background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4); */
+  color: white;
+  font-size: 64px;
+  font-family: HarlowItalic;
+  position: absolute;
+  top: 50%;
+  left: 58%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
 .rewardimage {
   background-image: url("../assets//reward.png");
   background-repeat: no-repeat;
