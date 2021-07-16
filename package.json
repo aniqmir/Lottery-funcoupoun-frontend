@@ -1,5 +1,6 @@
 {
   "name": "macquette",
+  "homepage": "http://funcoupons.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
