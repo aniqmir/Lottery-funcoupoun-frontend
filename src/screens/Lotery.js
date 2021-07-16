@@ -309,7 +309,21 @@ export default function NavTabs() {
         </div> */}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className="inProgress" />
+        <div className="inProgress">
+          {latestIDforrows.length !== 0 &&
+            lotteryValues.slice(1, 3).map((value, index) => (
+              <div className="tokenProgressMain" key={index}>
+                <TokenProgress
+                  key={index}
+                  keys={index + 1}
+                  lotteryAmount={lotteryArray[index]}
+                  progressValue={progressValue[index]}
+                  latestValues={latestIDforrows}
+                  {...value}
+                />
+              </div>
+            ))}
+        </div>
         <div className="bg-text">
           <p>In Progress...</p>
         </div>
