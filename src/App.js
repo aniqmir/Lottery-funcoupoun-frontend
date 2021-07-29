@@ -59,10 +59,10 @@ function App() {
       //user gain here
 
       if (accounts.length !== 0) {
-        const userGainer = await contractFunLottery.methods
-          .userGain(accounts[0])
-          .call();
-        setUserGainValue(userGainer / 100000000);
+        // const userGainer = await contractFunLottery.methods
+        //   .userGain(accounts[0])
+        //   .call();
+        // setUserGainValue(userGainer / 100000000);
       }
     }
   };

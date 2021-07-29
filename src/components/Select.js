@@ -64,7 +64,7 @@ export default function ControlledOpenSelect(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    if (event.target.value == "USD" || event.target.value == "BNB") {
+    if (event.target.value == "BUSD" || event.target.value == "BNB") {
       props.onChangeFilter(event.target.value);
     }
   };

@@ -1,4 +1,4 @@
-export const EXCHANGE_ADDRESS = "0x38373Fe9f2502C23aDc17cDD6d2fFd7cF9ec5385";
+export const EXCHANGE_ADDRESS = "0x34CD0E9746Ce81DaC1424Ca2DeBC41e1C4AA7167";
 
 export const EXCHANGE_ABI = [
 	{
@@ -45,6 +45,19 @@ export const EXCHANGE_ABI = [
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "adminWithdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [],

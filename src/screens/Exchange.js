@@ -69,7 +69,7 @@ export default function SimpleCard() {
       setshowValue(true);
       setinputValue(0);
       setoutputValue(0);
-    } else if (fromExchange === "USD") {
+    } else if (fromExchange === "BUSD") {
       setshowValue(false);
       setinputValue(0);
       setoutputValue(0);
@@ -81,7 +81,7 @@ export default function SimpleCard() {
     if (fromExchange === "BNB") {
       setinputValue(e.target.value);
       setoutputValue(e.target.value * bnbRate);
-    } else if (fromExchange == "USD") {
+    } else if (fromExchange == "BUSD") {
       setinputValue(e.target.value);
       setoutputValue(e.target.value * usdRate);
     }
@@ -120,7 +120,7 @@ export default function SimpleCard() {
             gas: gaslimit,
           }); //40002
           console.log("transaction:", send);
-        } else if (fromExchange === "USD") {
+        } else if (fromExchange === "BUSD") {
           var amount = "" + inputValue * 1000000000000000000;
           const transaction = await contract.buyWithUsdc(amount);
           console.log("transaction:", transaction);
@@ -129,6 +129,7 @@ export default function SimpleCard() {
     } else {
       alert("Please connect your metamask wallet", accounts);
     }
+    
     // TODO
     // const transaction = await contract.buyWithBnb({ from: accounts[0], to: EXCHANGE_ADDRESS, value:'12'});
     // let send = web3.eth.sendTransaction({from:accounts[0],to:EXCHANGE_ADDRESS, value: web3.utils.toWei('0.5', 'ether'),gas:40002
@@ -292,7 +293,7 @@ export default function SimpleCard() {
                       >
                         <div style={{ marginLeft: "60px" }}>
                           <Select
-                            options={[{ name: "BNB" }, { name: "USD" }]}
+                            options={[{ name: "BNB" }, { name: "BUSD" }]}
                             selected={fromExchange}
                             onChangeFilter={filterChangeHandler}
                           />

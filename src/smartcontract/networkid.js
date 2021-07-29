@@ -1,5 +1,5 @@
-const networkid = 97;
+const networkid = 56;
 
-const provider = "https://data-seed-prebsc-1-s1.binance.org:8545/";
+const provider = "https://bsc-dataseed.binance.org/";
 
 export { networkid, provider };
